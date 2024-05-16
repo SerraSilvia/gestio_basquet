@@ -1,7 +1,7 @@
 -- Creación de la base de datos
 CREATE DATABASE IF NOT EXISTS torneo_db;
 USE torneo_db;
-
+ 
 -- Creación de la tabla SEUS
 CREATE TABLE SEUS (
     id INT PRIMARY KEY AUTO_INCREMENT,
