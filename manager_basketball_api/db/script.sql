@@ -12,7 +12,7 @@ CREATE TABLE SEUS (
     deleted_at DATETIME
 );
 
--- Creación de la tabla TORNEJOS
+-- Creación de la tabla TORNEJOS.
 CREATE TABLE TORNEJOS (
     id INT PRIMARY KEY AUTO_INCREMENT,
     seu_id INT NOT NULL,
