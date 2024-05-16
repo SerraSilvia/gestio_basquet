@@ -1,235 +1,177 @@
--- Creación de la base de datos
-CREATE DATABASE IF NOT EXISTS torneo_db;
-USE torneo_db;
- 
--- Creación de la tabla SEUS
-CREATE TABLE SEUS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
-    direccio VARCHAR(250),
+CREATE DATABASE sports_management;
+USE sports_management;
+
+-- Tabla LOCATIONS
+CREATE TABLE LOCATIONS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address VARCHAR(250),
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     deleted_at DATETIME
 );
 
--- Creación de la tabla TORNEJOS.
-CREATE TABLE TORNEJOS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    seu_id INT NOT NULL,
-    nom VARCHAR(250) NOT NULL,
-    data_inici DATETIME,
-    data_fi DATETIME,
+-- Tabla TOURNAMENTS
+CREATE TABLE TOURNAMENTS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location_id INT NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    date_start DATETIME,
+    date_end DATETIME,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     deleted_at DATETIME,
-    FOREIGN KEY (seu_id) REFERENCES SEUS(id)
+    FOREIGN KEY (location_id) REFERENCES LOCATIONS(id)
 );
 
--- Creación de la tabla EQUIPS
-CREATE TABLE EQUIPS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
-    sede_id INT NOT NULL,
-    categoria ENUM('juvenil', 'senior', 'profesional') NOT NULL DEFAULT 'juvenil',
-    FOREIGN KEY (sede_id) REFERENCES SEUS(id)
+-- Tabla TEAMS
+CREATE TABLE TEAMS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location_id INT NOT NULL,
+    category ENUM('junior', 'senior', 'professional') NOT NULL DEFAULT 'junior',
+    FOREIGN KEY (location_id) REFERENCES LOCATIONS(id)
 );
 
--- Creación de la tabla PERSONES
-CREATE TABLE PERSONES (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
-    cognoms VARCHAR(200) NOT NULL,
+-- Tabla GAMES
+CREATE TABLE GAMES (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_booking INT NOT NULL,
+    tournament_id INT NOT NULL,
+    team1_id INT NOT NULL,
+    team2_id INT NOT NULL,
+    score_t1 INT,
+    score_t2 INT,
+    FOREIGN KEY (tournament_id) REFERENCES TOURNAMENTS(id),
+    FOREIGN KEY (team1_id) REFERENCES TEAMS(id),
+    FOREIGN KEY (team2_id) REFERENCES TEAMS(id)
+);
+
+-- Tabla PEOPLE
+CREATE TABLE PEOPLE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    surnames VARCHAR(200) NOT NULL,
     DNI VARCHAR(9) NOT NULL,
     email VARCHAR(250) NOT NULL,
-    contrasenya VARCHAR(250) NOT NULL,
-    data_naixement DATETIME,
-    equip_id INT NOT NULL,
-    FOREIGN KEY (equip_id) REFERENCES EQUIPS(id)
+    password VARCHAR(250) NOT NULL,
+    birthday DATETIME
 );
 
--- Creación de la tabla PARTITS
-CREATE TABLE PARTITS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_reserva INT NOT NULL,
-    torneig_id INT NOT NULL,
-    equip1_id INT NOT NULL,
-    equip2_id INT NOT NULL,
-    puntuacio_e1 INT,
-    puntuacio_e2 INT,
-    FOREIGN KEY (torneig_id) REFERENCES TORNEJOS(id),
-    FOREIGN KEY (equip1_id) REFERENCES EQUIPS(id),
-    FOREIGN KEY (equip2_id) REFERENCES EQUIPS(id)
+-- Tabla SCORES
+CREATE TABLE SCORES (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tournament_id INT NOT NULL,
+    team_id INT NOT NULL,
+    game_id INT NOT NULL,
+    score INT,
+    FOREIGN KEY (tournament_id) REFERENCES TOURNAMENTS(id),
+    FOREIGN KEY (team_id) REFERENCES TEAMS(id),
+    FOREIGN KEY (game_id) REFERENCES GAMES(id)
 );
 
--- Creación de la tabla INSTALACIONS
-CREATE TABLE INSTALACIONS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    sede_id INT NOT NULL,
-    nom VARCHAR(150) NOT NULL,
-    tipus_instalacio ENUM('pista entrenament', 'pista interior', 'pista exterior') NOT NULL DEFAULT 'pista entrenament',
-    estat_instalacio ENUM('manteniment', 'disponible', 'reservat') NOT NULL DEFAULT 'disponible',
-    FOREIGN KEY (sede_id) REFERENCES SEUS(id)
+-- Tabla FACILITIES
+CREATE TABLE FACILITIES (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location_id INT NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    facility_type ENUM('training-court', 'indoor-court', 'outdoor-court') NOT NULL DEFAULT 'training-court',
+    facility_status ENUM('maintenance', 'available', 'reserved') NOT NULL DEFAULT 'available',
+    FOREIGN KEY (location_id) REFERENCES LOCATIONS(id)
 );
 
--- Creación de la tabla RESERVES
-CREATE TABLE RESERVES (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    instalacio_id INT NOT NULL,
-    persona_id INT NOT NULL,
-    data_reserva DATETIME NOT NULL,
-    data_fi DATETIME NOT NULL,
-    estat_reserva ENUM('pendent', 'confirmat', 'cancelat') NOT NULL DEFAULT 'pendent',
-    tipus_reserva ENUM('classe', 'partit', 'entrenament'),
-    FOREIGN KEY (instalacio_id) REFERENCES INSTALACIONS(id),
-    FOREIGN KEY (persona_id) REFERENCES PERSONES(id)
+-- Tabla BOOKINGS
+CREATE TABLE BOOKINGS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    facility_id INT NOT NULL,
+    person_id INT NOT NULL,
+    date_start DATETIME NOT NULL,
+    date_end DATETIME NOT NULL,
+    reservation_status ENUM('pending', 'confirmed', 'cancelled') NOT NULL DEFAULT 'pending',
+    reservation_type ENUM('class', 'game', 'training'),
+    FOREIGN KEY (facility_id) REFERENCES FACILITIES(id),
+    FOREIGN KEY (person_id) REFERENCES PEOPLE(id)
 );
 
--- Creación de la tabla PAGAMENTS
-CREATE TABLE PAGAMENTS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    persona_id INT NOT NULL,
-    quantia DOUBLE NOT NULL,
-    concepte VARCHAR(250),
-    FOREIGN KEY (persona_id) REFERENCES PERSONES(id)
+-- Tabla PAYMENTS
+CREATE TABLE PAYMENTS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    quantity DOUBLE NOT NULL,
+    concept VARCHAR(250),
+    FOREIGN KEY (person_id) REFERENCES PEOPLE(id)
 );
 
--- Creación de la tabla PUNTUA
-CREATE TABLE PUNTUA (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    torneig_id INT NOT NULL,
-    equip_id INT NOT NULL,
-    partit_id INT NOT NULL,
-    puntuacio INT,
-    FOREIGN KEY (torneig_id) REFERENCES TORNEJOS(id),
-    FOREIGN KEY (equip_id) REFERENCES EQUIPS(id),
-    FOREIGN KEY (partit_id) REFERENCES PARTITS(id)
-);
-
--- Creación de la tabla JUGADOR
-CREATE TABLE JUGADOR (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    persona_id INT NOT NULL,
-    nivell ENUM('prebenjami', 'benjami', 'infantil', 'cadet', 'amateur', 'senior') NOT NULL DEFAULT 'cadet',
-    posicio ENUM('base', 'escolta', 'alero', 'pivot') NOT NULL DEFAULT 'base',
-    categoria ENUM('juvenil', 'senior', 'professional') NOT NULL DEFAULT 'juvenil',
-    FOREIGN KEY (persona_id) REFERENCES PERSONES(id)
-);
-
--- Creación de la tabla STAFF
-CREATE TABLE STAFF (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    persona_id INT NOT NULL,
-    carrec ENUM('treballador', 'capita', 'entrenador', 'jugador') NOT NULL DEFAULT 'jugador',
-    FOREIGN KEY (persona_id) REFERENCES PERSONES(id)
-);
-
--- Creación de la tabla COMENTARIS
-CREATE TABLE COMENTARIS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    jugador_id INT NOT NULL,
-    persona_creat_id INT NOT NULL,
-    comentari VARCHAR(250) NOT NULL,
+-- Tabla COMMENTS
+CREATE TABLE COMMENTS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    player_id INT NOT NULL,
+    person_create_id INT NOT NULL,
+    comment VARCHAR(250) NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     deleted_at DATETIME,
-    FOREIGN KEY (jugador_id) REFERENCES JUGADOR(id),
-    FOREIGN KEY (persona_creat_id) REFERENCES PERSONES(id)
+    FOREIGN KEY (player_id) REFERENCES PEOPLE(id),
+    FOREIGN KEY (person_create_id) REFERENCES PEOPLE(id)
 );
 
+-- Tabla PLAYERS
+CREATE TABLE PLAYERS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    level ENUM('junior', 'youth', 'amateur', 'semi-professional', 'professional') NOT NULL DEFAULT 'junior',
+    position ENUM('point-guard', 'shooting-guard', 'small-forward', 'center') NOT NULL DEFAULT 'point-guard',
+    category ENUM('junior', 'senior', 'professional') NOT NULL DEFAULT 'junior',
+    team_id INT NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES PEOPLE(id),
+    FOREIGN KEY (team_id) REFERENCES TEAMS(id)
+);
 
-/*Inserts de prova*/
--- Insertando en la tabla SEUS
-INSERT INTO SEUS (nom, direccio, created_at, updated_at) VALUES 
-('Seu Central', 'Carrer Major, 1', NOW(), NOW()),
-('Seu Nord', 'Carrer Nord, 23', NOW(), NOW()),
-('Seu Sud', 'Carrer Sud, 45', NOW(), NOW()),
-('Seu Est', 'Carrer Est, 67', NOW(), NOW()),
-('Seu Oest', 'Carrer Oest, 89', NOW(), NOW());
+-- Tabla STAFF
+CREATE TABLE STAFF (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    job ENUM('employee', 'captain', 'coach', 'player') NOT NULL DEFAULT 'player',
+    hire_date DATETIME NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES PEOPLE(id)
+);
 
--- Insertando en la tabla TORNEJOS
-INSERT INTO TORNEJOS (seu_id, nom, data_inici, data_fi, created_at, updated_at) VALUES 
-(1, 'Torneig Primavera', '2024-03-01 09:00:00', '2024-03-10 18:00:00', NOW(), NOW()),
-(2, 'Torneig Estiu', '2024-06-15 09:00:00', '2024-06-25 18:00:00', NOW(), NOW()),
-(3, 'Torneig Tardor', '2024-09-01 09:00:00', '2024-09-10 18:00:00', NOW(), NOW()),
-(4, 'Torneig Hivern', '2024-12-01 09:00:00', '2024-12-10 18:00:00', NOW(), NOW()),
-(5, 'Torneig Nadal', '2024-12-20 09:00:00', '2024-12-30 18:00:00', NOW(), NOW());
+-- Insert en LOCATIONS
+INSERT INTO LOCATIONS (name, address, created_at, updated_at) VALUES
+('Central Park', '123 Main St', NOW(), NOW()),
+('Downtown Arena', '456 Elm St', NOW(), NOW()),
+('Westside Court', '789 Oak St', NOW(), NOW()),
+('Northside Field', '101 Pine St', NOW(), NOW()),
+('Eastside Gym', '202 Maple St', NOW(), NOW());
 
--- Insertando en la tabla EQUIPS
-INSERT INTO EQUIPS (nom, sede_id, categoria) VALUES 
-('Equip A', 1, 'juvenil'),
-('Equip B', 2, 'senior'),
-('Equip C', 3, 'professional'),
-('Equip D', 4, 'juvenil'),
-('Equip E', 5, 'senior');
+-- Insert en TOURNAMENTS
+INSERT INTO TOURNAMENTS (location_id, name, date_start, date_end, created_at, updated_at) VALUES
+(1, 'Spring Tournament', '2024-06-01 09:00:00', '2024-06-07 18:00:00', NOW(), NOW()),
+(2, 'Summer Cup', '2024-07-01 10:00:00', '2024-07-05 20:00:00', NOW(), NOW()),
+(3, 'Fall Challenge', '2024-09-01 11:00:00', '2024-09-07 19:00:00', NOW(), NOW()),
+(4, 'Winter Games', '2024-12-01 12:00:00', '2024-12-05 21:00:00', NOW(), NOW()),
+(5, 'Year-End Tournament', '2024-12-26 13:00:00', '2024-12-31 22:00:00', NOW(), NOW());
 
--- Insertando en la tabla PERSONES
-INSERT INTO PERSONES (nom, cognoms, DNI, email, contrasenya, data_naixement, equip_id) VALUES 
-('Joan', 'Garcia', '12345678A', 'joan@example.com', 'password123', '1990-01-01', 1),
-('Maria', 'Lopez', '87654321B', 'maria@example.com', 'password123', '1985-02-02', 2),
-('Carlos', 'Martinez', '11223344C', 'carlos@example.com', 'password123', '1995-03-03', 3),
-('Ana', 'Sanchez', '44332211D', 'ana@example.com', 'password123', '2000-04-04', 4),
-('Luis', 'Rodriguez', '66778899E', 'luis@example.com', 'password123', '1998-05-05', 5);
+-- Insert en TEAMS
+INSERT INTO TEAMS (name, location_id, category) VALUES
+('Team Alpha', 1, 'junior'),
+('Team Beta', 2, 'senior'),
+('Team Gamma', 3, 'professional'),
+('Team Delta', 4, 'junior'),
+('Team Epsilon', 5, 'senior');
 
--- Insertando en la tabla PARTITS
-INSERT INTO PARTITS (id_reserva, torneig_id, equip1_id, equip2_id, puntuacio_e1, puntuacio_e2) VALUES 
-(1, 1, 1, 2, 30, 25),
-(2, 2, 3, 4, 20, 20),
-(3, 3, 1, 3, 25, 30),
-(4, 4, 2, 4, 15, 10),
-(5, 5, 3, 5, 35, 30);
+-- Insert en PEOPLE
+INSERT INTO PEOPLE (name, surnames, DNI, email, password, birthday) VALUES
+('John Doe', 'Doe', '12345678A', 'john.doe@example.com', 'password123', '2000-01-01'),
+('Jane Smith', 'Smith', '87654321B', 'jane.smith@example.com', 'password123', '1990-02-02'),
+('Alice Johnson', 'Johnson', '11223344C', 'alice.johnson@example.com', 'password123', '1985-03-03'),
+('Bob Brown', 'Brown', '44332211D', 'bob.brown@example.com', 'password123', '1975-04-04'),
+('Charlie Black', 'Black', '99887766E', 'charlie.black@example.com', 'password123', '1965-05-05');
 
--- Insertando en la tabla INSTALACIONS
-INSERT INTO INSTALACIONS (sede_id, nom, tipus_instalacio, estat_instalacio) VALUES 
-(1, 'Pista Central', 'pista entrenament', 'disponible'),
-(2, 'Pista Nord', 'pista interior', 'manteniment'),
-(3, 'Pista Sud', 'pista exterior', 'reservat'),
-(4, 'Pista Est', 'pista entrenament', 'disponible'),
-(5, 'Pista Oest', 'pista interior', 'disponible');
-
--- Insertando en la tabla RESERVES
-INSERT INTO RESERVES (instalacio_id, persona_id, data_reserva, data_fi, estat_reserva, tipus_reserva) VALUES 
-(1, 1, '2024-05-15 10:00:00', '2024-05-15 12:00:00', 'pendent', 'classe'),
-(2, 2, '2024-05-16 10:00:00', '2024-05-16 12:00:00', 'confirmat', 'partit'),
-(3, 3, '2024-05-17 10:00:00', '2024-05-17 12:00:00', 'cancelat', 'entrenament'),
-(4, 4, '2024-05-18 10:00:00', '2024-05-18 12:00:00', 'pendent', 'classe'),
-(5, 5, '2024-05-19 10:00:00', '2024-05-19 12:00:00', 'confirmat', 'partit');
-
--- Insertando en la tabla PAGAMENTS
-INSERT INTO PAGAMENTS (persona_id, quantia, concepte) VALUES 
-(1, 50.00, 'Inscripción torneo primavera'),
-(2, 60.00, 'Inscripción torneo estiu'),
-(3, 70.00, 'Inscripción torneo tardor'),
-(4, 80.00, 'Inscripción torneo hivern'),
-(5, 90.00, 'Inscripción torneo nadal');
-
--- Insertando en la tabla PUNTUA
-INSERT INTO PUNTUA (torneig_id, equip_id, partit_id, puntuacio) VALUES 
-(1, 1, 1, 30),
-(2, 2, 2, 20),
-(3, 3, 3, 25),
-(4, 4, 4, 15),
-(5, 5, 5, 35);
-
--- Insertando en la tabla JUGADOR
-INSERT INTO JUGADOR (persona_id, nivell, posicio, categoria) VALUES 
-(1, 'cadet', 'base', 'juvenil'),
-(2, 'senior', 'escolta', 'senior'),
-(3, 'amateur', 'alero', 'professional'),
-(4, 'cadet', 'pivot', 'juvenil'),
-(5, 'senior', 'base', 'senior');
-
--- Insertando en la tabla STAFF
-INSERT INTO STAFF (persona_id, carrec) VALUES 
-(1, 'administrador'),
-(2, 'neteja'),
-(3, 'entrenador'),
-(4, 'conserge'),
-(5, 'entrenador');
-
--- Insertando en la tabla COMENTARIS
-INSERT INTO COMENTARIS (jugador_id, persona_creat_id, comentari, created_at, updated_at) VALUES 
-(1, 2, 'Gran actuació al partit!', NOW(), NOW()),
-(2, 3, 'Bon entrenament!', NOW(), NOW()),
-(3, 4, 'Esforç excel·lent!', NOW(), NOW()),
-(4, 5, 'Necessita millorar en defensa.', NOW(), NOW()),
-(5, 1, 'Molt bona tècnica.', NOW(), NOW());
+-- Insert en GAMES
+INSERT INTO GAMES (id_booking, tournament_id, team1_id, team2_id, score_t1, score_t2) VALUES
+(1, 1, 1, 2, 50, 45),
+(2, 2, 3, 4, 60, 55),
+(3, 3, 2, 5, 70, 65),
+(4, 4, 1, 3, 80, 75),
+(5, 5, 4, 5, 90, 85);
