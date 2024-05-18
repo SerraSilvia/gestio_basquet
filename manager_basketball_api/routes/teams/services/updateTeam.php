@@ -1,15 +1,14 @@
 <?php
 
-function updateLocation($conn, $id) {
+function updateTeam($conn, $id) {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $name = $data['name'];
-    $address = $data['address'];
-    $created_at = $data['created_at'];
-    $updated_at = $data['updated_at'];
-    $deleted_at = $data['deleted_at'];
+    $location_id = $data['addlocation_idress'];
+    $category = $data['category'];
+    $total_score = $data['total_score'];
 
-    $q = "UPDATE locations SET name='$name', address='$address', created_at='$created_at', updated_at='$updated_at', deleted_at='$deleted_at' WHERE id='$id'";
+    $q = "UPDATE teams SET name='$name', location_id='$location_id', category='$category', total_score='$total_score' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {
