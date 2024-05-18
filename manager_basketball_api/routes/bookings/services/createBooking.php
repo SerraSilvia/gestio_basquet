@@ -1,0 +1,23 @@
+<?php
+
+function createBooking($conn) {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $facility_id = $data['facility_id'];
+    $person_id = $data['person_id'];
+    $date_start = $data['date_start'];
+    $date_end = $data['date_end'];
+    $reservation_status = $data['reservation_status'];
+    $reservation_type = $data['reservation_type'];
+
+    $q = "INSERT INTO valoracio VALUES (DEFAULT, '$empfacility_id_id', '$person_id', '$date_start', '$date_end', '$reservation_status', '$reservation_type'";
+    $result = mysqli_query($conn, $q);
+
+    if ($result) $res = array('status' => 'success');
+    else $res = array('status' => 'error');
+
+    header("Content-Type: application/json");
+    return json_encode($res);
+}
+
+?>
