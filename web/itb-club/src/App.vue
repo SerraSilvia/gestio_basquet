@@ -1,10 +1,9 @@
 <template>
-  <header>
+  <HeaderComponent></HeaderComponent>
     <nav>
       <RouterLink to="/">Go to Home</RouterLink>
       <RouterLink to="/about">My about component</RouterLink>
     </nav>
-  </header>
   <main>
     <RouterView/>
   </main>
@@ -12,9 +11,12 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
+import HeaderComponent from './components/HeaderComponent.vue'
+
 </script>
 
 <style scoped>
+
 a:hover,
 a:active,
 a.router-link-active {
