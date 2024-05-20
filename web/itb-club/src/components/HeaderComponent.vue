@@ -4,23 +4,32 @@
        <h1>ITBClub</h1>
        <IconLogin @click="clickGoToLogin"/>
     </header>
+    <NavigationComponent v-show="visibleMenu" class="position-top" @toggle-menu="toggleMenu"></NavigationComponent>
 </template>
+
 <script>
 import IconMenu from './icons/IconMenu.vue';
 import IconLogin from './icons/IconLogin.vue';
-
+import NavigationComponent from './NavigationComponent.vue';
 
 export default {
-    name:'HeaderComponent', 
+    name: 'HeaderComponent', 
     components: {
         IconMenu,
-        IconLogin
+        IconLogin,
+        NavigationComponent
     },
-    methods:{
-        toggleMenu(){
-            console.log("click menu");
+    data() {
+        return {
+            visibleMenu: false
+        };
+    },
+    methods: {
+        toggleMenu() {
+            if(this.visibleMenu) this.visibleMenu=false;
+            else this.visibleMenu=true;
         },
-        clickGoToLogin(){
+        clickGoToLogin() {
             console.log("click go to login");
         }
     }
@@ -28,16 +37,20 @@ export default {
 </script>
 
 <style>
-    header{
-        background: rgb(244,93,69);
-        background: linear-gradient(90deg, rgba(244,93,69,1) 0%, rgba(249,77,123,1) 100%);
-        padding: 1em;
-        display: flex;
-        justify-content: space-between;
-    }
-    h1{
-        color: white;
-        text-transform: uppercase;
-        font-size: 1.5em;
-    }
+.position-top{
+    position: absolute;
+    top: 0;
+}
+header{
+    background: rgb(244,93,69);
+    background: linear-gradient(90deg, rgba(244,93,69,1) 0%, rgba(249,77,123,1) 100%);
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+h1{
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
 </style>

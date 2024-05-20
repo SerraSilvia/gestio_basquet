@@ -1,9 +1,5 @@
 <template>
   <HeaderComponent></HeaderComponent>
-    <nav>
-      <RouterLink to="/">Go to Home</RouterLink>
-      <RouterLink to="/about">My about component</RouterLink>
-    </nav>
   <main>
     <RouterView/>
   </main>
