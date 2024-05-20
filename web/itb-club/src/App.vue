@@ -1,15 +1,21 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
     <h1>ITBCLUB</h1>
-    <router-link to="/about">My about component</router-link>
+    <nav>
+      <RouterLink to="/">Go to Home</RouterLink>
+      <RouterLink to="/about">My about component</RouterLink>
+    </nav>
+    
   </header>
-  <main><p>Esto es el main</p></main>
+  <main>
+    <RouterView/>
+  </main>
 
 </template>
+
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+</script>
 
 <style scoped>
 a:hover,
