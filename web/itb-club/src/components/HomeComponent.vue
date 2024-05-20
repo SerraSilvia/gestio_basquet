@@ -1,8 +1,8 @@
 <template>
-    <p>Esto es el about</p>
+    <p>Esto es el home</p>
 </template>
 <script>
 export default {
-    name:'AboutComponent'
+    name:'HomeComponent'
 };
 </script>
