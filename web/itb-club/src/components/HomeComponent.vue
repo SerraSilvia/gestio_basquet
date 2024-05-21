@@ -8,20 +8,20 @@
 
 <div class="home-bar">
       <div class="card">
-        <a href="../">
-          <img src="../assets/img/read.png" alt="" />
+        <a href="../rutaInstalacions">
+          <img src="../assets/instalacions.jpg" alt="instalacions" />
           <h4>Instal·lacions</h4>
         </a>
       </div>
       <div class="card">
-        <a href="../pages/write.php">
-          <img src="../assets/img/edit.png" alt="" />
+        <a href="../rutaClubs">
+          <img src="../assets/clubs.jpg" alt="clubs" />
           <h4>Clubs</h4>
         </a>
       </div>
       <div class="card">
-        <a href="https://historiasdeterror.com/">
-          <img src="../assets/img/moreTales.jpg" alt="" />
+        <a href="../rutaTornejos">
+          <img src="../assets/tornejos.jpg" alt="tornejos" />
           <h4>Tornejos</h4>
         </a>
       </div>
