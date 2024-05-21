@@ -26,7 +26,6 @@ export default {
     methods: {
         clickClub(selectedCity) {
             this.city = selectedCity;
-            console.log("click en un club: " + this.city);
             this.$emit("selected-club", this.city);
         }
     }

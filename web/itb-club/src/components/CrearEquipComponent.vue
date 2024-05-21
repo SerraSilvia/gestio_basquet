@@ -1,6 +1,7 @@
 <template>
     <section>
         <h2>Crea el teu equip</h2>
+        <div id="crear-poligon"></div>
         <p class="info">En crear un equip seràs el capità i podras administrar el jugadors que s'uneixin al teu equip.</p>
         <form action="POST">
             <label for="name">Nom d'equip</label>
@@ -31,13 +32,12 @@ export default {
 </script>
 
 <style>
-section {
-
+section{
+    padding-top: 1em;
 }
-
 form {
     max-width: 90%;
-    margin: 2em;
+    margin: 5em 2em;
     padding: 2em;
     background-color: #eff9f6;
     border-radius: 10px;
@@ -46,7 +46,7 @@ form {
 }
 
 label {
-    margin-top: 10px;
+    margin-top: 1em;
     font-weight: bold;
 }
 
@@ -85,5 +85,20 @@ label {
 
 #category {
     margin-bottom: 2em;
+}
+#crear-poligon{
+    width: 40em;
+    height: 9em;
+    transform: skew(20deg);
+    background: linear-gradient(to right, rgb(54, 208, 255), rgba(255, 159, 147, 0));
+    margin: 1em;
+    position: absolute;
+    top: 5em;
+    left: 7em;
+    z-index: -1;
+}
+
+.info{
+    padding-left: 3em;
 }
 </style>

@@ -2,14 +2,14 @@
     <section>
         <h2>Selecciona el club</h2>
         <div>
-            <ClubSelectComponent></ClubSelectComponent>
+            <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
         </div>
     </section>
 
     <section>
-        <h2>Equips a Barcelona</h2>
+        <h2>Equips a {{club}}</h2>
         <div>
-            <EquipComponent></EquipComponent>
+            <EquipComponent selected-team="handleSelectedTeam"></EquipComponent>
         </div>
     </section>
     <p class="button-container">
@@ -26,11 +26,22 @@ export default {
     data() {
         return {
             equip: null, // esto se cojera de la conexion a la API
+            club: "Barcelona",
+            viewEquip: null,
         };
     },
     components: {
         EquipComponent,
         ClubSelectComponent
+    },
+    methods:{
+        handleSelectedClub(selectedClub){
+            this.club=selectedClub;//no funciona
+            console.log(this.club)
+        },
+        handleSelectedTeam(id){
+            console.log("se clica un equipo, con id:"+ id);
+        }
     }
 };
 </script>

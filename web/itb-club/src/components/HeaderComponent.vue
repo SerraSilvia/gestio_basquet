@@ -2,7 +2,7 @@
     <header>
        <IconMenu @click="toggleMenu"/>
        <h1><RouterLink to="/">ITBClub</RouterLink></h1>
-       <IconLogin @click="clickGoToLogin"/>
+       <RouterLink to="/login"><IconLogin/></RouterLink>
     </header>
     <NavigationComponent v-show="visibleMenu" class="position-top" @toggle-menu="toggleMenu"></NavigationComponent>
 </template>
@@ -28,9 +28,6 @@ export default {
         toggleMenu() {
             if(this.visibleMenu) this.visibleMenu=false;
             else this.visibleMenu=true;
-        },
-        clickGoToLogin() {
-            console.log("click go to login");
         }
     }
 };
