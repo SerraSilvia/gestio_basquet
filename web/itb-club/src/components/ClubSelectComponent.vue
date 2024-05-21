@@ -18,9 +18,16 @@
 <script>
 export default {
     name: 'ClubSelectComponent',
+    data(){
+        return{
+            city:null
+        };
+    },
     methods: {
-        clickClub(city) {
-            console.log("click en un club: " + city);
+        clickClub(selectedCity) {
+            this.city = selectedCity;
+            console.log("click en un club: " + this.city);
+            this.$emit("selected-club", this.city);
         }
     }
 };
