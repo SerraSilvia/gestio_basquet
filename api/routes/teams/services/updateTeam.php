@@ -7,8 +7,9 @@ function updateTeam($conn, $id) {
     $location_id = $data['addlocation_idress'];
     $category = $data['category'];
     $total_score = $data['total_score'];
+    $img = $data['img'];
 
-    $q = "UPDATE teams SET name='$name', location_id='$location_id', category='$category', total_score='$total_score' WHERE id='$id'";
+    $q = "UPDATE teams SET name='$name', location_id='$location_id', category='$category', total_score='$total_score' , img='$img' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {
