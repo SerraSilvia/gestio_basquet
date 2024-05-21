@@ -1,7 +1,7 @@
 <?php
 function createTournament($conn) {
     $data = json_decode(file_get_contents("php://input"), true);
-     
+    
     $location_id = $data['location_id'];
     $name = $data['name'];
     $date_start = $data['date_start'];

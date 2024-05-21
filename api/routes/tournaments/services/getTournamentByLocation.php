@@ -1,6 +1,6 @@
 <?php 
 
-function getTournamentsByLocation($conn, $location_id) {
+function getTournamentByLocation($conn, $location_id) {
     $q = "SELECT * FROM tournaments WHERE location_id = '$location_id'";
     $result = mysqli_query($conn,$q);
 

@@ -1,6 +1,6 @@
 <?php 
 
-function getTournamentsById($conn, $id) {
+function getTournamentById($conn, $id) {
     $q = "SELECT * FROM tournaments WHERE id = '$id'";
     $result = mysqli_query($conn,$q);
 
