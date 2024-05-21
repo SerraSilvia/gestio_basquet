@@ -1,6 +1,6 @@
 <template>
     <div class="quiSom">
-        <div class="parallelogram"></div>
+        <div class="parallelogram-big"></div>
             <div class="content">
                 <h5>Qui som?</h5>
                 <p>Som un club esportiu dedicat a fomentar la pràctica de l'esport i la competició
@@ -32,7 +32,7 @@ export default {
     width: 35%;
     padding-left: 30px;
 }
-.parallelogram {
+.parallelogram-big {
     width: 100%;
     height: 30em;
     transform: skew(-40deg);
