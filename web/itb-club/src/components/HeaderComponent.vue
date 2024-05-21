@@ -48,9 +48,5 @@ header{
     display: flex;
     justify-content: space-between;
 }
-h1{
-    color: white;
-    text-transform: uppercase;
-    font-size: 1.5em;
-}
+
 </style>
