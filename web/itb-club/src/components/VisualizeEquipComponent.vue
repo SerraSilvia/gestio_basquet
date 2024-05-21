@@ -15,7 +15,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="section-players">
         <h2>Jugadors</h2>
         <!--Aqui habra que poner un bucle con un componente por jugador-->
     </section>
@@ -80,5 +80,8 @@ section .info-equip{
 div .location{
    padding: 0.75em;
     justify-content: center;
+}
+.section-players{
+    min-height: 12em;
 }
 </style>
