@@ -1,6 +1,6 @@
 <template>
-    <RouterLink to="/equips/{{ this.id }}"><!--TODO: crear componente y arreglar la ruta-->
-    <section class="team"><!--Hacer que cuando se haga click se vaya a la pagina de equipo-->
+   <RouterLink :to="`/equips/${id}`"><!--TODO: crear componente y arreglar la ruta-->
+        <section class="team">
         <div class="img-container">
             <img :src="img" alt="">
         </div>
