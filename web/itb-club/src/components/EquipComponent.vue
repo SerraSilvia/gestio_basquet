@@ -1,5 +1,5 @@
 <template>
-    <section class="team">
+    <section class="team"><!--Hacer que cuando se haga click se vaya a la pagina de equipo-->
         <div class="img-container">
             <img :src="img" alt="">
         </div>
@@ -36,6 +36,10 @@ export default {
     border-radius: 1em;
     display: flex;
     justify-content: space-between;
+}
+
+.team:hover{
+    box-shadow: 0.15em 0.15em #f94d7b;
 }
 
 .img-container img{
