@@ -32,7 +32,6 @@ export default {
 .team {
     background-color: #4fcdc4;
     width: 80%;
-    margin: auto;
     border-radius: 1em;
     display: flex;
     justify-content: space-between;
