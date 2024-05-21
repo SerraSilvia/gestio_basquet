@@ -9,6 +9,8 @@ import RankingsComponent from './components/RankingsComponent.vue';
 import ReservesComponent from './components/ReservesComponent.vue';
 import EquipsComponent from './components/EquipsComponent.vue';
 import UsuariComponent from './components/UsuariComponent.vue';
+import CrearEquipComponent from './components/CrearEquipComponent.vue';
+
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -18,6 +20,7 @@ const routes = [
   { path: '/reserva', component: ReservesComponent },
   { path: '/equips', component: EquipsComponent },
   { path: '/usuari', component: UsuariComponent },
+  { path: '/equips/crear', component: CrearEquipComponent },
 ];
 
 const router = createRouter({

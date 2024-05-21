@@ -1,7 +1,7 @@
 <template>
     <header>
        <IconMenu @click="toggleMenu"/>
-       <h1>ITBClub</h1>
+       <h1><RouterLink to="/">ITBClub</RouterLink></h1>
        <IconLogin @click="clickGoToLogin"/>
     </header>
     <NavigationComponent v-show="visibleMenu" class="position-top" @toggle-menu="toggleMenu"></NavigationComponent>
