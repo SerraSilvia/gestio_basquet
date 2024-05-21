@@ -1,4 +1,5 @@
 <template>
+    <RouterLink to="/equips/{{ this.id }}"><!--TODO: crear componente y arreglar la ruta-->
     <section class="team"><!--Hacer que cuando se haga click se vaya a la pagina de equipo-->
         <div class="img-container">
             <img :src="img" alt="">
@@ -12,19 +13,25 @@
         </div>
         
     </section>
+    </RouterLink>
+
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
     name: 'EquipComponent',
     data() {
-        return {//estos datos vendran del elemento padre, desde una propiedad "equipo"
+        return {
+            id: 1,
             nom: "Mi equipo",
             category: "JUNIOR",
             total_score: 100,
             img: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
-        }
-    }
+        };
+    },
+    components: { RouterLink }
 };
 </script>
 
