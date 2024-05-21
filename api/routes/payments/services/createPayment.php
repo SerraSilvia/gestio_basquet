@@ -8,7 +8,7 @@ function createPayment($conn) {
     $concept = $data['concept'];
     $date = $data['date'];
 
-    $q = "INSERT INTO valoracio VALUES (DEFAULT, '$person_id', '$quantity', '$concept', '$date'";
+    $q = "INSERT INTO payments VALUES (DEFAULT, '$person_id', '$quantity', '$concept', '$date'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

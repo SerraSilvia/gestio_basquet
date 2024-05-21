@@ -1,14 +1,17 @@
-<?php
+<?php 
 
 function getTournaments($conn) {
     $q = "SELECT * FROM tournaments";
-    $result = mysqli_query($conn, $q);
-    $empresas = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-        $empresas[] = $row;
+    $result = mysqli_query($conn,$q);
+
+    $tournaments = array();
+
+    while ($tournament = mysqli_fetch_assoc($result)) {
+        $tournaments[] = $tournament;
     }
-    header('Content-Type: application/json');
-    return json_encode($empresas);
+
+    header("Content-Type: application/json");
+    return json_encode($tournaments);
 }
 
 ?>

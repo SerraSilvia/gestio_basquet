@@ -1,15 +1,14 @@
 <?php
 
-function createLocation($conn) {
+function createFacility($conn) {
     $data = json_decode(file_get_contents("php://input"), true);
 
+    $location_id = $data['location_id'];
     $name = $data['name'];
-    $address = $data['address'];
-    $created_at = $data['created_at'];
-    $updated_at = $data['updated_at'];
-    $deleted_at = $data['deleted_at'];
+    $facility_type = $data['facility_type'];
+    $facility_status = $data['facility_status'];
 
-    $q = "INSERT INTO locations VALUES (DEFAULT, '$name', '$address', '$created_at', '$updated_at', '$deleted_at'";
+    $q = "INSERT INTO facilities VALUES (DEFAULT, '$location_id', '$name', '$facility_type', '$facility_status'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
