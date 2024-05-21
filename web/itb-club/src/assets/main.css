@@ -27,3 +27,25 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.button{
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+    text-transform: lowercase;
+    background-color:#4fcdc4;
+    padding: 0.25em 0.75em;
+    border-radius: 1em;
+  }
+  
+  .button:hover{
+    background-color:#6de6dd;
+  }
+  
+  .button:active{
+      background-color:rgba(255, 255, 255, 0);
+      border-color: #4fcdc4;
+      border-width: 0.1em;
+      border-style: solid;;
+      color:#4fcdc4;
+  }

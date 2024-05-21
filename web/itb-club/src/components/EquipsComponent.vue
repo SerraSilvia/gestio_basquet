@@ -2,20 +2,41 @@
     <section>
         <h2>Selecciona el club</h2>
             <div>
-                <p>Aqui iran los botones para seleccionar club</p>
+                <ClubSelectComponent></ClubSelectComponent>
             </div>
     </section>
 
     <section>
         <h2>Equips a Barcelona</h2>
         <div>
-            <p>Aqui iran los equipos</p>
+            <EquipComponent></EquipComponent>
         </div>
     </section>
-    <button>Afegir un equip</button>
+    <RouterLink  class="button" to="/equips/crear">Crear Equip</RouterLink><!--falta hacer el componente de crear equipo-->
+   
 </template>
 <script>
+import EquipComponent from './EquipComponent.vue'
+import ClubSelectComponent from './ClubSelectComponent.vue'
 export default {
-    name:'EquipsComponent'
+    name:'EquipsComponent',
+    data() {
+        return{
+            equip:null,//esto se cojera de la connexion a la api
+        };
+    },
+    components:{
+        EquipComponent,
+        ClubSelectComponent
+    }
+
 };
 </script>
+
+<style>
+
+.button{
+    margin-top:3em;
+}
+
+</style>
