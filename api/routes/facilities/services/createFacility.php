@@ -1,14 +1,14 @@
 <?php
 
-function createTeam($conn) {
+function createFacility($conn) {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $name = $data['name'];
     $location_id = $data['location_id'];
-    $category = $data['category'];
-    $total_score = $data['total_score'];
+    $name = $data['name'];
+    $facility_type = $data['facility_type'];
+    $facility_status = $data['facility_status'];
 
-    $q = "INSERT INTO teams VALUES (DEFAULT, '$name', '$location_id', '$category', '$total_score'";
+    $q = "INSERT INTO facilities VALUES (DEFAULT, '$location_id', '$name', '$facility_type', '$facility_status'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
