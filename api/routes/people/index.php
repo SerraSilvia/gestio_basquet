@@ -9,28 +9,32 @@ include './services/getPeopleByUserType.php';
 include './services/getPeopleByTeam.php';
 include './services/updatePeople.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['location_id'])) {
-    echo getTournaments($conn);
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['user_type']) && !isset($_REQUEST['team_id'])) {
+    echo getPeople($conn);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['id']) && !isset($_REQUEST['location_id'])) {
-    echo getTournamentById($conn, $_REQUEST['id']);
+else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['id']) && !isset($_REQUEST['user_type']) && !isset($_REQUEST['team_id'])) {
+    echo getPeopleById($conn, $_REQUEST['id']);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && isset($_REQUEST['location_id'])) {
-    echo getTournamentByLocation($conn, $_REQUEST['location_id']);
+else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && isset($_REQUEST['user_type']) && !isset($_REQUEST['team_id'])) {
+    echo getPeopleByUserType($conn, $_REQUEST['user_type']);
+}
+
+else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['user_type']) && isset($_REQUEST['team_id'])) {
+    echo getPeopleByTeam($conn, $_REQUEST['team_id']);
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo createTournament($conn);
+    echo createPeople($conn);
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id'])) {
-    echo updateTournament($conn, $_REQUEST['id']);    
+    echo updatePeople($conn, $_REQUEST['id']);    
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_REQUEST['id'])) {
-    echo deleteTournament($conn, $_REQUEST['id']);    
+    echo deletePeople($conn, $_REQUEST['id']);    
 }
 
 else {
