@@ -1,7 +1,7 @@
 <?php
 
 function getTeamsById($conn, $id) {
-    $q = "SELECT * FROM teams WHERE id='$id'";
+    $q = "SELECT * FROM TEAMS WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     $teams = array();

@@ -14,7 +14,7 @@ function createTeam($conn) {
     $player3 = $data['player3'];
     $player4 = $data['player4'];
 
-    $q = "INSERT INTO teams VALUES (DEFAULT, '$name', '$location_id', '$category', '$total_score', '$img', '$captain', '$player1', '$player2', '$player3', '$player4'";
+    $q = "INSERT INTO TEAMS VALUES (DEFAULT, '$name', '$location_id', '$category', '$total_score', '$img', '$captain', '$player1', '$player2', '$player3', '$player4'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

@@ -1,6 +1,6 @@
 <?php
 
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getTeams.php';
 include './services/getTeamById.php';
