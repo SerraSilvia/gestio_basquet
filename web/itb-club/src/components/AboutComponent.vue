@@ -1,23 +1,28 @@
 <template>
   <div class="who">
-    <div class="parallelogram-big"></div>
+    <div class="content-parallelogram-big">
+      <div class="parallelogram-big"></div>
+      <div class="parallelogram-big"></div>
+      <div class="parallelogram-big"></div>
+      <div class="parallelogram-big"></div>
+    </div>
     <div class="content">
       <h5>Qui som?</h5>
       <p>
         Som un club esportiu dedicat a fomentar la pràctica de l'esport i la
-        competició en un entorn amigable i professional. Volem oferir bona experiència 
-        per als jugadors i al personal del club gestionant equips, tornejos i classes 
-        de manera eficient i senzilla.
+        competició en un entorn amigable i professional. Volem oferir bona
+        experiència per als jugadors i al personal del club gestionant equips,
+        tornejos i classes de manera eficient i senzilla.
       </p>
     </div>
-        <div></div>
-        <div></div>
+    <div></div>
+    <div></div>
   </div>
 
   <div class="subscription">
     <div class="subcription-parallelogram">
-        <div></div>
-        <div></div>
+      <div></div>
+      <div></div>
     </div>
     <div class="content-subscription">
       <h5>La nostra subscripció</h5>
@@ -30,34 +35,51 @@
     </div>
   </div>
 
-<div class="where">
-  <div class="content-parallelogram">
-    <div class="parallelogram"></div>
-    <div class="content-where">
-      <h5>On ens pots trobar</h5>
-      <p class="where-description">
-        Ens trobem al cor de la ciutat per assegurar que els nostres membres
-        tinguin fàcil accés a les nostres instal·lacions. Visita'ns a:
-      </p>
-      <p>Carrer de l'Esport, 123</p>
-      <p>08080 Barcelona</p>
-      <p>Catalunya, Espanya</p>
-    </div>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23927.090064496788!2d2.1659648000000002!3d41.4416896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sca!2ses!4v1716362315269!5m2!1sca!2ses" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="where">
+    <div class="content-parallelogram">
+      <div class="parallelogram"></div>
+      <div class="content-where">
+        <h5>On ens pots trobar</h5>
+      </div>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23927.090064496788!2d2.1659648000000002!3d41.4416896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sca!2ses!4v1716362315269!5m2!1sca!2ses"
+          width="300"
+          height="300"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </div>
   </div>
-</div>
-
 
   <div class="contact">
-  <div class="contact-us">
-    <h5>Contacta'ns</h5>
-    <p>Telèfon: 938800000</p>
-    <p>ITBgym@itb.cat</p>
-  </div>
-</div>
+    <h5 class="title">Contacta'ns</h5>
 
+    <div class="card">
+      <div class="card-body">
+        <p class="where-description">
+          Ens trobem al cor de la ciutat per assegurar que els nostres membres
+          tinguin fàcil accés a les nostres instal·lacions. Visita'ns a:
+        </p>
+        <p>Carrer de l'Esport, 123</p>
+        <p>08080 Barcelona</p>
+        <p>Catalunya, Espanya</p>
+        <p>Telèfon: 938800000</p>
+        <p>Email: ITBgym@itb.cat</p>
+        <nav class="footer">
+          <ul>
+            <li><i class="fa-brands fa-facebook"></i></li>
+            <li><i class="fa-brands fa-instagram"></i></li>
+            <li><i class="fa-brands fa-square-twitter"></i></li>
+            <li><i class="fa-brands fa-youtube"></i></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -68,71 +90,54 @@ export default {
 
 <style>
 :root {
-    --color-quarter: #4fccc1;
+  --color-quarter: #4fccc1;
 }
-
 .who {
   position: relative;
   overflow: hidden;
   height: 600px;
-  margin-left: 40px;
+  margin-bottom: 2rem;
 }
 
-.content {
+.who .content {
   position: absolute;
   top: 4em;
-  left: 1.5em;
+  left: 0;
+  margin-right: 60%;
   padding: 5px;
   color: white;
-  width: 30%;
   padding-left: 30px;
-}
-
-.content-parallelogram {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 30em;
-  position: relative;
-}
-
-.content-parallelogram > .parallelogram {
-  width: 40% !important;
-  height: 30em !important;
-  background: #00a1e9;
-  margin: 1em;
-  margin-left: 200px !important;
-  position: absolute !important;
-  right: 20em;
-  top: -60px;
 }
 
 .parallelogram-big {
   width: 100%;
-  height: 30em;
-  transform: skew(-40deg);
-  margin: 1em;
-  margin-left: 500px;
+  height: 25em;
+  transform-origin: center;
+  transform: skew(-40deg) translate(40%, 20%);
   background: linear-gradient(
     to right,
     rgba(249, 77, 123, 1),
     rgba(244, 90, 69, 0.5)
   );
 }
-
-h5,
-p {
-  color: black;
+.content-parallelogram-big {
+  position: relative;
 }
-
-h5 {
-  font-size: 1.8em;
-  padding-bottom: 25px;
+.content-parallelogram-big div.parallelogram-big:nth-child(1) {
+  height: 3em;
+  transform-origin: center;
+  transform: skew(-40deg) translate(50%, 150%);
 }
-
-p {
-  font-size: 1.2em;
+.content-parallelogram-big div.parallelogram-big:nth-child(3) {
+  height: 3em;
+  transform-origin: center;
+  transform: skew(-40deg) translate(30%, 180%);
+}
+.content-parallelogram-big div.parallelogram-big:nth-child(4) {
+  width: 100%;
+  height: 1em;
+  transform-origin: center;
+  transform: skew(-40deg) translate(28.7%, 574%);
 }
 
 .content-subscription {
@@ -172,13 +177,66 @@ p {
   top: 0;
 }
 
-.contact {
-  background: white;
+.content-parallelogram {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30em;
+  position: relative;
+}
+
+.content-parallelogram > .parallelogram {
+  width: 40% !important;
+  height: 30em !important;
+  background: #00a1e9;
+  margin: 1em;
+  margin-left: 200px !important;
+  position: absolute !important;
+  right: 20em;
+  top: -60px;
+}
+
+.content-where {
+  color: white;
+  z-index: 1;
+  font-size: 1.4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.map-container {
+  border: 2px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 300px;
   height: 300px;
-  width: 80%;
-  margin-left: 100px;
+  position: absolute;
+  left: calc(50% + 210px);
+}
+
+.map-container iframe {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+}
+.contact .card {
+  background: white;
   border: 2px solid white;
   border-radius: 25px;
+  width: 100%;
 }
 
 .contact-us h5 {
@@ -190,36 +248,104 @@ p {
   margin-left: 200px;
 }
 
-.map-container {
+.where-description {
+  padding-bottom: 20px;
+}
+
+.footer {
+  position: relative;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  border: 2px solid white;
-  border-radius: 50%;
-  overflow: hidden;
-  width: 300px;
-  height: 300px;
-  margin-left:100px;
 }
 
-.map-container iframe {
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
+.footer ul {
+  list-style: none;
+  display: flex;
 }
 
-.where-description{
-padding-bottom:20px ;
+.footer ul > li {
+  padding: 0 10px;
 }
 
-.content-where {
-  position: absolute;
-  top: 4em;
-  left: 600px;
-  padding: 5px;
-  color: white;
-  width: 30%;
-  padding-left: 30px;
+.card .card-body {
+  padding: 10px 15px;
+}
+.card .card-body p {
+  line-height: 1.5;
+}
+@media (max-width: 500px) {
+  .parallelogram-big {
+    transform: skew(-40deg) translate(80%, 20%);
+  }
+  .content-parallelogram-big div.parallelogram-big:nth-child(1) {
+    transform: skew(-40deg) translate(123%, 150%);
+  }
+  .content-parallelogram-big div.parallelogram-big:nth-child(4) {
+    transform: skew(-40deg) translate(24%, 574%);
+  }
+
+  .who .content {
+    position: absolute;
+    top: 4em;
+    left: 0;
+    margin-right: 20%;
+    color: white;
+    padding-left: 30px;
+  }
+
+  .content-subscription > p {
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .content-parallelogram > .parallelogram {
+    width: 100% !important;
+    height: 90% !important;
+    background: #00a1e9;
+    right: -3em;
+    top: 0;
+  }
+
+  .content-parallelogram > .parallelogram {
+    top: 65px;
+  }
+
+  .content-where {
+    color: white;
+    z-index: 1;
+    font-size: 1.4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    align-items: flex-start;
+    height: 100%;
+  }
+
+  .map-container {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 150px);
+    margin-left: 0;
+  }
+
+  .where {
+    height: 600px;
+  }
 }
 
+h5,
+p {
+  color: black;
+}
+
+h5 {
+  font-size: 1.8em;
+  padding-bottom: 25px;
+}
+
+p {
+  font-size: 1.2em;
+}
 </style>
