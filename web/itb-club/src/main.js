@@ -9,6 +9,11 @@ import RankingsComponent from './components/RankingsComponent.vue';
 import ReservesComponent from './components/ReservesComponent.vue';
 import EquipsComponent from './components/EquipsComponent.vue';
 import UsuariComponent from './components/UsuariComponent.vue';
+import CrearEquipComponent from './components/CrearEquipComponent.vue';
+import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
+import LoginComponent from './components/LoginComponent.vue';
+import RegisterComponent from './components/RegisterComponent.vue';
+
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -18,6 +23,14 @@ const routes = [
   { path: '/reserva', component: ReservesComponent },
   { path: '/equips', component: EquipsComponent },
   { path: '/usuari', component: UsuariComponent },
+  { path: '/equips/crear', component: CrearEquipComponent },
+  {
+    path: '/equips/:id',
+    component: VisualizeEquipComponent,
+    props: route => ({ id: Number(route.params.id) })
+  },
+  { path: '/login', component: LoginComponent },
+  { path: '/register', component: RegisterComponent }
 ];
 
 const router = createRouter({

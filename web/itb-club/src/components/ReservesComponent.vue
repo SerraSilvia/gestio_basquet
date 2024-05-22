@@ -1,5 +1,5 @@
 <template>
-    <p>Esta es la pagina de componentes</p>
+    <p>Esta es la pagina de reservas</p>
 </template>
 <script>
 export default {
