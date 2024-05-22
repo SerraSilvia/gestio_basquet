@@ -1,7 +1,7 @@
 <?php
 
 function getPeople($conn) {
-    $q = "SELECT * FROM people";
+    $q = "SELECT * FROM PEOPLE";
     $result = mysqli_query($conn, $q);
 
     $peoples = array();
