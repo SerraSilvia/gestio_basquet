@@ -1,19 +1,20 @@
 <template>
-  <div class="quiSom">
+  <div class="who">
     <div class="parallelogram-big"></div>
     <div class="content">
       <h5>Qui som?</h5>
       <p>
         Som un club esportiu dedicat a fomentar la pràctica de l'esport i la
-        competició en un entorn amigable i professional. La nostra web està
-        dissenyada per oferir bona experiència per als jugadors i al personal
-        del club gestionant equips, tornejos i classes de manera eficient i
-        senzilla.
+        competició en un entorn amigable i professional. Volem oferir bona experiència 
+        per als jugadors i al personal del club gestionant equips, tornejos i classes 
+        de manera eficient i senzilla.
       </p>
     </div>
+        <div></div>
+        <div></div>
   </div>
 
-  <div class="subscripcio">
+  <div class="subscription">
     <div class="subcription-parallelogram">
         <div></div>
         <div></div>
@@ -29,7 +30,7 @@
     </div>
   </div>
 
-  <div class="onSom">
+  <div class="where">
     <div class="content-parallelogram">
       <div class="parallelogram"></div>
       <div class="content">
@@ -42,16 +43,21 @@
     </div>
   </div>
 
-  <div class="subscripcio">
-    <div class="contacte">
-      <h5>Contactan's</h5>
-      <h5>Adreça:</h5>
-      <p>Carrer de l'Esport, 123</p>
-      <p>08080 Barcelona</p>
-      <p>Catalunya, Espanya</p>
-    </div>
+  <div class="contact">
+  <div class="contact-us">
+    <h5>Contacta'ns</h5>
+    <p><strong>Adreça:</strong></p>
+    <p>Carrer de l'Esport, 123</p>
+    <p>08080 Barcelona</p>
+    <p>Catalunya, Espanya</p>
   </div>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23927.090064496788!2d2.1659648000000002!3d41.4416896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sca!2ses!4v1716362315269!5m2!1sca!2ses" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
 </template>
+
 <script>
 export default {
   name: "AboutComponent",
@@ -63,9 +69,11 @@ export default {
     --color-quarter: #4fccc1;
 }
 
-.quiSom {
+.who {
   position: relative;
   overflow: hidden;
+  height:600px;
+  margin-left:40px;
 }
 
 .content {
@@ -74,7 +82,7 @@ export default {
   left: 1.5em;
   padding: 5px;
   color: white;
-  width: 35%;
+  width: 30%;
   padding-left: 30px;
 }
 .content-parallelogram {
@@ -150,4 +158,46 @@ p {
     left: -30px;
     top: 0;
 }
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 20px;
+  border: 2px solid white;
+  border-radius: 25px;
+  width: 70%;
+  margin-left: 100px;
+  height: 350px;
+}
+
+.contact-us h5 {
+  margin-left: -40px;
+  padding-top: 50px;
+}
+
+.contact-us {
+  margin-left: 200px;
+}
+
+.map-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  margin-right: 200px;
+
+}
+
+.map-container iframe {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
 </style>
