@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $player_level = $data['player_level'];
     $team_id = $data['team_id'];
 
-    $q = "INSERT INTO people VALUES ('$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level', '$team_id')";
+    $q = "INSERT INTO PEOPLE VALUES ('$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level', '$team_id')";
     $result = mysqli_query($conn, $q);
 
     $res = array();
