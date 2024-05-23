@@ -1,46 +1,63 @@
 <template>
     <section>
         <h2>Selecciona el club</h2>
-            <div>
-                <ClubSelectComponent></ClubSelectComponent>
-            </div>
+        <div>
+            <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
+        </div>
     </section>
 
     <section>
-        <h2>Equips a Barcelona</h2>
+        <h2>Equips a {{club}}</h2>
         <div>
-            <EquipComponent></EquipComponent>
+            <EquipComponent selected-team="handleSelectedTeam"></EquipComponent>
         </div>
     </section>
-    <RouterLink  class="button" to="/equips/crear">Crear Equip</RouterLink><!--falta hacer el componente de crear equipo-->
-   
+    <p class="button-container">
+        <RouterLink class="button" to="/equips/crear">Crear Equip</RouterLink>
+        <!-- falta hacer el componente de crear equipo -->
+    </p>
 </template>
+
 <script>
 import EquipComponent from './EquipComponent.vue'
 import ClubSelectComponent from './ClubSelectComponent.vue'
 export default {
-    name:'EquipsComponent',
+    name: 'EquipsComponent',
     data() {
-        return{
-            equip:null,//esto se cojera de la connexion a la api
+        return {
+            equip: null, // esto se cojera de la conexion a la API
+            club: "Barcelona",
+            viewEquip: null,
         };
     },
-    components:{
+    components: {
         EquipComponent,
         ClubSelectComponent
+    },
+    methods:{
+        handleSelectedClub(selectedClub){
+            this.club=selectedClub;//no funciona
+            console.log(this.club)
+        },
+        handleSelectedTeam(id){
+            console.log("se clica un equipo, con id:"+ id);
+        }
     }
-
 };
 </script>
 
 <style>
-
-.button{
-    margin-top:3em;
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-section{
-    padding: 0% 7.5%;
+.button {
+    transition: background-color 0.3s ease;
 }
 
+section {
+    padding: 0 7.5%;
+}
 </style>

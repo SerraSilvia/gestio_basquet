@@ -1,7 +1,7 @@
 <?php
 
 function deleteTeam($conn, $id) {
-    $q = "DELETE FROM teams WHERE id = '$id'";
+    $q = "DELETE FROM TEAMS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

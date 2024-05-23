@@ -1,24 +1,12 @@
-@import './base.css';
-
-
+@import "./base.css";
 
 .roboto-flex-regular {
   font-family: "Roboto Flex", sans-serif;
   font-optical-sizing: auto;
-  font-weight:500;
+  font-weight: 500;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "wdth" 100,
-    "GRAD" 0,
-    "XOPQ" 96,
-    "XTRA" 468,
-    "YOPQ" 79,
-    "YTAS" 750,
-    "YTDE" -203,
-    "YTFI" 738,
-    "YTLC" 514,
-    "YTUC" 712;
+  font-variation-settings: "slnt" 0, "wdth" 100, "GRAD" 0, "XOPQ" 96, "XTRA" 468,
+    "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712;
 }
 
 .roboto-condensed-bold {
@@ -28,24 +16,31 @@
   font-style: normal;
 }
 
-.button{
+.button {
   color: white;
   font-weight: bolder;
   text-decoration: none;
-    text-transform: lowercase;
-    background-color:#4fcdc4;
-    padding: 0.25em 0.75em;
-    border-radius: 1em;
-  }
-  
-  .button:hover{
-    background-color:#6de6dd;
-  }
-  
-  .button:active{
-      background-color:rgba(255, 255, 255, 0);
-      border-color: #4fcdc4;
-      border-width: 0.1em;
-      border-style: solid;;
-      color:#4fcdc4;
-  }
+  text-transform: lowercase;
+  background-color: #4fcdc4;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+}
+
+.button:hover {
+  background-color: #6de6dd;
+}
+
+.button:active {
+  background-color: rgba(255, 255, 255, 0);
+  border-color: #4fcdc4;
+  border-width: 0.1em;
+  border-style: solid;
+  color: #4fcdc4;
+}
+body {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 58%, rgba(79,204,193,1) 100%);
+  background-repeat: no-repeat;
+  padding-bottom: 3em;
+
+}

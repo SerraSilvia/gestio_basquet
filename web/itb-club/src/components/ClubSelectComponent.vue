@@ -18,9 +18,15 @@
 <script>
 export default {
     name: 'ClubSelectComponent',
+    data(){
+        return{
+            city:null
+        };
+    },
     methods: {
-        clickClub(city) {
-            console.log("click en un club: " + city);
+        clickClub(selectedCity) {
+            this.city = selectedCity;
+            this.$emit("selected-club", this.city);
         }
     }
 };
@@ -41,7 +47,7 @@ export default {
 .parallelogram {
     width: 10em;
     height: 7em;
-    transform: skew(20deg);
+    transform: skew(-20deg);
     background: #00a1e9;
     margin: 1em;
     position: relative;

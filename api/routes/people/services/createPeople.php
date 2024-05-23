@@ -13,7 +13,7 @@ function createPeople($conn) {
     $player_level = $data['player_level'];
     $team_id = $data['team_id'];
 
-    $q = "INSERT INTO people VALUES (DEFAULT, '$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level', '$team_id'";
+    $q = "INSERT INTO PEOPLE VALUES (DEFAULT, '$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level', '$team_id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

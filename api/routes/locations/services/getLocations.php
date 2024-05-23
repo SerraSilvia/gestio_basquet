@@ -1,7 +1,7 @@
 <?php
 
 function getLocations($conn) {
-    $q = "SELECT * FROM locations";
+    $q = "SELECT * FROM LOCATIONS";
     $result = mysqli_query($conn, $q);
 
     $locations = array();
