@@ -1,14 +1,14 @@
 <template>
     <section class="club-container">
-        <div class="club-item" @click="clickClub('Barcelona')">
+        <div class="club-item" @click="clickClub('1')">
             <div class="parallelogram"></div>
             <p class="city-name">Barcelona</p>
         </div>
-        <div class="club-item" @click="clickClub('Terrassa')">
+        <div class="club-item" @click="clickClub('2')">
             <div class="parallelogram"></div>
             <p class="city-name">Terrassa</p>
         </div>
-        <div class="club-item" @click="clickClub('Sabadell')">
+        <div class="club-item" @click="clickClub('3')">
             <div class="parallelogram"></div>
             <p class="city-name">Sabadell</p>
         </div>

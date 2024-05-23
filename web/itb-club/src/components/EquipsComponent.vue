@@ -7,41 +7,64 @@
     </section>
 
     <section>
-        <h2>Equips a {{club}}</h2>
+        <h2>Equips a {{ clubName }}</h2>
         <div>
-            <EquipComponent selected-team="handleSelectedTeam"></EquipComponent>
+            <EquipComponent class="team-item" v-for="(team, index) in teams" :key="index" :team="team" @selected-team="handleSelectedTeam"></EquipComponent>
         </div>
     </section>
     <p class="button-container">
         <RouterLink class="button" to="/equips/crear">Crear Equip</RouterLink>
-        <!-- falta hacer el componente de crear equipo -->
     </p>
 </template>
 
 <script>
-import EquipComponent from './EquipComponent.vue'
-import ClubSelectComponent from './ClubSelectComponent.vue'
+import axios from 'axios'; 
+import EquipComponent from './EquipComponent.vue';
+import ClubSelectComponent from './ClubSelectComponent.vue';
+
 export default {
     name: 'EquipsComponent',
     data() {
         return {
-            equip: null, // esto se cojera de la conexion a la API
-            club: "Barcelona",
-            viewEquip: null,
+            clubName: "Barcelona",
+            teams: [],
+            club_id: 1, // Añadir club_id
         };
     },
     components: {
         EquipComponent,
         ClubSelectComponent
     },
-    methods:{
-        handleSelectedClub(selectedClub){
-            this.club=selectedClub;//no funciona
-            console.log(this.club)
+    methods: {
+        handleSelectedClub(selectedClub) {
+            this.club_id = selectedClub;
+            axios.get('http://localhost/gestio_basquet/api/routes/locations/?id=' + this.club_id)
+                .then(response => {
+                    console.log('Nombre del club obtenido:', response);
+                    this.clubName = response;
+                    //this.getTeams();
+                })
+                .catch(error => {
+                    console.error('Error al obtener el nombre del club', error);
+                });
         },
-        handleSelectedTeam(id){
-            console.log("se clica un equipo, con id:"+ id);
+        handleSelectedTeam(id) {
+            console.log("Se clica un equipo, con id:" + id);
+        },
+        getTeams() {
+            console.log("Buscando los equipos");
+            axios.get('thttp://localhost/gestio_basquet/api/routes/teams/?location_id=' + this.club_id)
+                .then(response => {
+                    console.log('Equipos obtenidos:', response.data);
+                    //this.teams = response.data;
+                })
+                .catch(error => {
+                    console.error('Error al intentar obtener los equipos', error);
+                });
         }
+    },
+    mounted() {
+        //this.getTeams(); 
     }
 };
 </script>
@@ -59,5 +82,9 @@ export default {
 
 section {
     padding: 0 7.5%;
+}
+
+.team-item {
+    margin: 0.2em;
 }
 </style>
