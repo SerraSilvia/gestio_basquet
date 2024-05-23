@@ -3,31 +3,66 @@
         <h2>Crea el teu equip</h2>
         <div id="crear-poligon"></div>
         <p class="info">En crear un equip seràs el capità i podras administrar el jugadors que s'uneixin al teu equip.</p>
-        <form action="POST">
+        <form id="form" @submit.prevent="validatorForm">
             <label for="name">Nom d'equip</label>
-            <input type="text" id="name" name="name">
-
+            <input type="text" id="name" name="name" v-model="name">
+            <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
+            
             <label for="location">Club</label>
-            <select name="location" id="location">
+            <select name="location" id="location" v-model="location">
                 <option value="Barcelona">Barcelona</option>
                 <option value="Terrassa">Terrassa</option>
                 <option value="Sabadell">Sabadell</option>
             </select>
+            <small v-if="errors.location" class="form-error">{{ errors.location }}</small>
 
             <label for="category">Categoria</label>
-            <select name="category" id="category">
+            <select name="category" id="category" v-model="category">
                 <option value="cadet">Cadet</option>
                 <option value="junior">Junior</option>
                 <option value="senior">Senior</option>
             </select>
+            <small v-if="errors.category" class="form-error">{{ errors.category }}</small>
+
             <input class="button" type="submit">
         </form>
     </section>
 </template>
 
 <script>
+import { Validators } from '@/utils/validators.js';
+
 export default {
-    name: 'CrearEquipComponent'
+    name: 'CrearEquipComponent',
+    data() {
+        return {
+            errors: {},
+            name: '',
+            location: null,
+            category: null
+        };
+    },
+    methods: {
+        validatorForm() {
+            this.resetForm();
+           
+            if (!Validators.required(this.name)) this.errors.name = 'El nombre es obligatorio.';
+            if (!Validators.required(this.location)) this.errors.location = 'La ubicación es obligatoria.';
+            if (!Validators.required(this.category)) this.errors.category = 'La categoría es obligatoria.';
+
+        },
+        resetForm() {
+            this.errors = {
+                name: null,
+                surnames: null,
+                dni: null,
+                location: null,
+                category: null,
+                email: null,
+                password: null
+            }
+        }
+    }
 };
 </script>
 
@@ -51,6 +86,8 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="password"],
 select {
     margin-top: 5px;
     padding: 10px;
@@ -60,6 +97,8 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
 select:focus {
     border-color: #00a1e9;
     outline: none;
@@ -83,9 +122,6 @@ label {
     font-size: 14px;
 }
 
-#category {
-    margin-bottom: 2em;
-}
 #crear-poligon{
     width: 40em;
     height: 9em;
