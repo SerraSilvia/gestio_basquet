@@ -69,7 +69,11 @@
         <p>Catalunya, Espanya</p>
         <p>Telèfon: 938800000</p>
         <p>Email: ITBgym@itb.cat</p>
-        <nav class="footer">
+
+      </div>
+    </div>
+  </div>
+  <nav class="footer">
           <ul>
             <li><i class="fa-brands fa-facebook"></i></li>
             <li><i class="fa-brands fa-instagram"></i></li>
@@ -77,9 +81,6 @@
             <li><i class="fa-brands fa-youtube"></i></li>
           </ul>
         </nav>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
