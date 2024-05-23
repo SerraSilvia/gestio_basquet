@@ -1,7 +1,7 @@
 <?php
 
 function getLocationById($conn, $id) {
-    $q = "SELECT * FROM locations WHERE id = '$id'";
+    $q = "SELECT * FROM LOCATIONS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     $locations = array();

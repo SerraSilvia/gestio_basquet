@@ -1,7 +1,7 @@
 <?php
 
 function getTeamsByLocation($conn, $location_id) {
-    $q = "SELECT * FROM teams WHERE location_id='$location_id'";
+    $q = "SELECT * FROM TEAMS WHERE location_id='$location_id'";
     $result = mysqli_query($conn, $q);
 
     $teams = array();

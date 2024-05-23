@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $password = md5($data['password']);
     $user_type = $data['user_type'];
 
-    $q = "SELECT * FROM people WHERE email = '$email' AND password = '$password'";
+    $q = "SELECT * FROM PEOPLE WHERE email = '$email' AND password = '$password'";
     $result = mysqli_query($conn, $q);
 
     $user = array();

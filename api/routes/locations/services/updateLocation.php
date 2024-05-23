@@ -9,7 +9,7 @@ function updateLocation($conn, $id) {
     $updated_at = $data['updated_at'];
     $deleted_at = $data['deleted_at'];
 
-    $q = "UPDATE locations SET name='$name', address='$address', created_at='$created_at', updated_at='$updated_at', deleted_at='$deleted_at' WHERE id='$id'";
+    $q = "UPDATE LOCATIONS SET name='$name', address='$address', created_at='$created_at', updated_at='$updated_at', deleted_at='$deleted_at' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {

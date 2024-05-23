@@ -1,7 +1,7 @@
 <?php
 
 function getPeopleByUserType($conn, $user_type) {
-    $q = "SELECT * FROM people WHERE user_type='$user_type'";
+    $q = "SELECT * FROM PEOPLE WHERE user_type='$user_type'";
     $result = mysqli_query($conn, $q);
 
     $peoples = array();

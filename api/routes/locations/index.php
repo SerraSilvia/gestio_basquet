@@ -1,6 +1,5 @@
 <?php
-
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getLocations.php';
 include './services/getLocationById.php';
