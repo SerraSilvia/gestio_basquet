@@ -77,7 +77,7 @@ export default {
     },
     getPlayersId() {
       this.playerIDs.push(this.team.captain, this.team.player1, this.team.player2, this.team.player3, this.team.player4);
-      console.log(this.getPlayersId)
+      console.log(this.playerIDs);
     },
     addMeToTeam() {
       //acceder al session storage y hacer un post del nuevo usuario segun el num de ids
