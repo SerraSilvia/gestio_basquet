@@ -1,6 +1,9 @@
 <template>
-    <div>
-      <p class="player">Esto es un jugador: {{ playerData ? playerData.name : 'Cargando...' }}</p>
+    <div class="player-container">
+      <p>{{ playerData ? playerData.name : 'Vacant' }}</p>
+      <div v-if="true" class="admin-teamates">
+        <button class="button" @click="deletePlayer">Eliminar</button>
+      </div>
     </div>
   </template>
   
@@ -30,6 +33,9 @@
           .catch(error => {
             console.error('Error al obtener datos del jugador:', error);
           });
+      }, 
+      deletePlayer(){
+
       }
     },
     mounted() {
@@ -39,8 +45,15 @@
   </script>
   
   <style>
-  .player {
-    background-color: red;
+  .player-container{
+    padding: 1em;
+    border-radius: 1em;
+    background-color: #eff9f6;
+    margin: 0.25em 0em;
+    display: flex;
+    justify-content: space-between;
+
   }
+
   </style>
   
