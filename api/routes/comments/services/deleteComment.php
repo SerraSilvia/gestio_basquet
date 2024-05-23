@@ -1,7 +1,7 @@
 <?php
 
 function deleteComment($conn, $id) {
-    $q = "DELETE FROM comments WHERE id = '$id'";
+    $q = "DELETE FROM COMMENTS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

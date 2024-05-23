@@ -1,7 +1,7 @@
 <?php
 
 function deleteTournament($conn, $id) {
-    $q = "DELETE FROM tournaments WHERE id = '$id'";
+    $q = "DELETE FROM TOURNAMENTS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

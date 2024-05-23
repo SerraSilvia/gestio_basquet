@@ -1,6 +1,6 @@
 <?php
 
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getCommentsByPlayer.php';
 include './services/getCommentById.php';

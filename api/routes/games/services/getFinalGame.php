@@ -1,7 +1,7 @@
 <?php 
 
 function getFinalGame($conn, $tournament_id) {
-    $q = "SELECT * FROM games WHERE tournament_id = '$tournament_id' AND tournament_position = 7";
+    $q = "SELECT * FROM GAMES WHERE tournament_id = '$tournament_id' AND tournament_position = 7";
 
     $result = mysqli_query($conn,$q);
 

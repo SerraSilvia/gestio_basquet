@@ -11,7 +11,7 @@ function updateTournament($conn, $id) {
     $updated_at = $data['updated_at'];
     $deleted_at = $data['deleted_at'];
 
-    $q = "UPDATE tournaments SET location_id='$location_id', name='$name', date_start='$date_start', date_end='$date_end', created_at='$created_at', updated_at='$updated_at', deleted_at='$deleted_at' WHERE id='$id'";
+    $q = "UPDATE TOURNAMENTS SET location_id='$location_id', name='$name', date_start='$date_start', date_end='$date_end', created_at='$created_at', updated_at='$updated_at', deleted_at='$deleted_at' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {

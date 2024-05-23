@@ -1,7 +1,7 @@
 <?php 
 
 function getFacilities($conn) {
-    $q = "SELECT * FROM facilities";
+    $q = "SELECT * FROM FACILITIES";
     $result = mysqli_query($conn,$q);
 
     $facilities = array();

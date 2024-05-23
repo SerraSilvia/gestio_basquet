@@ -1,6 +1,6 @@
 <?php
 
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getPayments.php';
 include './services/getPaymentById.php';

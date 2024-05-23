@@ -1,7 +1,7 @@
 <?php
 
 function getCommentById($conn, $id) {
-    $q = "SELECT * FROM comments WHERE id = '$id'";
+    $q = "SELECT * FROM COMMENTS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     $comments = array();

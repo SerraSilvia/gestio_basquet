@@ -1,7 +1,7 @@
 <?php 
 
 function getSemifinalsGames($conn, $tournament_id) {
-    $q = "SELECT * FROM games WHERE tournament_id = '$tournament_id' AND tournament_position IN (5, 6)";
+    $q = "SELECT * FROM GAMES WHERE tournament_id = '$tournament_id' AND tournament_position IN (5, 6)";
 
     $result = mysqli_query($conn,$q);
 
