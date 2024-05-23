@@ -42,7 +42,7 @@ export default {
                 .then(response => {
                     console.log('Nombre del club obtenido:', response);
                     this.clubName = response;
-                    //this.getTeams();
+                    this.getTeams();
                 })
                 .catch(error => {
                     console.error('Error al obtener el nombre del club', error);
@@ -56,7 +56,7 @@ export default {
             axios.get('thttp://localhost/gestio_basquet/api/routes/teams/?location_id=' + this.club_id)
                 .then(response => {
                     console.log('Equipos obtenidos:', response.data);
-                    //this.teams = response.data;
+                    this.teams = response.data;
                 })
                 .catch(error => {
                     console.error('Error al intentar obtener los equipos', error);
@@ -64,7 +64,7 @@ export default {
         }
     },
     mounted() {
-        //this.getTeams(); 
+        this.getTeams(); 
     }
 };
 </script>

@@ -1,8 +1,7 @@
 <?php
-// Agregar estos encabezados al principio de tus scripts PHP
-header("Access-Control-Allow-Origin: *"); // Permitir solicitudes desde cualquier origen
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Permitir los métodos HTTP específicos
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Permitir los encabezados personalizados necesarios
+header("Access-Control-Allow-Origin: *"); 
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
 
 $db_hostname = "localhost";
 $db_username = "root";
