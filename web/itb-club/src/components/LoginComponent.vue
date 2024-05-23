@@ -17,40 +17,43 @@
 
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name:'LoginComponent',
     data() {
       return {
-        user: {//TODO:hace falta cambiar los datos
-          name: '',
-          surnames: '',
-          dni: 0,
+        user: {
           email: '',
-          password: '',
-          birthdate: '',
-          user_type: '',
-          player_level: '',
-          team_id: null,
-        }
+          password: ''
+        },
+        logedUser:null,
       };
     },
-    methods: {
-      dologin() {
+    methods: {//TODO: hay que probar el funcionamiento
+      doLogin() {
         console.log("Iniciando sesion...");
-        
+        axios.get('auth/login', this.user)
+        .then(response =>{
+          console.log('Producto obtenido:', response.data);
+          this.logedUser=response.data;
+          this.clearForm()
+          this.saveSession()
+        })
+        .catch(error =>{
+          console.error('Error al intentar hacer el login');
+        })
       },
-      clearForm() {//hace falta cambiar los datos
+      clearForm() {
         this.user = {
-          name: '',
-          surnames: '',
-          dni: 0,
           email: '',
-          password: '',
-          birthdate: '',
-          user_type: '',
-          player_level: '',
-          team_id: null,
+          password: ''
         };
+      },
+      saveSession(){//TODO: falta acabar y que corresponda con los datos obtenidos del json
+        console.log('guardando la sesion en sessionStorage');
+        userData=this.logedUser
+        localStorage.setItem('userData', JSON.stringify(userData));//guardar en el local storage
       }
     }
   
