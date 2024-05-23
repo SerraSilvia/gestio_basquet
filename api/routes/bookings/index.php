@@ -1,6 +1,5 @@
 <?php
-
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getBookings.php';
 include './services/getBookingsByFacility.php';
