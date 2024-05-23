@@ -1,9 +1,9 @@
 <template>
   <section>
-    <h2>Log in</h2>
+    <h2>Iniciar Sessión</h2>
     <div id="crear-poligon"></div>
     <form id="form" @submit.prevent="validatorForm">
-      <label for="email">Mail</label>
+      <label for="email">Email</label>
       <input type="email" id="email" name="email" v-model="user.email" />
       <small v-if="errors.email" class="form-error">{{ errors.email }}</small>
 
@@ -26,7 +26,6 @@
 
 <script>
 import { Validators } from "@/utils/validators.js";
-import { axiosInstance } from "@/axios.js";
 
 import axios from "axios";
 
@@ -109,7 +108,4 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
 </style>

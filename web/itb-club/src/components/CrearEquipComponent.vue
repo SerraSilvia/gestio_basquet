@@ -39,7 +39,7 @@
 <script>
 import { Validators } from "@/utils/validators.js";
 
-import axios from "../axios.js";
+import axios from "axios";
 
 export default {
   name: "CrearEquipComponent",
