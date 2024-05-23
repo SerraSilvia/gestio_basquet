@@ -2,7 +2,7 @@
          <section id="register">
         <h2>Registrar-se</h2>
         <div id="crear-poligon"></div>
-        <form action="POST">
+        <form action="addUser">
             <label for="name">Nom</label>
             <input type="text" id="name" name="name">
 
@@ -11,6 +11,10 @@
 
             <label for="name">DNI</label><!--TODO: hacer que valide con js antes de enviar el formulario-->
             <input type="text" id="dni" name="dni">
+
+            <label for="birthdate">Data de naixement</label>
+            <input type="datetime-local" id="birthdate" name="birthdate" v-model="newTeam.birthdate" required>
+
 
             <label for="location">Club</label>
             <select name="location" id="location">
@@ -40,8 +44,49 @@
 </template>
 <script>
 export default {
-    name:'RegisterComponent'
-};
+    name:'RegisterComponent',
+    data() {
+      return {
+        newUser: {
+          name: '',
+          surnames: '',
+          dni: 0,
+          email: '',
+          password: '',
+          birthdate: '',
+          user_type: '',
+          player_level: '',
+          team_id: null,
+        }
+      };
+    },
+    methods: {
+      addUser() {
+        console.log("Creando un nuevo usuario...");
+        axios.post('auth/register', this.newUser)
+          .then(response => {
+            console.log('Usuario ha sido agregado:', response.data);
+            this.clearForm();
+          })
+          .catch(error => {
+            console.error('Error al agregar el usuario:', error);
+          });
+      },
+      clearForm() {
+        this.newUser = {
+          name: '',
+          surnames: '',
+          dni: 0,
+          email: '',
+          password: '',
+          birthdate: '',
+          user_type: '',
+          player_level: '',
+          team_id: null,
+        };
+      }
+    }
+  };
 </script>
 
 <style>
