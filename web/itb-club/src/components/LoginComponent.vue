@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Iniciar Sessión</h2>
-    <div id="crear-poligon"></div>
+    <div class="title-poligon"></div>
     <form id="form" @submit.prevent="validatorForm">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" v-model="user.email" />
