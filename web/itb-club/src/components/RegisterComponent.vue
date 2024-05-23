@@ -71,6 +71,7 @@ export default {
           .catch(error => {
             console.error('Error al agregar el usuario:', error);
           });
+          clearForm();
       },
       clearForm() {
         this.newUser = {
