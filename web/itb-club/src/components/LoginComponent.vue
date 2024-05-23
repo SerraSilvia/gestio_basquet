@@ -1,17 +1,18 @@
 <template>
   <section>
-    <h2>Log in</h2>
+    <h2>Iniciar Sesión</h2>
     <div id="crear-poligon"></div>
     <form @submit.prevent="doLogin">
-      <label for="mail">Mail</label>
-      <input type="email" id="mail" v-model="user.email" name="mail" required>
+      <label for="email">Correo Electrónico:</label>
+      <input type="email" id="email" v-model="user.email" name="email" required>
 
-      <label for="password">Contrasenya</label>
+      <label for="password">Contraseña:</label>
       <input type="password" id="password" v-model="user.password" name="password" required>
 
-      <input class="button" type="submit" value="Login">
+      <input class="button" type="submit" value="Iniciar Sesión">
     </form>
-    <RouterLink to="/register">Registrar-se</RouterLink>
+    <RouterLink to="/register">Registrarse</RouterLink>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </section>
 </template>
 
@@ -27,21 +28,22 @@ export default {
         password: ''
       },
       logedUser: null,
+      errorMessage: ''
     };
   },
   methods: {
-    doLogin() {
-      console.log("Iniciando sesion...");
-      axios.post('auth/login', this.user)
-        .then(response => {
-          console.log('Producto obtenido:', response.data);
-          this.logedUser = response.data;
-          this.clearForm();
-          this.saveSession();
-        })
-        .catch(error => {
-          console.error('Error al intentar hacer el login', error);
-        });
+    async doLogin() {
+      console.log("Iniciando sesión...");
+      try {
+        const response = await axios.post('http://localhost/gestio_basquet/api/routes/auth/login', this.user);
+        console.log('Usuario autenticado:', response.data);
+        this.logedUser = response.data;
+        this.clearForm();
+        this.saveSession();
+      } catch (error) {
+        console.error('Error al intentar hacer el login', error);
+        this.errorMessage = 'Error al iniciar sesión';
+      }
     },
     clearForm() {
       this.user = {
@@ -50,7 +52,7 @@ export default {
       };
     },
     saveSession() {
-      console.log('Guardando la sesion en sessionStorage');
+      console.log('Guardando la sesión en sessionStorage');
       const userData = {
         name: this.logedUser.name,
         level: this.logedUser.level,
@@ -62,3 +64,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.error {
+  color: red;
+}
+</style>
