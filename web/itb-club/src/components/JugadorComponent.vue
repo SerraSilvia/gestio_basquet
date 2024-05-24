@@ -27,7 +27,7 @@ export default {
   name: 'JugadorComponent',
   props: {
     player: {
-      type: Number,
+      type: String,
       required: true
     }
   },

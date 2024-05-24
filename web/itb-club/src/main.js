@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/equips/:id',
     component: VisualizeEquipComponent,
-    props: route => ({ id: Number(route.params.id) })
+    props: route => ({ id: String(route.params.id) })
   },
   { path: '/login', component: LoginComponent },
   { path: '/register', component: RegisterComponent }
