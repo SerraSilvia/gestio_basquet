@@ -8,6 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }*/
 
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    header("HTTP/1.1 200 OK");
+    exit;
+}
+
 $db_hostname = "localhost";
 $db_username = "root";
 $db_password = "";
