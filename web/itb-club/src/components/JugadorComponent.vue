@@ -41,7 +41,6 @@ export default {
     getPlayerData() {
       axios.get('http://localhost/gestio_basquet/api/routes/people/?id=' + this.player)
         .then(response => {
-          console.log(response.data);
           this.playerData = response.data[0];
         })
         .catch(error => {

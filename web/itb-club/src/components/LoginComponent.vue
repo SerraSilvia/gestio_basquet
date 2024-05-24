@@ -80,7 +80,7 @@ export default {
     async doLogin() {
       console.log("Iniciando sesión...");
       try {
-        const response = await axios.post(
+        const response = await axios.put(
           "http://localhost/gestio_basquet/api/routes/auth/login",
           this.user
         );
