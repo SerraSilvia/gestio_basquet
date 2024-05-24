@@ -4,46 +4,58 @@
       <div class="user-manager-container">
         <section>
           <h3>Les teves dades</h3>
-          <button>Modificar</button>
+          <button class="button">Modificar</button>
         </section>
         <section>
           <h3>El teu equip</h3>
-          <EquipComponent class="team-item" v-for="(team, index) in teams" :key="index" :team="team" @selected-team="handleSelectedTeam"></EquipComponent>
+          <EquipComponent class="team-item" @selected-team="handleSelectedTeam" :team="team"></EquipComponent>
         </section>
         <section>
           <h3>Subscripcio</h3>
         </section>
         <section>
           <h3>Reserves</h3>
+          <ReservaItemComponent></ReservaItemComponent>
         </section>
-        <button>Eliminar compte</button>
+        <button class="button">Eliminar compte</button>
       </div>
     </div>
   </template>
   
   <script>
 import EquipComponent from './EquipComponent.vue';
+import ReservaItemComponent from './ReservaItemComponent.vue';
+
 
   // Habrá que comprobar que el usuario es admin o que su id se corresponde con la id del session storage
   export default {
     name: 'UsuariComponent',
     data() {
       return {
-        user: null // Inicializa el usuario como null
+        user: null,
+        team: {
+          
+        }, 
       };
+    },
+    components:{
+      EquipComponent,
+      ReservaItemComponent
     },
     methods:{
         handleSelectedTeam(){
             console.log("Se administran cosas");
+        },
+        getReservas(){
+          console.log("Se consiguen reservas");
         }
     },
     mounted() {
-      // Aquí podrías agregar lógica para obtener los datos del usuario,
-      // por ejemplo, desde una API o desde sessionStorage
       const userData = JSON.parse(sessionStorage.getItem('userData'));
       if (userData) {
         this.user = userData;
       }
+      this.getReservas();
     }
   };
   </script>
