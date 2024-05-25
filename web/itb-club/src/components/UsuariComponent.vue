@@ -69,7 +69,7 @@ export default {
           console.error('Error al intentar obtener las reservas', error);
         });
     },
-    getPayments(){
+    getPayments(){//falla la api
       this.$axios.get('payments/?user_id=' + this.user.id)
         .then(response => {
           console.log("payments: "+response.data);
