@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'LoginComponent',
@@ -32,7 +31,7 @@ export default {
   methods: {
     doLogin() {
       console.log("Iniciando sesion...");
-      axios.post('auth/login', this.user)
+      this.$axios.post('auth/login/', this.user)
         .then(response => {
           console.log('Producto obtenido:', response.data);
           this.logedUser = response.data;

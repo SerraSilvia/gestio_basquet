@@ -1,6 +1,8 @@
+// main.js
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
+import axios from './axios';
 
 import HomeComponent from './components/HomeComponent.vue';
 import AboutComponent from './components/AboutComponent.vue';
@@ -13,7 +15,6 @@ import CrearEquipComponent from './components/CrearEquipComponent.vue';
 import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
-
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -39,6 +40,9 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+
+// Proporciona Axios globalmente
+app.config.globalProperties.$axios = axios;
 
 app.use(router);
 

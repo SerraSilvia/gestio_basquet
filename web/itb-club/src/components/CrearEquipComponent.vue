@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from '../axios.js';
 
 export default {
   name: 'CrearEquipComponent',
@@ -62,7 +61,7 @@ export default {
     },
     addTeam() {
       console.log("Creando un nuevo equipo...");
-      axios.post('http://localhost/gestio_basquet/api/routes/teams/', this.newTeam)
+      this.$axios.post('teams', this.newTeam)
         .then(response => {
           console.log('Equipo ha sido agregado:', response.data);
           this.clearForm();
