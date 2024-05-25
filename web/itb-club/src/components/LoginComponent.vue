@@ -2,7 +2,7 @@
   <section>
     <h2>Iniciar Sessión</h2>
     <div class="title-poligon"></div>
-    <form id="form" @submit.prevent="validatorForm">
+    <form id="form" @submit.prevent="doLogin">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" v-model="user.email" />
       <small v-if="errors.email" class="form-error">{{ errors.email }}</small>
@@ -57,22 +57,6 @@ export default {
         email: "",
         password: "",
       };
-    },
-    async doLogin() {
-      console.log("Iniciando sesión...");
-      try {
-        const response = await axios.put(
-          "http://localhost/gestio_basquet/api/routes/auth/login",
-          this.user
-        );
-        console.log("Usuario autenticado:", response.data);
-        this.logedUser = response.data;
-        this.clearForm();
-        this.saveSession();
-      } catch (error) {
-        console.error("Error al intentar hacer el login", error);
-        this.errorMessage = "Error al iniciar sesión";
-      }
     },
     saveSession() {
       console.log("Guardando la sesión en sessionStorage");
