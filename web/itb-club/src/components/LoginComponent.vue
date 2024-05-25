@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h2>Iniciar Sessión</h2>
+  <section v-if="!loged">
+    <h2>Iniciar Sessió</h2>
     <div class="title-poligon"></div>
     <form id="form" @submit.prevent="validatorForm">
       <label for="email">Email</label>
@@ -13,8 +13,12 @@
 
       <input class="button" type="submit" />
     </form>
+    <RouterLink to="/register">Registrar-se</RouterLink>
   </section>
-  <RouterLink to="/register">Registrar-se</RouterLink>
+  <section v-else="loged">
+    <h2>Tancar la sessió</h2>
+    <button class="button" @click="logOut">Logout</button>
+  </section>
 </template>
 
 <script>
@@ -29,6 +33,7 @@ export default {
         password: "",
       },
       logedUser: null,
+      loged:false,
     };
   },
   methods: {
@@ -54,10 +59,9 @@ export default {
       this.$axios.get('people/?email=' + this.user.email)
         .then(response => {
           console.log(response.data[0]);
-          this.user = response.data[0];
+          this.logedUser = response.data[0];
           this.saveSession();
           this.clearForm();
-          //aqui redirigira a la pagina de usuario
         })
         .catch(error => {
           console.error('Error al intentar obtener el usuario', error);
@@ -67,19 +71,35 @@ export default {
       this.user = {
         email: "",
         password: "",
-      };
+      }
     },
     saveSession() {
       console.log("Guardando la sesión en sessionStorage");
       const userData = {
-        name: this.logedUser.name,
-        level: this.logedUser.level,
         id: this.logedUser.id,
-        location_id: this.logedUser.location_id,
+        name: this.logedUser.name,
+        surnames: this.logedUser.surnames,
+        level: this.logedUser.user_type,
+        player_level: this.logedUser.player_level,
+        mail: this.logedUser.email
       };
       sessionStorage.setItem("userData", JSON.stringify(userData));
+      console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));
+      this.$router.push({ path: '/' });
+
     },
+    checkSession(){
+      console.log("Contenido de sessionStorage al iniciar:", sessionStorage.getItem("userData"));
+      if(sessionStorage.getItem("userData")!=null) this.loged=true;
+    }, 
+    logOut(){
+      sessionStorage.removeItem("userData");
+      this.$router.push({ path: '/usuari' });
+    }
   },
+  mounted() {
+    this.checkSession();
+  }
 };
 </script>
 
