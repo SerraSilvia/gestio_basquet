@@ -63,6 +63,12 @@ export default {
           console.error('Error al intentar hacer el login', error);
         });
     },
+    resetForm() {
+      this.errors = {
+        email: null,
+        password: null,
+      };
+    },
     clearForm() {
       this.user = {
         email: "",

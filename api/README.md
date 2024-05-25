@@ -13,3 +13,7 @@ docker build -t "gestio_basquet_api" .
 # Run Docker Image 
 
 Execute run_docker.bat into root folder project
+
+# Url API 
+
+http://localhost:3001/routes/folders../index.php

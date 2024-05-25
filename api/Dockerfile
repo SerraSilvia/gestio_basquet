@@ -6,6 +6,9 @@ COPY apache.conf /etc/apache2/sites-available/000-default.conf
 # Habilitar el sitio de Apache
 RUN a2ensite 000-default
 
+# Habilitar la extension de mysqli para PHP
+RUN docker-php-ext-install mysqli
+
 # Copiamos los ficheros necesarios del proyecto
 COPY . /var/www/
 RUN chown -R www-data:www-data /var/www
