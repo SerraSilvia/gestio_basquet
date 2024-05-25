@@ -1,0 +1,63 @@
+/* GENERAL STYLES */
+section {
+  padding-top: 1em;
+}
+
+form {
+  max-width: 90%;
+  margin: 5em 2em;
+  padding: 2em;
+  background-color: #eff9f6;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #00a1e9;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #00a1e9;
+  outline: none;
+}
+
+input[type="submit"] {
+  width: 6em;
+  margin: auto;
+  border-color: white;
+  border-style: solid;
+}
+.form-error{
+  color: red;
+}
+.title-poligon {
+  width: 40em;
+  height: 9em;
+  transform: skew(20deg);
+  background: linear-gradient(
+    to right,
+    rgb(54, 208, 255),
+    rgba(255, 159, 147, 0)
+  );
+  margin: 1em;
+  position: absolute;
+  top: 5em;
+  left: 7em;
+  z-index: -1;
+}

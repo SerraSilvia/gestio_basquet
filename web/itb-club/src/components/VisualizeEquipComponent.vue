@@ -36,7 +36,7 @@ export default {
   name: "VisualizeEquipComponent",
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true,
     }
   },

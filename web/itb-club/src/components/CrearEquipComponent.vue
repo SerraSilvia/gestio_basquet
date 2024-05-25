@@ -2,25 +2,36 @@
   <section>
     <h2>Crea el teu equip</h2>
     <div id="crear-poligon"></div>
-    <p class="info">En crear un equip seràs el capità i podras administrar els jugadors que s'uneixin al teu equip.</p>
-    <form @submit.prevent="addTeam">
+    <p class="info">
+      En crear un equip seràs el capità i podras administrar el jugadors que
+      s'uneixin al teu equip.
+    </p>
+    <form id="form" @submit.prevent="validatorForm">
       <label for="name">Nom d'equip</label>
-      <input type="text" id="name" name="name" v-model="newTeam.name" required>
+      <input type="text" id="name" name="name" v-model="newTeam.name" />
+      <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
 
-      <label for="location_id">Club</label>
-      <select name="location_id" id="location_id" v-model="newTeam.location_id" required>
-        <option value="1">Barcelona</option>
-        <option value="2">Terrassa</option>
-        <option value="3">Sabadell</option>
+      <label for="location">Club</label>
+      <select name="location" id="location" v-model="newTeam.location">
+        <option value="Barcelona">Barcelona</option>
+        <option value="Terrassa">Terrassa</option>
+        <option value="Sabadell">Sabadell</option>
       </select>
+      <small v-if="errors.location" class="form-error">{{
+        errors.location
+      }}</small>
 
       <label for="category">Categoria</label>
-      <select name="category" id="category" v-model="newTeam.category" required>
+      <select name="category" id="category" v-model="newTeam.category">
         <option value="cadet">Cadet</option>
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
       </select>
-      <input class="button" type="submit" value="Crear">
+      <small v-if="errors.category" class="form-error">{{
+        errors.category
+      }}</small>
+
+      <input class="button" type="submit" />
     </form>
   </section>
 </template>
@@ -28,29 +39,59 @@
 <script>
 
 export default {
-  name: 'CrearEquipComponent',
+  name: "CrearEquipComponent",
   data() {
     return {
+      errors: {},
       newTeam: {
-        name: '',
+        name: "",
         location_id: 1,
-        category: '',
+        category: "",
         total_score: 0,
-        img: '',
+        img: "",
         captain: 0,
         player1: 0,
         player2: 0,
         player3: 0,
-        player4: 0
-      }
+        player4: 0,
+      },
     };
   },
   mounted() {
     this.setCaptainId();
   },
   methods: {
+    validatorForm() {
+      this.resetForm();
+
+      if (!Validators.required(this.newTeam.name)) {
+        this.errors.name = "El nombre es obligatorio.";
+        return;
+      }
+      if (!Validators.required(this.newTeam.location_id)) {
+        this.errors.location = "La ubicación es obligatoria.";
+        return;
+      }
+      if (!Validators.required(this.newTeam.category)) {
+        this.errors.category = "La categoría es obligatoria.";
+        return;
+      }
+
+      this.addTeam();
+    },
+    resetForm() {
+      this.errors = {
+        name: null,
+        surnames: null,
+        dni: null,
+        location: null,
+        category: null,
+        email: null,
+        password: null,
+      };
+    },
     setCaptainId() {
-      this.newTeam.captain = 280;//HARDCODEADO
+      this.newTeam.captain = 280; //HARDCODEADO
       /*const userId = parseInt(sessionStorage.getItem('userId'), 10);
       if (userId) {
         this.newTeam.captain = userId;
@@ -66,25 +107,25 @@ export default {
           console.log('Equipo ha sido agregado:', response.data);
           this.clearForm();
         })
-        .catch(error => {
-          console.error('Error al agregar el equipo:', error);
+        .catch((error) => {
+          console.error("Error al agregar el equipo:", error);
         });
     },
     clearForm() {
       this.newTeam = {
-        name: '',
+        name: "",
         location_id: 1,
-        category: '',
+        category: "",
         total_score: 0,
-        img: '',
-        captain: parseInt(sessionStorage.getItem('userId'), 10),
+        img: "",
+        captain: parseInt(sessionStorage.getItem("userId"), 10),
         player1: 0,
         player2: 0,
         player3: 0,
-        player4: 0
+        player4: 0,
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -109,6 +150,8 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="password"],
 select {
   margin-top: 5px;
   padding: 10px;
@@ -118,6 +161,8 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
 select:focus {
   border-color: #00a1e9;
   outline: none;
@@ -130,15 +175,26 @@ input[type="submit"] {
   border-style: solid;
 }
 
-.info {
-  padding-left: 3em;
+label {
+  margin-top: 3em;
+}
+
+.dropdown-info {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
 }
 
 #crear-poligon {
   width: 40em;
   height: 9em;
   transform: skew(20deg);
-  background: linear-gradient(to right, rgb(54, 208, 255), rgba(255, 159, 147, 0));
+  background: linear-gradient(
+    to right,
+    rgb(54, 208, 255),
+    rgba(255, 159, 147, 0)
+  );
   margin: 1em;
   position: absolute;
   top: 5em;
