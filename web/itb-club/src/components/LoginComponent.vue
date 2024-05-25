@@ -9,7 +9,7 @@
 
       <label for="password">Contrasenya</label>
       <input type="password" id="password" name="password" v-model="user.password" />
-      <small v-if="errors.password" class="form-error">{{errors.password}}</small>
+      <small v-if="errors.password" class="form-error">{{ errors.password }}</small>
 
       <input class="button" type="submit" />
     </form>
@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     validatorForm() {
-      this.resetForm();
 
       if (!Validators.required(this.user.email)) {
         this.errors.email = "El correo electrónico es obligatorio.";
@@ -52,15 +51,16 @@ export default {
     },
     doLogin() {
       console.log("Iniciando sesion...");
-      this.$axios.post('auth/login/', this.user)
+      this.$axios.get('people/?email=' + this.user.email)
         .then(response => {
-          console.log('Producto obtenido:', response);
-          this.logedUser = response.data;
-          this.clearForm();
+          console.log(response.data[0]);
+          this.user = response.data[0];
           this.saveSession();
+          this.clearForm();
+          //aqui redirigira a la pagina de usuario
         })
         .catch(error => {
-          console.error('Error al intentar hacer el login', error);
+          console.error('Error al intentar obtener el usuario', error);
         });
     },
     clearForm() {

@@ -48,7 +48,7 @@ export default {
             console.log("Se clica un equipo, con id:" + id);
         },
         getTeams() {
-            axios.get('http://localhost/gestio_basquet/api/routes/teams/?location_id=' + this.club_id)
+            this.$axios.get('teams/?location_id=' + this.club_id)
                 .then(response => {
                     this.teams = response.data;
                 })
