@@ -74,7 +74,6 @@ export default {
       }
     },
     saveSession() {
-      console.log("Guardando la sesión en sessionStorage");
       const userData = {
         id: this.logedUser.id,
         name: this.logedUser.name,
@@ -89,7 +88,6 @@ export default {
 
     },
     checkSession(){
-      console.log("Contenido de sessionStorage al iniciar:", sessionStorage.getItem("userData"));
       if(sessionStorage.getItem("userData")!=null) this.loged=true;
     }, 
     logOut(){
