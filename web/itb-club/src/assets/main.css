@@ -44,3 +44,7 @@ body {
   padding-bottom: 3em;
 
 }
+
+.capitalize{
+  text-transform: capitalize;
+}
