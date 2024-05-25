@@ -5,7 +5,7 @@ include "../../../db/connection.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     $email = $data['email'];
-    $password = $data['password'];
+    $password = $data['password']; //Se necesita el md5 pero hay que revisar el script.sql para que las password esten en md5
 
     $q = "SELECT * FROM PEOPLE WHERE email = '$email' AND password = '$password'";
     
