@@ -2,21 +2,14 @@
   <section>
     <h2>Iniciar Sessión</h2>
     <div class="title-poligon"></div>
-    <form id="form" @submit.prevent="doLogin">
+    <form id="form" @submit.prevent="validatorForm">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" v-model="user.email" />
       <small v-if="errors.email" class="form-error">{{ errors.email }}</small>
 
       <label for="password">Contrasenya</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        v-model="user.password"
-      />
-      <small v-if="errors.password" class="form-error">{{
-        errors.password
-      }}</small>
+      <input type="password" id="password" name="password" v-model="user.password" />
+      <small v-if="errors.password" class="form-error">{{errors.password}}</small>
 
       <input class="button" type="submit" />
     </form>
@@ -25,7 +18,7 @@
 </template>
 
 <script>
-
+import { Validators } from "@/utils/validators.js";
 export default {
   name: "LoginComponent",
   data() {
@@ -39,11 +32,29 @@ export default {
     };
   },
   methods: {
+    validatorForm() {
+      this.resetForm();
+
+      if (!Validators.required(this.user.email)) {
+        this.errors.email = "El correo electrónico es obligatorio.";
+        return;
+      } else if (!Validators.email(this.user.email)) {
+        this.errors.email = "El correo electrónico debe ser válido.";
+        return;
+      }
+
+      if (!Validators.required(this.user.password)) {
+        this.errors.password = "La contraseña es obligatoria.";
+        return;
+      }
+
+      this.doLogin();
+    },
     doLogin() {
       console.log("Iniciando sesion...");
       this.$axios.post('auth/login/', this.user)
         .then(response => {
-          console.log('Producto obtenido:', response.data);
+          console.log('Producto obtenido:', response);
           this.logedUser = response.data;
           this.clearForm();
           this.saveSession();
@@ -72,5 +83,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
