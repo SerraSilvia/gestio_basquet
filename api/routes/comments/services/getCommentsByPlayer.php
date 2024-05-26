@@ -1,6 +1,6 @@
 <?php
 
-function getCommentsByPlayerId($conn, $player_id) {
+function getCommentsByPlayer($conn, $player_id) {
     $q = "SELECT * FROM COMMENTS WHERE player_id = '$player_id'";
     $result = mysqli_query($conn, $q);
 
