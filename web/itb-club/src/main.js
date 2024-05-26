@@ -16,6 +16,7 @@ import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
 import VisualizeTournamentComponent from './components/VisualizeTournamentComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
+import ReservaCrear from '@/components/ReservaCrear.vue';
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -38,6 +39,10 @@ const routes = [
     component: VisualizeTournamentComponent,
     props: route => ({ id: String(route.params.id) })
   },
+  {
+    path: '/reserva/crear',
+    component: ReservaCrear
+}
 ];
 
 const router = createRouter({
