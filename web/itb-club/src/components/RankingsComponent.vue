@@ -7,7 +7,7 @@
     </section>
   
     <section id="teams-section">
-      <h2>Equips a {{ clubName }}</h2>
+      <h2>Ranking de {{ clubName }}</h2>
       <input type="text" v-model="searchQuery" placeholder="Buscar equip per nom">
       <div v-for="(team, index) in sortedTeams" :key="team.id">
         <p class="number">{{ index + 1 }}</p><!--TODO: hacer que el indice no cambie segun la busqueda, que sea una propiedad mas del team-->
