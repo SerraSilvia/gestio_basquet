@@ -9,7 +9,7 @@
     <section>
         <h2>Pistes</h2>
         <div>
-            // 
+            //
         </div>
     </section>
 
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="week in calendar" :key="week[0].date">
-                        <td v-for="day in week" :key="day.date" :class="{'is-today': day.isToday, 'is-selected': day.isSelected}" @click="selectDate(day)">
+                        <td v-for="day in week" :key="day.date" :class="{'is-today': day.isToday, 'is-selected': day.isSelected, 'is-weekend': day.isWeekend}" @click="selectDate(day)">
                             {{ day.date.getDate() }}
                         </td>
                     </tr>
@@ -106,7 +106,6 @@ export default {
             const start = new Date(today.getFullYear(), today.getMonth(), 1);
             const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-            
             const startDate = start.getDay() === 1 ? start : new Date(start.setDate(start.getDate() - (start.getDay() - 1)));
             const endDate = end.getDay() === 5 ? end : new Date(end.setDate(end.getDate() + (5 - end.getDay())));
 
@@ -120,6 +119,7 @@ export default {
                         date: new Date(currentDate),
                         isToday: currentDate.toDateString() === today.toDateString(),
                         isSelected: false,
+                        isWeekend: i >= 5, 
                         isWeekday: currentDate.getDay() >= 1 && currentDate.getDay() <= 5
                     });
                     currentDate.setDate(currentDate.getDate() + 1);
@@ -191,6 +191,14 @@ th {
     color: white;
 }
 
+.is-weekend {
+    background-color: #ECE0BF; 
+}
+
+#weekend {
+    background-color: #C5B484; 
+}
+
 ul {
     list-style: none;
     padding: 0;
@@ -207,9 +215,5 @@ li {
 li.is-selected {
     background-color: #2196f3;
     color: white;
-}
-
-#weekend {
-    background-color: #C5B481;
 }
 </style>
