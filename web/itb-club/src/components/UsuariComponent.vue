@@ -1,16 +1,22 @@
 <template>
   <div id="user-manager-page">
-    <h2>Hola, {{ user ? user.name : 'Usuari' }}</h2>
+    <div>
+      <img :src="user ? user.img : ''" alt="user_img">
+      <h2>Hola, {{ user ? user.name : 'Usuari' }}</h2>
+    </div>
+    
     <div class="user-manager-container">
-      <section>
+      <section id="user-info">
         <h3>Les teves dades</h3>
-        <p>{{ user ? user.name : 'carregant...' }} {{ user ? user.surname : 'carregant...' }}</p>
-        <p>{{ user ? user.mail : 'carregant...' }}</p>
-        <p class="capitalize">{{ user ? user.player_level : 'carregant...' }}</p>
-        <div class="center-container">
-          <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar compte</button>
-          <button id="modifyAcount" class="button-pink">Modificar dades</button>
+        <div class="white">
+          <p>{{ user ? user.name : 'carregant...' }} {{ user ? user.surnames : 'carregant...' }}</p>
+          <p>{{ user ? user.mail : 'carregant...' }}</p>
+          <p class="capitalize">{{ user ? user.player_level : 'carregant...' }}</p>
         </div>
+        <div class="center-container">
+            <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar compte</button>
+            <button id="modifyAcount" class="button-pink">Modificar dades</button>
+          </div>
       </section>
 
       <section v-if="user && user.level === 'player'">
@@ -34,8 +40,8 @@
 
       <section v-if="user && user.level === 'player'">
         <h3>Comentaris</h3>
-        <ComentariComponent v-for="(comment, index) in comments" :key="index" :comment="comment">
-        </ComentariComponent>
+        <CommentComponent v-for="(comment, index) in comments" :key="index" :comment="comment">
+        </CommentComponent>
       </section>
 
     </div>
@@ -47,6 +53,8 @@
 import EquipComponent from './EquipComponent.vue';
 import ReservaItemComponent from './ReservaItemComponent.vue';
 import PaymentComponent from './PaymentComponent.vue';
+import CommentComponent from './CommentComponent.vue';
+
 
 export default {
   name: 'UsuariComponent',
@@ -57,13 +65,14 @@ export default {
       team: [],
       bookings: [],
       payments: [],
-      comments:[],
+      comments: [],
     };
   },
   components: {
     EquipComponent,
     ReservaItemComponent,
-    PaymentComponent
+    PaymentComponent,
+    CommentComponent
   },
   methods: {
 
@@ -94,6 +103,15 @@ export default {
           console.error('Error al intentar obtener el equipo', error);
         });
     },
+    getComments() {
+      this.$axios.get('comments/?person_id=' + this.user.id)
+        .then(response => {
+          this.comments = response.data;
+        })
+        .catch(error => {
+          console.error('Error al intentar obtener los comentarios', error);
+        });
+    },
     deleteAcount() {
       sessionStorage.removeItem("userData");
       //TODO: aqui se debera eliminar el usuario con la api
@@ -106,6 +124,7 @@ export default {
       this.user = userData;
       this.getBookings();
       this.getPayments();
+      this.getComments();
       if (this.user.team_id != null) this.getTeam();
     } else {
       this.$router.push({ path: '/login' });
@@ -147,5 +166,17 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+#user-info .white{
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+}
+
+#user-info p{
+  padding: 0.5em;
+
 }
 </style>
