@@ -13,5 +13,4 @@ import HeaderComponent from './components/HeaderComponent.vue'
 
 <style scoped>
 
-
 </style>

@@ -80,11 +80,13 @@ export default {
         surnames: this.logedUser.surnames,
         level: this.logedUser.user_type,
         player_level: this.logedUser.player_level,
-        mail: this.logedUser.email
+        mail: this.logedUser.email,
+        team_id: this.logedUser.team_id,
+        birthday: this.logedUser.birthday,
       };
       sessionStorage.setItem("userData", JSON.stringify(userData));
       console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: '/usuari' });
 
     },
     checkSession(){
@@ -92,7 +94,7 @@ export default {
     }, 
     logOut(){
       sessionStorage.removeItem("userData");
-      this.$router.push({ path: '/usuari' });
+      this.$router.push({ path: '/' });
     }
   },
   mounted() {
