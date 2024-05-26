@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'; 
 import EquipComponent from './EquipComponent.vue';
 import ClubSelectComponent from './ClubSelectComponent.vue';
 
@@ -38,7 +37,7 @@ export default {
     methods: {
         handleSelectedClub(selectedClub) {
             this.club_id = selectedClub;
-            axios.get('http://localhost/gestio_basquet/api/routes/locations/?id=' + this.club_id)
+            this.$axios.get('locations/?id=' + this.club_id)
                 .then(response => {
                     this.clubName = response.data[0].name;
                     this.getTeams();
