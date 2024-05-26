@@ -19,6 +19,9 @@ else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['id']) && !isset
 else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && isset($_REQUEST['user_id'])) {
     echo getPaymentByUserId($conn, $_REQUEST['user_id']);
 }
+else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['id']) && !isset($_REQUEST['user_id'])) {
+    echo getPaymentById($conn, $_REQUEST['id']);
+}
 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo createPayment($conn);
