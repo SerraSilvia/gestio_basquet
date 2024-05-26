@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'; 
 import EquipComponent from './EquipComponent.vue';
 import ClubSelectComponent from './ClubSelectComponent.vue';
 

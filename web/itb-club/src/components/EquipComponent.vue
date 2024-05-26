@@ -1,12 +1,12 @@
 <template>
-    <RouterLink :to="`/equips/${team.id}`"><!--TODO: crear componente y arreglar la ruta-->
+    <RouterLink :to="`/equips/${team.id}`">
         <section class="team">
             <div class="img-container">
                 <img :src="team.img" alt="">
             </div>
             <div class="team-info">
                 <h3>{{ team.name }}</h3>
-                <p>{{ team.category }}</p>
+                <p class="capitalize">{{ team.category }}</p>
             </div>
             <div class="score">
                 <p>{{ team.total_score }}</p>
@@ -30,10 +30,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .team {
     background-color: #4fcdc4;
-    width: 80%;
+    width:85%;    
     border-radius: 1em;
     display: flex;
     justify-content: space-between;
