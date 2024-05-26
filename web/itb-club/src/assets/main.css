@@ -17,7 +17,9 @@
 }
 
 .button {
+  border-color: white;
   color: white;
+  border-style: solid;
   font-weight: bolder;
   text-decoration: none;
   text-transform: lowercase;
@@ -28,6 +30,23 @@
 
 .button:hover {
   background-color: #6de6dd;
+}
+
+
+.button-pink {
+  border-color: white;
+  border-style: solid;
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+  text-transform: lowercase;
+  background-color: #f94d7b;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+}
+
+.button-pink:hover {
+  background-color: #ff7a9d;
 }
 
 .button:active {
