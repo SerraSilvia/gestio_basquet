@@ -56,10 +56,10 @@ export default {
     },
     doLogin() {
       console.log("Iniciando sesion...");
-      this.$axios.get('people/?email=' + this.user.email)
+      this.$axios.post('auth/login/', this.user)
         .then(response => {
-          console.log(response.data[0]);
-          this.logedUser = response.data[0];
+          console.log(response);
+          this.logedUser = response.data;
           this.saveSession();
           this.clearForm();
         })
