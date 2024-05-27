@@ -6,10 +6,17 @@
         </div>
     </section>
 
+    
+
+
     <section>
         <h2>Pistes</h2>
         <div>
-            //
+            <ul>
+                <li v-for="facility in facilities" :key="facility.id">
+                    {{ facility.name }}
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -56,6 +63,7 @@
 </template>
 
 <script>
+
 import axios from 'axios'; 
 import ClubSelectComponent from './ClubSelectComponent.vue';
 
@@ -98,8 +106,15 @@ export default {
                     this.getFacilities();
                 });
         },
+        
         getFacilities() {
-            
+            axios.get(`http://localhost/gestio_basquet/api/routes/facilities/?id=${this.club_id}`)
+                .then(response => {
+                    this.facilities = response.data;
+                })
+                .catch(error => {
+                    console.error("Error al obtener las instalaciones:", error);
+                });
         },
         generateCalendar() {
             const today = new Date();
@@ -119,7 +134,7 @@ export default {
                         date: new Date(currentDate),
                         isToday: currentDate.toDateString() === today.toDateString(),
                         isSelected: false,
-                        isWeekend: i >= 5, 
+                        isWeekend: i >= 5,
                         isWeekday: currentDate.getDay() >= 1 && currentDate.getDay() <= 5
                     });
                     currentDate.setDate(currentDate.getDate() + 1);
