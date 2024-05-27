@@ -14,7 +14,7 @@
       }}</small>
 
       <label for="name">DNI</label
-      ><!--TODO: hacer que valide con js antes de enviar el formulario-->
+      >
       <input type="text" id="dni" name="dni" v-model="newUser.dni" />
       <small v-if="errors.dni" class="form-error">{{ errors.dni }}</small>
 
@@ -142,23 +142,33 @@ export default {
     },
     addUser() {
       console.log("Creando un nuevo usuario...");
-      axios
-        .post("auth/register", this.newUser)
+      this.$axios.post("auth/register/", this.newUser)
         .then((response) => {
           console.log("Usuario ha sido agregado:", response.data);
-          this.clearForm();
+          this.saveSession();
         })
         .catch((error) => {
           console.error("Error al agregar el usuario:", error);
         });
-      clearForm();
+      this.resetForm();
+
     },
-    clearForm() {
-      this.user = {
-        email: "",
-        password: "",
+    saveSession() {
+      const userData = {
+        id: this.newUser.id,
+        name: this.newUser.name,
+        surnames: this.newUser.surnames,
+        level: this.newUser.user_type,
+        player_level: this.newUser.player_level,
+        mail: this.newUser.email,
+        team_id: this.newUser.team_id,
+        birthday: this.newUser.birthday,
       };
-    },
+      sessionStorage.setItem("userData", JSON.stringify(userData));
+      console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));
+      this.$router.push({ path: '/usuari' });
+
+    }
   },
 };
 </script>
