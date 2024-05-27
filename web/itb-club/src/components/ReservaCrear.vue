@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Confirmar Reserva</h2>
-        <div v-if="date && slot">
+        <div v-if="date && slot && facility_id">
             <p><strong>Fecha:</strong> {{ date }}</p>
             <p><strong>Franja horaria:</strong> {{ slot }}</p>
             <button @click="confirmarReserva">Confirmar Reserva</button>
@@ -20,19 +20,30 @@ export default {
     data() {
         return {
             date: null,
-            slot: null
+            slot: null,
+            facility_id: null,
+            person_id: 1, // Este ID puede ser dinámico según la lógica de tu aplicación
+            reservation_status: 'confirmed', // Ejemplo de estado de reserva
+            reservation_type: 'typeA' // Ejemplo de tipo de reserva
         };
     },
     created() {
         this.date = this.$route.query.date;
         this.slot = this.$route.query.slot;
+        this.facility_id = this.$route.query.facility_id;
     },
     methods: {
         confirmarReserva() {
+            const dateStart = new Date(`${this.date}T${this.slot.split('-')[0]}`);
+            const dateEnd = new Date(`${this.date}T${this.slot.split('-')[1]}`);
+            
             axios.post('http://localhost/gestio_basquet/api/routes/bookings', {
-                date: this.date,
-                slot: this.slot,
-                club_id: this.club_id
+                facility_id: this.facility_id,
+                person_id: this.person_id,
+                date_start: dateStart.toISOString(),
+                date_end: dateEnd.toISOString(),
+                reservation_status: this.reservation_status,
+                reservation_type: this.reservation_type
             })
             .then(response => {
                 alert('¡Reserva confirmada!');
