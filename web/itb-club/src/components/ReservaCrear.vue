@@ -29,9 +29,9 @@ export default {
       facilityName: null,
       club_id: null,
       clubName: null,
-      person_id: 1, // Este ID puede ser dinámico según la lógica de tu aplicación
-      reservation_status: 'confirmed', // Ejemplo de estado de reserva
-      reservation_type: 'typeA', // Ejemplo de tipo de reserva
+      person_id: 1, // Suponiendo que este ID se obtiene dinámicamente en tu aplicación
+      reservation_status: 'confirmed', // Suponiendo que este estado se obtiene dinámicamente en tu aplicación
+      reservation_type: 'typeA', // Suponiendo que este tipo se obtiene dinámicamente en tu aplicación
       successMessage: '',
       errorMessage: ''
     };
@@ -44,7 +44,6 @@ export default {
 
     if (this.date && this.slot && this.facility_id && this.club_id) {
       this.fetchFacilityName();
-      this.fetchClubName();
     }
   },
   methods: {
