@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     header("Content-Type: application/json");
-    return json_encode($res);
+    echo json_encode($res);
 }
 
 ?>
