@@ -13,27 +13,27 @@ services:
     depends_on:
       - db
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=admin
-      - MYSQL_DATABASE=sports_management
+      - MYSQL_HOST=sql7.freemysqlhosting.net
+      - MYSQL_USER=sql7709574
+      - MYSQL_PASSWORD=BXimbBLPlM
+      - MYSQL_DATABASE=sql7709574
 
-  db:
-    image: mysql:5.7
-    container_name: gestio_basquet_db
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: sports_management
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./db/script.sql:/docker-entrypoint-initdb.d/script.sql
-    ports:
-      - "3306:3306"
-    networks:
-      - basquet_network
+  # db:
+   # image: mysql:5.7
+   # container_name: gestio_basquet_db
+   # environment:
+   #   MYSQL_ROOT_PASSWORD: admin
+   #   MYSQL_DATABASE: sports_management
+   # volumes:
+   #   - mysql_data:/var/lib/mysql
+   #   - ./db/script.sql:/docker-entrypoint-initdb.d/script.sql
+   # ports:
+   #   - "3306:3306"
+   # networks:
+   #   - basquet_network
 
 networks:
   basquet_network:
 
-volumes:
-  mysql_data:
+#volumes:
+#  mysql_data:
