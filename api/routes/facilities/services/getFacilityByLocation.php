@@ -1,6 +1,6 @@
 <?php 
 
-function getFacilitiesByLocation($conn, $location_id) {
+function getFacilityByLocation($conn, $location_id) {
     $q = "SELECT * FROM FACILITIES WHERE location_id = '$location_id'";
     $result = mysqli_query($conn,$q);
 

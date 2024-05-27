@@ -102,7 +102,7 @@ export default {
       this.generateCalendar();
     },
     getFacilitiesByLocation(locationId) {
-      axios.get(`http://localhost/gestio_basquet/api/routes/facilities/?location=${locationId}`)
+      axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/facilities/?location_id=${locationId}`)
         .then(response => {
           this.facilities = response.data;
         })
