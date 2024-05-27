@@ -11,7 +11,12 @@
       <h2>Pistas</h2>
       <div>
         <ul>
-          <li v-for="facility in facilities" :key="facility.id" @click="selectFacility(facility)">
+          <li 
+            v-for="facility in facilities" 
+            :key="facility.id" 
+            @click="selectFacility(facility)" 
+            :class="{ 'selected-facility': facility.id === selectedFacilityId }"
+          >
             {{ facility.name }}
           </li>
         </ul>
@@ -35,7 +40,12 @@
           </thead>
           <tbody>
             <tr v-for="week in calendar" :key="week[0].date">
-              <td v-for="day in week" :key="day.date" :class="{'is-today': day.isToday, 'is-selected': day.isSelected, 'is-weekend': day.isWeekend}" @click="selectDate(day)">
+              <td 
+                v-for="day in week" 
+                :key="day.date" 
+                :class="{'is-today': day.isToday, 'is-selected': day.isSelected, 'is-weekend': day.isWeekend}" 
+                @click="selectDate(day)"
+              >
                 {{ day.date.getDate() }}
               </td>
             </tr>
@@ -48,7 +58,12 @@
       <h2>Seleccione una franja horaria para el {{ selectedDate.toLocaleDateString() }}:</h2>
       <div>
         <ul>
-          <li v-for="slot in slots" :key="slot" :class="{'is-selected': slot === selectedSlot}" @click="selectSlot(slot)">
+          <li 
+            v-for="slot in slots" 
+            :key="slot" 
+            :class="{'is-selected': slot === selectedSlot}" 
+            @click="selectSlot(slot)"
+          >
             {{ slot }}
           </li>
         </ul>
@@ -69,9 +84,9 @@ export default {
   name: 'ReservesComponent',
   data() {
     return {
-      facilityName: 'Barcelona',
       facilities: [],
       club_id: 1,
+      selectedFacilityId: null,
       selectedDate: null,
       selectedSlot: null,
       calendar: [],
@@ -83,12 +98,14 @@ export default {
   },
   computed: {
     reservationLink() {
-      if (this.selectedDate && this.selectedSlot) {
+      if (this.selectedDate && this.selectedSlot && this.selectedFacilityId) {
         return {
           path: '/reserva/crear',
           query: {
             date: this.selectedDate.toISOString().split('T')[0],
-            slot: this.selectedSlot
+            slot: this.selectedSlot,
+            facility_id: this.selectedFacilityId,
+            club_id: this.club_id
           }
         };
       }
@@ -151,6 +168,9 @@ export default {
     },
     selectSlot(slot) {
       this.selectedSlot = slot;
+    },
+    selectFacility(facility) {
+      this.selectedFacilityId = facility.id;
     }
   },
   mounted() {
@@ -221,6 +241,11 @@ li {
 }
 
 li.is-selected {
+    background-color: #2196f3;
+    color: white;
+}
+
+.selected-facility {
     background-color: #2196f3;
     color: white;
 }
