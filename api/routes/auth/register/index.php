@@ -8,21 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $surnames = $data['surnames'];
     $dni = $data['dni'];
     $email = $data['email'];
-    $password = md5($data['password']);
+    $password = $data['password'];
     $birthdate = $data['birthdate'];
     $user_type = $data['user_type'];
     $player_level = $data['player_level'];
 
     $q = "INSERT INTO PEOPLE (name, surnames, dni, email, password, birthdate, user_type, player_level) VALUES ('$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level')";
-    
     $result = mysqli_query($conn, $q);
 
-    $res = array();
-    if ($result) {
-        $res = array('status' => 'success');
-    } else {
-        $res = array('status' => 'error');
-    }
+    if ($result) $res = array('status' => 'success');
+    else $res = array('status' => 'error');
 
     header("Content-Type: application/json");
     echo json_encode($res);

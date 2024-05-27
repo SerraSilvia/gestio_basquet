@@ -7,11 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header("HTTP/1.1 200 OK");
     exit;
 }
-/*
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(204); 
-    exit();
-}*/
 
 $db_hostname = "sql7.freemysqlhosting.net";
 $db_username = "sql7709574";
