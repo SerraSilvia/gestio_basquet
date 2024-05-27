@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 div {
     text-align: center;
     margin-top: 50px;
