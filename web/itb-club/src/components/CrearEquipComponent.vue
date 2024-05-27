@@ -54,6 +54,7 @@ export default {
         player2: 0,
         player3: 0,
         player4: 0,
+        tournament_id:null
       },
     };
   },
