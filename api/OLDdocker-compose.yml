@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: gestio_basquet_api
+    ports:
+      - "3001:80"
+    volumes:
+      - ./routes:/var/www/routes
+    networks:
+      - basquet_network
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=sports_management
+
+  db:
+    image: mysql:5.7
+    container_name: gestio_basquet_db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: sports_management
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/script.sql:/docker-entrypoint-initdb.d/script.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - basquet_network
+
+networks:
+  basquet_network:
+
+volumes:
+  mysql_data:
