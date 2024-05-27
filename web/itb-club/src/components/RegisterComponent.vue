@@ -71,6 +71,7 @@ export default {
         category: null,
         email: "",
         password: "",
+        user_type:"player",
       },
     };
   },

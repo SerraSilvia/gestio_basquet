@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $surnames = $data['surnames'];
     $dni = $data['dni'];
     $email = $data['email'];
-    $password = $data['password'];
+    $password = md5($data['password']);
     $birthdate = $data['birthdate'];
     $user_type = $data['user_type'];
     $player_level = $data['player_level'];
