@@ -33,7 +33,7 @@ export default {
         password: "",
       },
       logedUser: null,
-      loged:false,
+      loged: false,
     };
   },
   methods: {
@@ -59,9 +59,13 @@ export default {
       this.$axios.post('auth/login/', this.user)
         .then(response => {
           console.log(response);
-          this.logedUser = response.data;
-          this.saveSession();
-          this.clearForm();
+          if (response.data.id != undefined) {
+            console.log("Usuario ha sido logado:", response.data);
+            this.logedUser = response.data;
+            this.saveSession();
+            this.clearForm();
+          }
+
         })
         .catch(error => {
           console.error('Error al intentar obtener el usuario', error);
@@ -89,10 +93,10 @@ export default {
       this.$router.push({ path: '/usuari' });
 
     },
-    checkSession(){
-      if(sessionStorage.getItem("userData")!=null) this.loged=true;
-    }, 
-    logOut(){
+    checkSession() {
+      if (sessionStorage.getItem("userData") != null) this.loged = true;
+    },
+    logOut() {
       sessionStorage.removeItem("userData");
       this.$router.push({ path: '/' });
     }

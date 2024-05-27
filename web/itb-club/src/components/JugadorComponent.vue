@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'JugadorComponent',
@@ -39,7 +38,7 @@ export default {
   },
   methods: {
     getPlayerData() {
-      axios.get('http://localhost/gestio_basquet/api/routes/people/?id=' + this.player)
+      this.$axios.get('/people/?id=' + this.player)
         .then(response => {
           this.playerData = response.data[0];
         })
@@ -48,10 +47,17 @@ export default {
         });
     },
     deletePlayer() {
-      // Implementar la lógica para eliminar el jugador
+      // TODO: Implementar la lógica para eliminar el jugador del equip (retirar el id del equipo al jugador y del equipo)
+      this.$axios.put('/people/?id=' + this.player)
+        .then(response => {
+          this.playerData = response.data[0];
+        })
+        .catch(error => {
+          console.error('Error al obtener datos del jugador:', error);
+        });
     },
     addPlayer() {
-      // Implementar la lógica para añadir el jugador
+      // Implementar la lógica para añadir el jugador al equip
     }
   },
   mounted() {

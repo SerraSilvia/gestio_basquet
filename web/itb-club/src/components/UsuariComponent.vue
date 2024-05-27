@@ -32,7 +32,7 @@
         <PaymentComponent v-for="(payment, index) in payments" :key="index" :payment="payment"></PaymentComponent>
       </section>
 
-      <section>
+      <section v-if="user && bookings.size > 0">
         <h3>Reserves</h3>
         <ReservaItemComponent v-for="(booking, index) in bookings" :key="index" :booking="booking">
         </ReservaItemComponent>

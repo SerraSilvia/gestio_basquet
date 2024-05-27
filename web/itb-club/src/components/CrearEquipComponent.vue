@@ -37,7 +37,7 @@
 </template>
 
 <script>
-
+import { Validators } from '@/utils/validators';
 export default {
   name: "CrearEquipComponent",
   data() {
@@ -47,14 +47,8 @@ export default {
         name: "",
         location_id: 1,
         category: "",
-        total_score: 0,
-        img: "",
+        img: "image.png",
         captain: 0,
-        player1: 0,
-        player2: 0,
-        player3: 0,
-        player4: 0,
-        tournament_id:null
       },
     };
   },
@@ -83,49 +77,31 @@ export default {
     resetForm() {
       this.errors = {
         name: null,
-        surnames: null,
-        dni: null,
-        location: null,
+        location_id: null,
         category: null,
-        email: null,
-        password: null,
+        img: null,
+        captain: JSON.parse(sessionStorage.getItem("userData")).id,
       };
     },
     setCaptainId() {
-      this.newTeam.captain = 280; //HARDCODEADO
-      /*const userId = parseInt(sessionStorage.getItem('userId'), 10);
-      if (userId) {
-        this.newTeam.captain = userId;
-        this.newTeam.captain = 280;
+      const user = JSON.parse(sessionStorage.getItem("userData"));
+      if (user) {
+        this.newTeam.captain = user.id;
       } else {
         console.error('No user ID found in session storage');
-      }*/
+      }
     },
     addTeam() {
       console.log("Creando un nuevo equipo...");
-      this.$axios.post('teams', this.newTeam)
+      this.$axios.post('teams/', this.newTeam)
         .then(response => {
           console.log('Equipo ha sido agregado:', response.data);
-          this.clearForm();
         })
         .catch((error) => {
           console.error("Error al agregar el equipo:", error);
         });
     },
-    clearForm() {
-      this.newTeam = {
-        name: "",
-        location_id: 1,
-        category: "",
-        total_score: 0,
-        img: "",
-        captain: parseInt(sessionStorage.getItem("userId"), 10),
-        player1: 0,
-        player2: 0,
-        player3: 0,
-        player4: 0,
-      };
-    },
+
   },
 };
 </script>

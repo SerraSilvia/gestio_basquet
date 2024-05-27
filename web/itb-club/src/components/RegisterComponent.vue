@@ -13,19 +13,12 @@
         errors.surnames
       }}</small>
 
-      <label for="name">DNI</label
-      >
+      <label for="name">DNI</label>
       <input type="text" id="dni" name="dni" v-model="newUser.dni" />
       <small v-if="errors.dni" class="form-error">{{ errors.dni }}</small>
 
       <label for="birthdate">Data de naixement</label>
-      <input
-        type="datetime-local"
-        id="birthdate"
-        name="birthdate"
-        v-model="newUser.birthdate"
-        required
-      />
+      <input type="datetime-local" id="birthdate" name="birthdate" v-model="newUser.birthdate" required />
 
       <label for="location">Club</label>
       <select name="location" id="location" v-model="newUser.location">
@@ -142,11 +135,21 @@ export default {
     },
     addUser() {
       console.log("Creando un nuevo usuario...");
+
       this.$axios.post("auth/register/", this.newUser)
         .then((response) => {
-          console.log("Usuario ha sido agregado:", response.data);
+          if (response.data.status != "error") {
+            console.log("Usuario ha sido agregado:", response.data);
+
+            this.saveSession(response.data.user);
+            this.$router.push({ path: '/usuari' });
+          } else {
+            console.error("Error en la creación del usuario:", response.data.message);
+          }
+
           this.saveSession();
         })
+
         .catch((error) => {
           console.error("Error al agregar el usuario:", error);
         });
