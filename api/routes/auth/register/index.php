@@ -14,7 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $player_level = $data['player_level'];
 
     $q = "INSERT INTO PEOPLE (name, surnames, dni, email, password, birthdate, user_type, player_level) VALUES ('$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level')";
-    echo $q;
+    
+    $result = mysqli_query($conn, $q);
+
+    $res = array();
+    if ($result) {
+        $res = array('status' => 'success');
+    } else {
+        $res = array('status' => 'error');
+    }
+
+    header("Content-Type: application/json");
+    echo json_encode($res);
 }
 
 ?>
