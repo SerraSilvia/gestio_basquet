@@ -11,12 +11,7 @@
       <h2>Pistas</h2>
       <div>
         <ul>
-          <li 
-            v-for="facility in facilities" 
-            :key="facility.id" 
-            @click="selectFacility(facility)" 
-            :class="{ 'selected-facility': facility.id === selectedFacilityId }"
-          >
+          <li v-for="facility in facilities" :key="facility.id" @click="selectFacility(facility)" :class="{ 'selected-facility': facility.id === selectedFacilityId }">
             {{ facility.name }}
           </li>
         </ul>
@@ -40,12 +35,7 @@
           </thead>
           <tbody>
             <tr v-for="week in calendar" :key="week[0].date">
-              <td 
-                v-for="day in week" 
-                :key="day.date" 
-                :class="{'is-today': day.isToday, 'is-selected': day.isSelected, 'is-weekend': day.isWeekend}" 
-                @click="selectDate(day)"
-              >
+              <td v-for="day in week" :key="day.date" :class="{'is-today': day.isToday, 'is-selected': day.isSelected, 'is-weekend': day.isWeekend}" @click="selectDate(day)">
                 {{ day.date.getDate() }}
               </td>
             </tr>
@@ -58,12 +48,7 @@
       <h2>Seleccione una franja horaria para el {{ selectedDate.toLocaleDateString() }}:</h2>
       <div>
         <ul>
-          <li 
-            v-for="slot in slots" 
-            :key="slot" 
-            :class="{'is-selected': slot === selectedSlot}" 
-            @click="selectSlot(slot)"
-          >
+          <li v-for="slot in slots" :key="slot" :class="{'is-selected': slot === selectedSlot}" @click="selectSlot(slot)">
             {{ slot }}
           </li>
         </ul>
@@ -84,11 +69,12 @@ export default {
   name: 'ReservesComponent',
   data() {
     return {
+      facilityName: 'Barcelona',
       facilities: [],
       club_id: 1,
-      selectedFacilityId: null,
       selectedDate: null,
       selectedSlot: null,
+      selectedFacilityId: null,
       calendar: [],
       slots: ['8:00h-10:00h', '10:00h-12:00h', '12:00h-14:00h', '17:00h-19:00h', '19:00h-21:00h', '21:00h-23:00h']
     };
@@ -246,7 +232,6 @@ li.is-selected {
 }
 
 .selected-facility {
-    background-color: #2196f3;
-    color: white;
+  background-color: #add8e6; /* Fondo azul claro */
 }
 </style>

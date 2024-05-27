@@ -7,6 +7,8 @@
       <p><strong>Fecha:</strong> {{ date }}</p>
       <p><strong>Franja horaria:</strong> {{ slot }}</p>
       <button @click="confirmarReserva">Reservar Pista</button>
+      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
     <div v-else>
       <p>No hay ninguna reserva seleccionada.</p>
@@ -29,7 +31,9 @@ export default {
       clubName: null,
       person_id: 1, // Este ID puede ser dinámico según la lógica de tu aplicación
       reservation_status: 'confirmed', // Ejemplo de estado de reserva
-      reservation_type: 'typeA' // Ejemplo de tipo de reserva
+      reservation_type: 'typeA', // Ejemplo de tipo de reserva
+      successMessage: '',
+      errorMessage: ''
     };
   },
   created() {
@@ -39,15 +43,15 @@ export default {
     this.club_id = this.$route.query.club_id;
 
     if (this.date && this.slot && this.facility_id && this.club_id) {
-      this.getFacilityName();
-      this.getClubName();
+      this.fetchFacilityName();
+      this.fetchClubName();
     }
   },
   methods: {
     confirmarReserva() {
       const dateStart = new Date(`${this.date}T${this.slot.split('-')[0]}`);
       const dateEnd = new Date(`${this.date}T${this.slot.split('-')[1]}`);
-      
+
       axios.post('http://localhost/gestio_basquet/api/routes/bookings', {
         facility_id: this.facility_id,
         person_id: this.person_id,
@@ -57,30 +61,51 @@ export default {
         reservation_type: this.reservation_type
       })
       .then(response => {
-        alert('¡Reserva confirmada!');
-        this.$router.push('/');
+        if (response.data.status === 'success') {
+          this.successMessage = 'Reserva realizada con éxito';
+          this.errorMessage = '';
+        } else {
+          this.errorMessage = 'Error al realizar la reserva';
+          this.successMessage = '';
+        }
       })
       .catch(error => {
         console.error('Error al confirmar la reserva:', error);
-        alert('Error al confirmar la reserva. Inténtalo de nuevo.');
+        this.errorMessage = 'Error al realizar la reserva. Inténtalo de nuevo.';
+        this.successMessage = '';
       });
     },
-    getFacilityName() {
-      axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/facilities/${this.facility_id}`)
+    fetchFacilityName() {
+      axios.get(`http://localhost/gestio_basquet/api/routes/facilities/?id=${this.facility_id}`)
         .then(response => {
-          this.facilityName = response.data.name;
+          if (response.data.length > 0) {
+            const facility = response.data[0];
+            this.facilityName = facility.name;
+            this.fetchClubName(facility.location_id);
+          } else {
+            console.error('No se encontró la instalación.');
+            this.errorMessage = 'No se encontró la instalación.';
+          }
         })
         .catch(error => {
           console.error('Error al obtener el nombre de la pista:', error);
+          this.errorMessage = 'Error al obtener el nombre de la pista.';
         });
     },
-    getClubName() {
-      axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/clubs/${this.club_id}`)
+    fetchClubName(location_id) {
+      axios.get(`http://localhost/gestio_basquet/api/routes/locations/?id=${location_id}`)
         .then(response => {
-          this.clubName = response.data.name;
+          if (response.data.length > 0) {
+            const club = response.data[0];
+            this.clubName = club.name;
+          } else {
+            console.error('No se encontró la ubicación.');
+            this.errorMessage = 'No se encontró la ubicación.';
+          }
         })
         .catch(error => {
           console.error('Error al obtener el nombre del club:', error);
+          this.errorMessage = 'Error al obtener el nombre del club.';
         });
     }
   }
@@ -103,5 +128,15 @@ button {
 
 button:hover {
   background-color: #1976d2;
+}
+
+.success-message {
+  color: green;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 20px;
 }
 </style>
