@@ -11,9 +11,8 @@ function createPeople($conn) {
     $birthdate = $data['birthdate'];
     $user_type = $data['user_type'];
     $player_level = $data['player_level'];
-    $team_id = $data['team_id'];
 
-    $q = "INSERT INTO PEOPLE VALUES (DEFAULT, '$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level', '$team_id'";
+    $q = "INSERT INTO PEOPLE (name, surnames, dni, email, password, birthdate, user_type, player_level) VALUES ('$name', '$surnames', '$dni', '$email', '$password', '$birthdate', '$user_type', '$player_level')";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
