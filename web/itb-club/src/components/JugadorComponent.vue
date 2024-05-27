@@ -57,7 +57,6 @@ export default {
   mounted() {
     this.getPlayerData();
     const userLevel = localStorage.getItem('userLevel');
-    //this.isAdmin = (userLevel === 'admin');
     this.isAdmin=true;
   }
 };

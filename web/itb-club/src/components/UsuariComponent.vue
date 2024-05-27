@@ -61,7 +61,6 @@ export default {
   data() {
     return {
       user: null,
-      team_id: null,
       team: [],
       bookings: [],
       payments: [],
@@ -95,8 +94,10 @@ export default {
         });
     },
     getTeam() {
+      console.log("equipo id:" + this.user.team_id);
       this.$axios.get('teams/?id=' + this.user.team_id)
         .then(response => {
+          console.log("equipo:"+ response.data[0]);
           this.team = response.data[0];
         })
         .catch(error => {

@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import IconLocation from "./icons/IconLocation.vue";
 import JugadorComponent from "./JugadorComponent.vue";
 
@@ -54,7 +53,7 @@ export default {
   },
   methods: {
     getTeamData() {
-      axios.get('http://localhost/gestio_basquet/api/routes/teams/?id=' + this.id)
+      this.$axios.get('teams/?id=' + this.id)
         .then(response => {
           this.team = response.data[0];
           this.handleSelectedClub();
@@ -66,7 +65,7 @@ export default {
     },
     handleSelectedClub() {
       if (!this.team) return;
-      axios.get('http://localhost/gestio_basquet/api/routes/locations/?id=' + this.team.location_id)
+      this.$axios.get('locations/?id=' + this.team.location_id)
         .then(response => {
           if (response.data[0]) {
             this.clubName = response.data[0].name;
@@ -92,7 +91,7 @@ export default {
 <style>
 .folder {
   background-color: #4fccc1;
-  padding: 1em;
+  padding: 1.5em;
   color: white;
   width: 75%;
   border-radius: 2em;
