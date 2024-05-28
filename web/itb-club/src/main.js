@@ -17,6 +17,8 @@ import VisualizeTournamentComponent from './components/VisualizeTournamentCompon
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
 import ReservaCrear from '@/components/ReservaCrear.vue';
+import AdministrarComponent from './components/AdministrarComponent.vue';
+
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -42,6 +44,10 @@ const routes = [
   {
     path: '/reserva/crear',
     component: ReservaCrear
+},
+{
+  path: '/administrar',
+  component: AdministrarComponent
 }
 ];
 
