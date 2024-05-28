@@ -55,6 +55,17 @@
       </div>
     </section>
 
+    <section>
+      <h2>Selecciona el tipo de reserva</h2>
+      <div>
+        <label for="reservationType">Tipo de Reserva:</label>
+        <select v-model="reservationType" @change="updateReservationLink">
+          <option value="class">Class</option>
+          <option value="training">Training</option>
+        </select>
+      </div>
+    </section>
+
     <p class="button-container">
       <RouterLink class="button" :to="reservationLink">Fer reserva!</RouterLink>
     </p>
@@ -75,6 +86,7 @@ export default {
       selectedDate: null,
       selectedSlot: null,
       selectedFacilityId: null,
+      reservationType: 'class', 
       calendar: [],
       slots: ['8:00h-10:00h', '10:00h-12:00h', '12:00h-14:00h', '17:00h-19:00h', '19:00h-21:00h', '21:00h-23:00h']
     };
@@ -91,7 +103,8 @@ export default {
             date: this.selectedDate.toISOString().split('T')[0],
             slot: this.selectedSlot,
             facility_id: this.selectedFacilityId,
-            club_id: this.club_id
+            club_id: this.club_id,
+            reservation_type: this.reservationType
           }
         };
       }
@@ -132,7 +145,7 @@ export default {
             isToday: currentDate.toDateString() === today.toDateString(),
             isSelected: false,
             isWeekend: i >= 5,
-            isWeekday: currentDate.getDay() >= 1 && currentDate.getDay() <= 5
+            isWeekday: currentDate >= today 
           });
           currentDate.setDate(currentDate.getDate() + 1);
         }
@@ -157,11 +170,14 @@ export default {
     },
     selectFacility(facility) {
       this.selectedFacilityId = facility.id;
+    },
+    updateReservationLink() {
+      this.$forceUpdate();
     }
-  },
-  mounted() {
-    this.generateCalendar();
-  }
+},
+mounted() {
+  this.generateCalendar();
+}
 };
 </script>
 
@@ -226,12 +242,10 @@ li {
     text-align: center;
 }
 
-li.is-selected {
+li.is-selected, .selected-facility {
     background-color: #2196f3;
     color: white;
 }
 
-.selected-facility {
-  background-color: #add8e6; /* Fondo azul claro */
-}
 </style>
+
