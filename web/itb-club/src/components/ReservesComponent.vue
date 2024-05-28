@@ -19,7 +19,7 @@
     </section>
 
     <section>
-      <h2>Hores disponibles:</h2>
+      <h2>Horas disponibles:</h2>
       <div>
         <table>
           <thead>
@@ -97,11 +97,24 @@ export default {
   computed: {
     reservationLink() {
       if (this.selectedDate && this.selectedSlot && this.selectedFacilityId) {
+        const date_start = new Date(this.selectedDate);
+        const [startHour, endHour] = this.selectedSlot.split('-');
+        const startTime = startHour.split('h')[0] + ':00:00';
+        const endTime = endHour.split('h')[0] + ':00:00';
+
+        date_start.setHours(parseInt(startHour.split(':')[0]), 0, 0);
+
+        const date_end = new Date(date_start);
+        date_end.setHours(parseInt(endHour.split(':')[0]), 0, 0);
+
+        const date_start_formatted = `${date_start.toISOString().split('T')[0]} ${startTime}`;
+        const date_end_formatted = `${date_end.toISOString().split('T')[0]} ${endTime}`;
+
         return {
           path: '/reserva/crear',
           query: {
-            date: this.selectedDate.toISOString().split('T')[0],
-            slot: this.selectedSlot,
+            date_start: date_start_formatted,
+            date_end: date_end_formatted,
             facility_id: this.selectedFacilityId,
             club_id: this.club_id,
             reservation_type: this.reservationType
@@ -128,8 +141,13 @@ export default {
     },
     generateCalendar() {
       const today = new Date();
-      const start = new Date(today.getFullYear(), today.getMonth(), 1);
-      const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      let start = new Date(today.getFullYear(), today.getMonth(), 1);
+      let end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+      if (today.getDate() > start.getDate() - 7) {
+        start = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+        end = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+      }
 
       const startDate = start.getDay() === 1 ? start : new Date(start.setDate(start.getDate() - (start.getDay() - 1)));
       const endDate = end.getDay() === 5 ? end : new Date(end.setDate(end.getDate() + (5 - end.getDay())));
@@ -174,10 +192,10 @@ export default {
     updateReservationLink() {
       this.$forceUpdate();
     }
-},
-mounted() {
-  this.generateCalendar();
-}
+  },
+  mounted() {
+    this.generateCalendar();
+  }
 };
 </script>
 
@@ -248,4 +266,3 @@ li.is-selected, .selected-facility {
 }
 
 </style>
-

@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .position-top{
     position: absolute;
     top: 0;

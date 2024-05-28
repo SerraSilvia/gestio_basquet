@@ -9,52 +9,52 @@
       </p>
     </div>
   </div>
-
-  <div class="home-bar">
-    <nav>
-      <ul class="img-li">
-        <li class="home-li">
-          <a href="../../facilitiesInfo.html">
-            <div class="parallelogram-img">
-              <img src="../assets/instalacions.jpg" alt="instalacions" />
-            </div>
-            <h3>Instal·lacions</h3>
-          </a>
-        </li>
-
-        <li class="home-li">
-          <a href="../rutaClubs">
-            <div class="parallelogram-img">
-              <img src="../assets/clubs.jpg" alt="clubs" />
-            </div>
-            <h3>Clubs</h3>
-          </a>
-        </li>
-        <li class="home-li">
-          <a href="../rutaTornejos">
-            <div class="parallelogram-img">
-              <img src="../assets/tornejos.jpg" alt="tornejos" />
-            </div>
-            <h3>Tornejos</h3>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="classes">
-    <h4>Classes amb els millors</h4>
-    <div class="coach">
-      <ul>
-        <li>
-          <img src="../assets/images/entrenador1.jpg" alt="entrenador1.jpg" />
-          <h5>Robert Piera</h5>
-        </li>
-
-        <li>
-          <img src="../assets/images/entrenador2.jpg" alt="entrenador2.jpg" />
-          <h5>Francesc Vila</h5>
-        </li>
+  
+    <div class="home-bar">
+      <nav>
+        <ul class="img-li">
+          <li class="home-li">
+            <RouterLink to="/info-facilities">
+              <div class="parallelogram-img">
+                <img src="../assets/instalacions.jpg" alt="instalacions" />
+              </div>
+              <h3>Instal·lacions</h3>
+            </RouterLink>
+          </li>
+  
+          <li>
+            <RouterLink to="/info-clubs">
+              <div class="parallelogram-img">
+                <img src="../assets/clubs.jpg" alt="clubs" />
+              </div>
+              <h3>Clubs</h3>
+            </RouterLink>
+          </li>
+          <li>
+            <a href="../rutaTornejos">
+              <div class="parallelogram-img">
+                <img src="../assets/tornejos.jpg" alt="tornejos" />
+              </div>
+              <h3>Tornejos</h3>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  
+    <div class="classes">
+      <h4>Classes amb els millors</h4>
+      <div class="coach">
+        <ul>
+          <li>
+            <img src="../assets/images/entrenador1.jpg" alt="entrenador1.jpg"> 
+            <h5>Robert Piera</h5>
+          </li>
+                    
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
 
         <li>
           <img src="../assets/images/entrenador3.jpg" alt="entrenador3.jpg" />
