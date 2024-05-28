@@ -53,13 +53,12 @@ export default {
     },
     confirmReservation() {
       const bookingData = {
+        facility_id: this.facility_id,
+        person_id: this.person_id,
         date_start: this.formattedDateStart,
         date_end: this.formattedDateEnd,
-        facility_id: this.facility_id,
-        club_id: this.club_id,
         reservation_status: this.reservation_status,
         reservation_type: this.reservation_type,
-        person_id: this.person_id
       };
       console.log('Datos enviados a la API:', bookingData);
       axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/bookings/', bookingData)
