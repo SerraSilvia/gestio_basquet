@@ -78,7 +78,7 @@ section {
 }
 
 .team-item {
-    margin: 0.2em;
+    margin: 0.5em;
 }
 a:hover{
     color: white;
