@@ -16,10 +16,10 @@
         <div class="center-container">
             <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar compte</button>
             <button id="modifyAcount" class="button-pink" @click="modifyAcount">Modificar dades</button>
-          </div>
+        </div>
       </section>
 
-      <section v-if="user && user.level === 'player'">
+      <section v-if="user && user.user_type === 'player'">
         <h3>El teu equip</h3>
         <p v-if="user.team_id != null">
           <EquipComponent class="center-container team-item" :team="team"></EquipComponent>
@@ -27,25 +27,22 @@
         <p v-else>Sembla que no tens equip :(</p>
       </section>
 
-      <section v-if="user && user.level === 'player'">
+      <section v-if="user && user.user_type === 'player' && payments.length > 0">
         <h3>Subscripció</h3>
         <PaymentComponent v-for="(payment, index) in payments" :key="index" :payment="payment"></PaymentComponent>
       </section>
 
-      <section v-if="user && bookings.size > 0">
+      <section v-if="user && bookings.length > 0">
         <h3>Reserves</h3>
-        <ReservaItemComponent v-for="(booking, index) in bookings" :key="index" :booking="booking">
-        </ReservaItemComponent>
+        <ReservaItemComponent v-for="(booking, index) in bookings" :key="index" :booking="booking"></ReservaItemComponent>
       </section>
 
-      <section v-if="user && user.level === 'player'">
+      <section v-if="user && user.user_type === 'player' && bookings.length > 0">
         <h3>Comentaris</h3>
-        <CommentComponent v-for="(comment, index) in comments" :key="index" :comment="comment">
-        </CommentComponent>
+        <CommentComponent v-for="(comment, index) in comments" :key="index" :comment="comment"></CommentComponent>
       </section>
 
     </div>
-
   </div>
 </template>
 
@@ -55,13 +52,12 @@ import ReservaItemComponent from './ReservaItemComponent.vue';
 import PaymentComponent from './PaymentComponent.vue';
 import CommentComponent from './CommentComponent.vue';
 
-
 export default {
   name: 'UsuariComponent',
   data() {
     return {
-      user: null,
-      team: [],
+      user: null, 
+      team: null, 
       bookings: [],
       payments: [],
       comments: [],
@@ -74,60 +70,68 @@ export default {
     CommentComponent
   },
   methods: {
-
     getBookings() {
-      this.$axios.get('bookings/?user_id=' + this.user.id)
-        .then(response => {
-          this.bookings = response.data;
-        })
-        .catch(error => {
-          console.error('Error al intentar obtener las reservas', error);
-        });
+      if (this.user && this.user.id) {
+        this.$axios.get(`bookings/?user_id=${this.user.id}`)
+          .then(response => {
+            this.bookings = response.data;
+          })
+          .catch(error => {
+            console.error('Error al intentar obtener las reservas', error);
+          });
+      }
     },
     getPayments() {
-      this.$axios.get('payments/?user_id=' + this.user.id)
-        .then(response => {
-          this.payments = response.data;
-        })
-        .catch(error => {
-          console.error('Error al intentar obtener las reservas', error);
-        });
+      if (this.user && this.user.id) {
+        this.$axios.get(`payments/?user_id=${this.user.id}`)
+          .then(response => {
+            this.payments = response.data;
+          })
+          .catch(error => {
+            console.error('Error al intentar obtener las reservas', error);
+          });
+      }
     },
     getTeam() {
-      console.log("equipo id:" + this.user.team_id);
-      this.$axios.get('teams/?id=' + this.user.team_id)
-        .then(response => {
-          console.log("equipo:"+ response.data[0]);
-          this.team = response.data[0];
-        })
-        .catch(error => {
-          console.error('Error al intentar obtener el equipo', error);
-        });
+      if (this.user && this.user.team_id) {
+        this.$axios.get(`teams/?id=${this.user.team_id}`)
+          .then(response => {
+            this.team = response.data[0];
+          })
+          .catch(error => {
+            console.error('Error al intentar obtener el equipo', error);
+          });
+      }
     },
     getComments() {
-      this.$axios.get('comments/?person_id=' + this.user.id)
-        .then(response => {
-          this.comments = response.data;
-        })
-        .catch(error => {
-          console.error('Error al intentar obtener los comentarios', error);
-        });
+      if (this.user && this.user.id) {
+        this.$axios.get(`comments/?person_id=${this.user.id}`)
+          .then(response => {
+            this.comments = response.data;
+          })
+          .catch(error => {
+            console.error('Error al intentar obtener los comentarios', error);
+          });
+      }
     },
     deleteAcount() {
-      sessionStorage.removeItem("userData");
-      this.$axios.delete('people/?id=' + this.user.id)
-        .then(response => {
-          this.comments = response.data;
-        })
-        .catch(error => {
-          console.error('Error al intentar obtener los comentarios', error);
-        });
-      this.$router.push({ path: '/' });
-    }, 
-    modifyAcount(){
-      console.log("se modifica el usuario");
-      this.$router.push({ path: `/modify/user/${this.user.id}` });
-
+      if (this.user && this.user.id) {
+        sessionStorage.removeItem("userData");
+        this.$axios.delete(`people/?id=${this.user.id}`)
+          .then(response => {
+            console.log('Cuenta eliminada');
+            this.$router.push({ path: '/' });
+          })
+          .catch(error => {
+            console.error('Error al intentar eliminar la cuenta', error);
+          });
+      }
+    },
+    modifyAcount() {
+      if (this.user && this.user.id) {
+        console.log("se modifica el usuario");
+        this.$router.push({ path: `/modify/user/${this.user.id}` });
+      }
     }
   },
   mounted() {
@@ -156,7 +160,6 @@ export default {
   padding: 1.25em 2em;
   border-radius: 1em;
   color: black;
-
 }
 
 .user-manager-container h3 {
@@ -180,15 +183,14 @@ export default {
   align-items: center;
 }
 
-#user-info .white{
+#user-info .white {
   padding: 0.5em;
   background-color: white;
   border-radius: 0.5em;
   margin-bottom: 1em;
 }
 
-#user-info p{
+#user-info p {
   padding: 0.5em;
-
 }
 </style>

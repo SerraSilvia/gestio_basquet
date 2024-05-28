@@ -160,7 +160,7 @@ export default {
         id: this.newUser.id,
         name: this.newUser.name,
         surnames: this.newUser.surnames,
-        level: this.newUser.user_type,
+        user_type: this.newUser.user_type,
         player_level: this.newUser.player_level,
         mail: this.newUser.email,
         team_id: this.newUser.team_id,
