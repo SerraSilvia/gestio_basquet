@@ -15,7 +15,7 @@
         </div>
         <div class="center-container">
             <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar compte</button>
-            <button id="modifyAcount" class="button-pink">Modificar dades</button>
+            <button id="modifyAcount" class="button-pink" @click="modifyAcount">Modificar dades</button>
           </div>
       </section>
 
@@ -115,8 +115,19 @@ export default {
     },
     deleteAcount() {
       sessionStorage.removeItem("userData");
-      //TODO: aqui se debera eliminar el usuario con la api
+      this.$axios.delete('comments/?_id=' + this.user.id)
+        .then(response => {
+          this.comments = response.data;
+        })
+        .catch(error => {
+          console.error('Error al intentar obtener los comentarios', error);
+        });
       this.$router.push({ path: '/' });
+    }, 
+    modifyAcount(){
+      console.log("se modifica el usuario");
+      this.$router.push({ path: '/modify/user/${team.id}' });
+
     }
   },
   mounted() {

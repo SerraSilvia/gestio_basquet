@@ -18,6 +18,8 @@ import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
 import ReservaCrear from '@/components/ReservaCrear.vue';
 import AdministrarComponent from './components/AdministrarComponent.vue';
+import ModifyUserComponent from './components/ModifyUserComponent.vue';
+
 
 
 const routes = [
@@ -48,6 +50,10 @@ const routes = [
 {
   path: '/administrar',
   component: AdministrarComponent
+},  {
+  path: '/modify/user/:id',
+  component: ModifyUserComponent,
+  props: route => ({ id: String(route.params.id) })
 }
 ];
 
