@@ -1,18 +1,14 @@
 <template>
   <div>
-    <h2>Confirmar Reserva</h2>
-    <div v-if="date && slot && facilityName && clubName">
-      <p><strong>Club:</strong> {{ clubName }}</p>
-      <p><strong>Pista:</strong> {{ facilityName }}</p>
-      <p><strong>Fecha:</strong> {{ date }}</p>
-      <p><strong>Franja horaria:</strong> {{ slot }}</p>
-      <button @click="confirmarReserva">Reservar Pista</button>
-      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-    </div>
-    <div v-else>
-      <p>No hay ninguna reserva seleccionada.</p>
-    </div>
+    <h2>Resumen de reserva</h2>
+    <p>Fecha de inicio: {{ date_start }}</p>
+    <p>Fecha de fin: {{ date_end }}</p>
+    <p>ID de instalación: {{ facility_id }}</p>
+    <p>ID de club: {{ club_id }}</p>
+    <p>Estado de reserva: {{ reservation_status }}</p>
+    <p>Tipo de reserva: {{ reservation_type }}</p>
+    <p>ID de usuario logeado: {{ person_id }}</p>
+    <button @click="confirmReservation">Confirmar Reserva</button>
   </div>
 </template>
 
@@ -23,88 +19,58 @@ export default {
   name: 'ReservaCrear',
   data() {
     return {
-      date: null,
-      slot: null,
-      facility_id: null,
-      facilityName: null,
-      club_id: null,
-      clubName: null,
-      person_id: 1, // Suponiendo que este ID se obtiene dinámicamente en tu aplicación
-      reservation_status: 'confirmed', // Suponiendo que este estado se obtiene dinámicamente en tu aplicación
-      reservation_type: 'typeA', // Suponiendo que este tipo se obtiene dinámicamente en tu aplicación
-      successMessage: '',
-      errorMessage: ''
+      date_start: '',
+      date_end: '',
+      slot: '',
+      facility_id: '',
+      club_id: '',
+      reservation_status: 'confirmed', 
+      reservation_type: '',
+      person_id: '' 
     };
   },
-  created() {
-    this.date = this.$route.query.date;
-    this.slot = this.$route.query.slot;
-    this.facility_id = this.$route.query.facility_id;
-    this.club_id = this.$route.query.club_id;
+  mounted() {
+    const query = this.$route.query;
+    this.date_start = this.formatDate(query.date);
+    this.date_end = this.formatDateEnd(query.date);
+    this.slot = query.slot || '';
+    this.facility_id = query.facility_id || '';
+    this.club_id = query.club_id || '';
+    this.reservation_type = query.reservation_type || '';
 
-    if (this.date && this.slot && this.facility_id && this.club_id) {
-      this.fetchFacilityName();
-    }
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    this.person_id = userData ? userData.id : '';
   },
   methods: {
-    confirmarReserva() {
-      const dateStart = new Date(`${this.date}T${this.slot.split('-')[0]}`);
-      const dateEnd = new Date(`${this.date}T${this.slot.split('-')[1]}`);
-
-      axios.post('http://localhost/gestio_basquet/api/routes/bookings', {
+    formatDate(date) {
+      const formattedDate = new Date(date);
+      return formattedDate.toLocaleString();
+    },
+    formatDateEnd(date) {
+      const formattedDate = new Date(date);
+      formattedDate.setHours(formattedDate.getHours() + 2); 
+      return formattedDate.toLocaleString();
+    },
+    confirmReservation() {
+      
+      const bookingData = {
         facility_id: this.facility_id,
-        person_id: this.person_id,
-        date_start: dateStart.toISOString(),
-        date_end: dateEnd.toISOString(),
-        reservation_status: this.reservation_status,
-        reservation_type: this.reservation_type
-      })
-      .then(response => {
-        if (response.data.status === 'success') {
-          this.successMessage = 'Reserva realizada con éxito';
-          this.errorMessage = '';
-        } else {
-          this.errorMessage = 'Error al realizar la reserva';
-          this.successMessage = '';
-        }
-      })
-      .catch(error => {
-        console.error('Error al confirmar la reserva:', error);
-        this.errorMessage = 'Error al realizar la reserva. Inténtalo de nuevo.';
-        this.successMessage = '';
-      });
-    },
-    fetchFacilityName() {
-      axios.get(`http://localhost/gestio_basquet/api/routes/facilities/?id=${this.facility_id}`)
+        person_id: this.person_id, 
+        date_start: this.$route.query.date, 
+        date_end: this.date_end, 
+        reservation_status: this.reservation_status, 
+        reservation_type: this.reservation_type 
+      };
+
+      
+      axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/bookings', bookingData)
         .then(response => {
-          if (response.data.length > 0) {
-            const facility = response.data[0];
-            this.facilityName = facility.name;
-            this.fetchClubName(facility.location_id);
-          } else {
-            console.error('No se encontró la instalación.');
-            this.errorMessage = 'No se encontró la instalación.';
-          }
+          console.log('Reserva creada:', response.data);
+          
         })
         .catch(error => {
-          console.error('Error al obtener el nombre de la pista:', error);
-          this.errorMessage = 'Error al obtener el nombre de la pista.';
-        });
-    },
-    fetchClubName(location_id) {
-      axios.get(`http://localhost/gestio_basquet/api/routes/locations/?id=${location_id}`)
-        .then(response => {
-          if (response.data.length > 0) {
-            const club = response.data[0];
-            this.clubName = club.name;
-          } else {
-            console.error('No se encontró la ubicación.');
-            this.errorMessage = 'No se encontró la ubicación.';
-          }
-        })
-        .catch(error => {
-          console.error('Error al obtener el nombre del club:', error);
-          this.errorMessage = 'Error al obtener el nombre del club.';
+          console.error('Error al crear la reserva:', error);
+          
         });
     }
   }
@@ -112,30 +78,5 @@ export default {
 </script>
 
 <style scoped>
-div {
-  text-align: center;
-  margin-top: 50px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1976d2;
-}
-
-.success-message {
-  color: green;
-  margin-top: 20px;
-}
-
-.error-message {
-  color: red;
-  margin-top: 20px;
-}
+/* Estilos si es necesario */
 </style>
