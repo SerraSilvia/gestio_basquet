@@ -126,6 +126,19 @@ export default {
         .catch(error => {
           console.error('Error al intentar obtener las reservas', error);
         });
+    }, 
+    getOldData(){
+     
+      this.$axios.get('people/?id=' + this.id)
+        .then(response => {
+          console.log("old data: "+response.data[0]);
+          this.oldUser=response.data[0];
+          this.modUser.id=this.oldUser;
+        })
+        .catch(error => {
+          console.error('Error al intentar obtener el usuario', error);
+        });
+
     }
   },
   mounted() {
@@ -136,16 +149,7 @@ export default {
         console.log("no cumple las condiciones");
         this.$router.push({ path: '/' });
       }
-      this.modUser.id=this.id;
-      this.modUser.name=this.user.name;
-      this.modUser.surnames=this.user.surnames;
-      this.modUser.email=this.user.email;
-      this.modUser.password=this.user.password;
-      this.modUser.birthdate=this.user.birthdate;
-      this.modUser.user_type=this.user.user_type;
-      this.modUser.player_level=this.user.player_level;
-      this.modUser.team_id=this.user.team_id;
-
+      this.getOldData();
     } else {
       this.$router.push({ path: '/' });
     }

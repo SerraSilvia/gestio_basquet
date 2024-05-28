@@ -7,13 +7,13 @@
       <input type="text" id="name" name="name" v-model="newUser.name" />
       <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
 
-      <label for="name">Surnames</label>
+      <label for="surnames">Surnames</label>
       <input type="text" id="surnames" name="surnames" v-model="newUser.surnames" />
       <small v-if="errors.surnames" class="form-error">{{
         errors.surnames
       }}</small>
 
-      <label for="name">DNI</label>
+      <label for="dni">DNI</label>
       <input type="text" id="dni" name="dni" v-model="newUser.dni" />
       <small v-if="errors.dni" class="form-error">{{ errors.dni }}</small>
 

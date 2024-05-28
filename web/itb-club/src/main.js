@@ -22,6 +22,7 @@ import ModifyUserComponent from './components/ModifyUserComponent.vue';
 import AdminUsers from './components/AdminUsers.vue';
 import FacilitiesInfo from './components/FacilitiesInfo.vue';
 import ClubsInfo from './components/ClubsInfo.vue';
+import CreateNewUser from './components/CreateNewUser.vue';
 
 
 
@@ -63,6 +64,9 @@ const routes = [
 {
   path: '/administrar/users',
   component: AdminUsers
+},{
+  path: '/administrar/users/add',
+  component: CreateNewUser
 },{
   path: '/info-facilities',
   component: FacilitiesInfo

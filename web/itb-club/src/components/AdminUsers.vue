@@ -1,52 +1,54 @@
 <template>
-    <p>Aqui se mostraran todos los usuarios</p>
-    <input type="text" v-model="searchQuery" placeholder="Buscar jugador per email">
-    <UserItemComponent v-for="(user, index) in sortedUsers" :key="user.id" ></UserItemComponent>
+    <div id="user-id-container">
+        <h2>Usuaris registrats</h2>
+        <div class="center-container">
+            <RouterLink class="button" to="/administrar/users/add">Crear Usuari</RouterLink></div>
+        <input type="text" v-model="searchQuery" placeholder="Buscar jugador per email">
+        <UserItemComponent v-for="(user, index) in sortedUsers" :key="user" :user="user"></UserItemComponent>
+    </div>
+
 </template>
-  
+
 <script>
 import UserItemComponent from "./UserItemComponent.vue"
 
 export default {
     name: 'AdminUsers',
-    data(){
-        return{
-            user:[],
+    data() {
+        return {
+            user: [],
             users: [],
             searchQuery: ''
 
         }
     },
-    components:{
+    components: {
         UserItemComponent
     },
-    computed:{
-
-      sortedUsers() {
-        return this.users
-          /*.slice()
-          .filter(user => user.email.toLowerCase().includes(this.searchQuery.toLowerCase()));*/
-      }
+    computed: {
+        sortedUsers() {
+            return this.users.filter(user => user.email.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        }
     },
-    methods:{   
-        getUsers(){
+    methods: {
+        getUsers() {
             console.log("se consiguen los usuarios");
             this.$axios.get('people/')
                 .then(response => {
-                    console.log("club: " + response.data[0]);
-                    this.users = response.data[0];
+                    console.log("club: " + response.data);
+                    this.users = response.data;
                 })
                 .catch(error => {
                     console.error('Error al intentar obtener el club', error);
                 });
         }
     },
-    mounted(){
+    mounted() {
         const userData = JSON.parse(sessionStorage.getItem('userData'));
-        if(userData) {
+        if (userData) {
             this.user = userData;
-            if(this.user.user_type=="admin"||this.user.user_type=="employee"||this.user.user_type=="professor"){
-            }else this.$router.push({ path: '/' });
+            if (this.user.user_type == "admin" || this.user.user_type == "employee" || this.user.user_type == "professor") {
+            } else this.$router.push({ path: '/' });
             this.getUsers();
         } else {
             this.$router.push({ path: '/' });
@@ -55,6 +57,33 @@ export default {
 };
 
 </script>
-  
-<style scoped></style>
-  
+
+<style scoped>
+h2{
+    margin-bottom: 0em;
+}
+#user-id-container {
+    padding: 5% 10%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 2em;
+    border: 1px solid #ffffff;
+    border-radius: 0.5em;
+    box-shadow: 0.25em 0.25em #f94d7b;
+
+}
+.center-container {
+    display: flex;
+    justify-content:flex-end; 
+    margin-bottom: 1em;/* Centra el botón horizontalmente */
+}
+
+
+.center-container button{
+    width: 10em;
+    padding: 0.5em;
+}
+</style>
