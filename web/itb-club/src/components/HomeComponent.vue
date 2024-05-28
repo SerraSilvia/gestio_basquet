@@ -107,8 +107,8 @@
         en línia o posa't en contacte amb nosaltres. No deixis escapar
         l'oportunitat de practicar a les nostres instal·lacions!
       </p>
+      <button>reserva</button>
     </div>
-    <button>reserva</button>
   </div>
 
   <nav class="footer">
@@ -174,6 +174,10 @@ h4 {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #00a1e9;
   border: 1px solid #00a1e9;
+  transition: transform .25s;
+}
+.home-li:hover {
+  transform: scale(105%);
 }
 
 .img-li {
@@ -193,14 +197,6 @@ img {
   color: black;
   text-align: center;
   font-size: 25px;
-}
-
-.home-li h3:hover {
-  color: white;
-  background-color: #6de6dd;
-  border-radius: 25px;
-  padding: 2px;
-  padding-left: 3px;
 }
 
 .classes {
@@ -262,8 +258,9 @@ img {
 
 .booking-container {
   max-width: 100%;
-  height: 250px;
   padding-top: 20px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .booking {
@@ -276,5 +273,8 @@ img {
   width: 20% !important;
   height: 400px !important;
   
+}
+.button {
+  float: right;
 }
 </style>

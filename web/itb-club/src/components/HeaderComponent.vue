@@ -35,15 +35,20 @@ export default {
 
 <style>
 .position-top{
-    position: absolute;
-    top: 0;
+    top: 64px;
+    position: fixed;
 }
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: rgb(244,93,69);
     background: linear-gradient(90deg, rgba(244,93,69,1) 0%, rgba(249,77,123,1) 100%);
     padding: 1em;
     display: flex;
     justify-content: space-between;
+    z-index: 10;
 }
 
 </style>

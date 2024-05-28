@@ -1,3 +1,7 @@
+:root {
+  --primary-color: rgba(249, 77, 123, 1);
+  --secondary-color: #00a1e9;
+}
 /* GENERAL STYLES */
 section {
   padding-top: 1em;
@@ -21,6 +25,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="datetime-local"],
 select {
   margin-top: 5px;
   padding: 10px;
@@ -32,6 +37,7 @@ select {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
+input[type="datetime-local"],
 select:focus {
   border-color: #00a1e9;
   outline: none;
@@ -39,9 +45,12 @@ select:focus {
 
 input[type="submit"] {
   width: 6em;
-  margin: auto;
+  margin: .8rem auto;
   border-color: white;
   border-style: solid;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  cursor: pointer;
 }
 .form-error{
   color: red;
@@ -61,4 +70,35 @@ input[type="submit"] {
   left: 7em;
   z-index: -1;
 }
-
+button,
+.btn {
+  border-color: white;
+  color: white;
+  border-style: solid;
+  font-weight: bolder;
+  text-decoration: none;
+  text-transform: lowercase;
+  background-color: #4fcdc4;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin-top: .5rem;
+  cursor: pointer;
+}
+button:hover,
+.btn:hover {
+  background-color: #6de6dd;
+}
+.link {
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--secondary-color);
+}
+.link:hover {
+  color: var(--primary-color);
+}
+main {
+  margin-top: 64px;
+}

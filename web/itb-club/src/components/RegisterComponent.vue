@@ -51,9 +51,11 @@
       }}</small>
 
       <input class="button" type="submit" />
+      <div>
+        Tens una compta? <RouterLink to="/login" class="link">Logar-se</RouterLink>
+      </div>
     </form>
   </section>
-  <RouterLink to="/login">Logar-se</RouterLink>
 </template>
 <script>
 import { Validators } from "@/utils/validators.js";
@@ -177,8 +179,30 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 .form-error {
   color: red;
+}
+#crear-poligon {
+  width: 40em;
+  height: 9em;
+  transform: skew(20deg);
+  background: linear-gradient(
+    to right,
+    rgb(54, 208, 255),
+    rgba(255, 159, 147, 0)
+  );
+  margin: 1em;
+  position: absolute;
+  top: 5em;
+  left: 7em;
+  z-index: -1;
+}
+#register {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.button {
+  margin-top: .8rem;
 }
 </style>
