@@ -11,7 +11,6 @@ function createBooking($conn) {
     $reservation_type = $data['reservation_type'];
 
     $q = "INSERT INTO BOOKINGS (facility_id, person_id, date_start, date_end, reservation_status, reservation_type) VALUES ($facility_id, $person_id, '$date_start', '$date_end', '$reservation_status', '$reservation_type')";
-    echo $q;
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
