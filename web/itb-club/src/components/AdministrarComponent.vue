@@ -4,7 +4,6 @@
         <h3>Usuaris</h3>
         <ul>
             <li><RouterLink @click="handleToggleMenu" to="/administrar/users">Mirar Usuaris</RouterLink></li>
-            <li><RouterLink @click="handleToggleMenu" to="/administrar/usuari">Cercar Usuari</RouterLink></li>
         </ul>
     </section>
 </template>

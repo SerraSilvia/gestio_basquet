@@ -14,21 +14,21 @@
       <nav>
         <ul class="img-li">
           <li class="home-li">
-            <a href="../../facilitiesInfo.html">
+            <RouterLink to="/info-facilities">
               <div class="parallelogram-img">
                 <img src="../assets/instalacions.jpg" alt="instalacions" />
               </div>
               <h3>Instal·lacions</h3>
-            </a>
+            </RouterLink>
           </li>
   
           <li>
-            <a href="../rutaClubs">
+            <RouterLink to="/info-clubs">
               <div class="parallelogram-img">
                 <img src="../assets/clubs.jpg" alt="clubs" />
               </div>
               <h3>Clubs</h3>
-            </a>
+            </RouterLink>
           </li>
           <li>
             <a href="../rutaTornejos">

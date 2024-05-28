@@ -1,6 +1,7 @@
 <template>
     <p>Aqui se mostraran todos los usuarios</p>
-    <UserItemComponent></UserItemComponent>
+    <input type="text" v-model="searchQuery" placeholder="Buscar jugador per email">
+    <UserItemComponent v-for="(user, index) in sortedUsers" :key="user.id" ></UserItemComponent>
 </template>
   
 <script>
@@ -11,11 +12,21 @@ export default {
     data(){
         return{
             user:[],
-            users: []
+            users: [],
+            searchQuery: ''
+
         }
     },
     components:{
         UserItemComponent
+    },
+    computed:{
+
+      sortedUsers() {
+        return this.users
+          /*.slice()
+          .filter(user => user.email.toLowerCase().includes(this.searchQuery.toLowerCase()));*/
+      }
     },
     methods:{   
         getUsers(){
