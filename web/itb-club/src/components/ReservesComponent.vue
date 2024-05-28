@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isLoggedIn">
     <section id="bookings">
       <h2>Selecciona el club</h2>
       <div>
@@ -70,6 +70,10 @@
       <RouterLink :to="reservationLink" class="button" v-if="canReserve">Fer reserva!</RouterLink>
     </p>
   </div>
+  <div v-else>
+    <p>Por favor, inicia sesión para hacer una reserva.</p>
+    <RouterLink to="/login">Ir a la página de inicio de sesión</RouterLink>
+  </div>
 </template>
 
 <script>
@@ -88,7 +92,8 @@ export default {
       selectedFacilityId: null,
       reservationType: 'class',
       calendar: [],
-      slots: ['8:00h-10:00h', '10:00h-12:00h', '12:00h-14:00h', '17:00h-19:00h', '19:00h-21:00h', '21:00h-23:00h']
+      slots: ['8:00h-10:00h', '10:00h-12:00h', '12:00h-14:00h', '17:00h-19:00h', '19:00h-21:00h', '21:00h-23:00h'],
+      isLoggedIn: false
     };
   },
   components: {
@@ -128,6 +133,14 @@ export default {
     }
   },
   methods: {
+    checkLoginStatus() {
+      const userData = JSON.parse(sessionStorage.getItem("userData"));
+      if (userData && userData.id) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    },
     handleSelectedClub(selectedClub) {
       this.club_id = selectedClub;
       this.getFacilitiesByLocation(this.club_id);
@@ -197,7 +210,10 @@ export default {
     }
   },
   mounted() {
-    this.generateCalendar();
+    this.checkLoginStatus();
+    if (this.isLoggedIn) {
+      this.generateCalendar();
+    }
   }
 };
 </script>
