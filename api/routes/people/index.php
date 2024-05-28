@@ -34,8 +34,8 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo createPeople($conn);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id'])) {
-    echo updatePeople($conn, $_REQUEST['id']);    
+else if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    echo updatePeople($conn);    
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
