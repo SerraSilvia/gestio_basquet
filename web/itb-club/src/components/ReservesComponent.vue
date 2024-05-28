@@ -67,7 +67,7 @@
     </section>
 
     <p class="button-container">
-      <RouterLink class="button" :to="reservationLink">Fer reserva!</RouterLink>
+      <RouterLink :to="reservationLink" class="button" v-if="canReserve">Fer reserva!</RouterLink>
     </p>
   </div>
 </template>
@@ -86,7 +86,7 @@ export default {
       selectedDate: null,
       selectedSlot: null,
       selectedFacilityId: null,
-      reservationType: 'class', 
+      reservationType: 'class',
       calendar: [],
       slots: ['8:00h-10:00h', '10:00h-12:00h', '12:00h-14:00h', '17:00h-19:00h', '19:00h-21:00h', '21:00h-23:00h']
     };
@@ -95,8 +95,11 @@ export default {
     ClubSelectComponent
   },
   computed: {
+    canReserve() {
+      return this.selectedDate && this.selectedSlot && this.selectedFacilityId;
+    },
     reservationLink() {
-      if (this.selectedDate && this.selectedSlot && this.selectedFacilityId) {
+      if (this.canReserve) {
         const date_start = new Date(this.selectedDate);
         const [startHour, endHour] = this.selectedSlot.split('-');
         const startTime = startHour.split('h')[0] + ':00:00';
@@ -264,5 +267,4 @@ li.is-selected, .selected-facility {
     background-color: #2196f3;
     color: white;
 }
-
 </style>
