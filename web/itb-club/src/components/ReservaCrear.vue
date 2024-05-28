@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="reservation-summary">
     <h2>Resumen de reserva</h2>
-    <p>Fecha de inicio: {{ formattedDateStart }}</p>
-    <p>Fecha de fin: {{ formattedDateEnd }}</p>
-    <p>ID de instalación: {{ facility_id }}</p>
-    <p>ID de club: {{ club_id }}</p>
-    <p>Estado de reserva: {{ reservation_status }}</p>
-    <p>Tipo de reserva: {{ reservation_type }}</p>
-    <p>ID de usuario logeado: {{ person_id }}</p>
-    <button @click="confirmReservation">Confirmar Reserva</button>
+    <p>Fecha de inicio: <span class="highlight">{{ formattedDateStart }}</span></p>
+    <p>Fecha de fin: <span class="highlight">{{ formattedDateEnd }}</span></p>
+    <p>ID de instalación: <span class="highlight">{{ facility_id }}</span></p>
+    <p>ID de club: <span class="highlight">{{ club_id }}</span></p>
+    <p>Estado de reserva: <span class="highlight">{{ reservation_status }}</span></p>
+    <p>Tipo de reserva: <span class="highlight">{{ reservation_type }}</span></p>
+    <p>ID de usuario logeado: <span class="highlight">{{ person_id }}</span></p>
+    <button class="confirm-button" @click="confirmReservation">Confirmar Reserva</button>
     <p v-if="message" :class="messageClass">{{ message }}</p>
   </div>
 </template>
@@ -91,11 +91,59 @@ export default {
 </script>
 
 <style scoped>
+.reservation-summary {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-summary h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reservation-summary p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.reservation-summary .highlight {
+  font-weight: bold;
+  color: #333;
+}
+
+.confirm-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.confirm-button:hover {
+  background-color: #1976d2;
+}
+
 .success-message {
   color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .error-message {
   color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
 }
 </style>
