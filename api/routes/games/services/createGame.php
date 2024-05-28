@@ -17,7 +17,7 @@ function createGame($conn) {
     else $res = array('status' => 'error');
 
     header("Content-Type: application/json");
-    return json_decode($res);
+    return json_encode($res);
 }
 
 ?>
