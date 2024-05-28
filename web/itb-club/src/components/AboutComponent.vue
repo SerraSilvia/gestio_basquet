@@ -238,6 +238,7 @@ export default {
   border: 2px solid white;
   border-radius: 25px;
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .contact-us h5 {
