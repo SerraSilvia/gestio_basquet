@@ -80,4 +80,7 @@ section {
 .team-item {
     margin: 0.2em;
 }
+a:hover{
+    color: white;
+}
 </style>

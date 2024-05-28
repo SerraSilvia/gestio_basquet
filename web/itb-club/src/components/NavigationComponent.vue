@@ -32,14 +32,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .menu-container{
     width: 10em;
     background: rgb(244,93,69);
     padding: 1.5em 1em;
-    height: 100%;
-    z-index:3;
+	min-height: 100vh;
+        z-index:3;
 }
     nav{
         margin: 1em 0em;

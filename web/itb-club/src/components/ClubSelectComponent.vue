@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .club-container {
     display: flex;
     justify-content: space-evenly;

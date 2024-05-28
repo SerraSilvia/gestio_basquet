@@ -120,7 +120,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .home-header {
     width: 100%;
     height: 300px;
