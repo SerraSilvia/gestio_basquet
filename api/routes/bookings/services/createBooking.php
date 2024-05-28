@@ -7,10 +7,11 @@ function createBooking($conn) {
     $person_id = $data['person_id'];
     $date_start = $data['date_start'];
     $date_end = $data['date_end'];
-    $reservation_status = $data['reservation_status'];
+    $reservation_status = "pending";
     $reservation_type = $data['reservation_type'];
 
-    $q = "INSERT INTO BOOKINGS VALUES (DEFAULT, '$facility_id', '$person_id', '$date_start', '$date_end', '$reservation_status', '$reservation_type'";
+    $q = "INSERT INTO BOOKINGS (facility_id, person_id, date_start, date_end, reservation_status, reservation_type) VALUES ($facility_id, $person_id, '$date_start', '$date_end', '$reservation_status', '$reservation_type')";
+    echo $q;
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
