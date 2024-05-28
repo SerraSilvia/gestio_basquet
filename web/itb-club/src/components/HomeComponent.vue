@@ -46,7 +46,35 @@
       <h4>Classes amb els millors</h4>
       <div class="coach">
         <ul>
-          <li></li>
+          <li>
+            <img src="../assets/images/entrenador1.jpg" alt="entrenador1.jpg"> 
+            <h5>Robert Piera</h5>
+          </li>
+                    
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
+
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
+                    
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
+         
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
+                    
+          <li>
+            <img src="" alt="">
+            <h5></h5>
+          </li>
         </ul>
       </div>
     </div>
@@ -158,14 +186,21 @@
     /*transform: skew(-10deg); Ajusta el ángulo según tus necesidades */
   }
   
-  .coach {
-    background-color: #A4DED9;
-    width: 80%;
-    height: 100px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  
+.coach {
+  background: linear-gradient(to right, #A4DED9, #D4F6F4);
+  width: 80%;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto; /* Centrado horizontal */
+}
+.coach img{
+    width: 150px; /* Ajusta el tamaño según tus necesidades */
+    height: 150px; /* Ajusta el tamaño según tus necesidades */
+    object-fit: cover;
+    border-radius: 50%;
+}
   .leaders {
     background-color: #F94D7B;
     margin-top: 25px;
