@@ -115,7 +115,7 @@ export default {
     },
     deleteAcount() {
       sessionStorage.removeItem("userData");
-      this.$axios.delete('comments/?_id=' + this.user.id)
+      this.$axios.delete('people/?id=' + this.user.id)
         .then(response => {
           this.comments = response.data;
         })
@@ -126,7 +126,7 @@ export default {
     }, 
     modifyAcount(){
       console.log("se modifica el usuario");
-      this.$router.push({ path: '/modify/user/${team.id}' });
+      this.$router.push({ path: `/modify/user/${this.user.id}` });
 
     }
   },
@@ -153,7 +153,7 @@ export default {
 .user-manager-container {
   background-color: #eff9f6;
   margin: 5% 5%;
-  padding: 1.25em 0.75em;
+  padding: 1.25em 2em;
   border-radius: 1em;
   color: black;
 

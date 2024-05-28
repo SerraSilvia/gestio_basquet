@@ -2,7 +2,7 @@
   <section v-if="!loged">
     <h2>Iniciar Sessió</h2>
     <div class="title-poligon"></div>
-    <form id="form" @submit.prevent="validatorForm">
+    <form class="form" @submit.prevent="validatorForm">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" v-model="user.email" />
       <small v-if="errors.email" class="form-error">{{ errors.email }}</small>
@@ -82,7 +82,7 @@ export default {
         id: this.logedUser.id,
         name: this.logedUser.name,
         surnames: this.logedUser.surnames,
-        level: this.logedUser.user_type,
+        user_type: this.logedUser.user_type,
         player_level: this.logedUser.player_level,
         mail: this.logedUser.email,
         team_id: this.logedUser.team_id,

@@ -38,8 +38,8 @@ else if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     echo updatePeople($conn);    
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    echo deletePeople($conn);    
+else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_REQUEST['id'])) {
+    echo deletePeople($conn, $_REQUEST['id']);    
 }
 
 else {
