@@ -7,7 +7,7 @@ function updatePeople($conn) {
     $name = $data['name'];
     $surnames = $data['surnames'];
     $email = $data['email'];
-    $password = $data['password'];
+    $password = md5($data['password']);
     $birthdate = $data['birthdate'];
     $user_type = $data['user_type'];
     $player_level = $data['player_level'];
