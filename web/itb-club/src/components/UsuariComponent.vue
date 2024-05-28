@@ -37,7 +37,7 @@
         <ReservaItemComponent v-for="(booking, index) in bookings" :key="index" :booking="booking"></ReservaItemComponent>
       </section>
 
-      <section v-if="user && user.user_type === 'player' && bookings.length > 0">
+      <section v-if="user && user.user_type === 'player' && comments.length > 0">
         <h3>Comentaris</h3>
         <CommentComponent v-for="(comment, index) in comments" :key="index" :comment="comment"></CommentComponent>
       </section>

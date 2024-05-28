@@ -1,4 +1,5 @@
 <template>
+    
     <div class="container">
         <div class="user-img">
             <p>img</p>
@@ -7,11 +8,13 @@
             <h3>{{ user.email }}</h3>
             <p>{{ user.id }}</p>
             <p class="capitalize">{{ user.user_type }}</p>
-            
+            <p v-if="user.team_id!=null&&user.team_id!=undefined">{{ user.team_id }}</p>
         </div>
         <div class="button-container">
-                <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar</button>
-                <button id="modifyAcount" class="button-pink" @click="modifyAcount">Modificar</button>
+            <RouterLink class="button-pink" :to="`/administrar/comments/${user.id}`">Comentaris</RouterLink>
+
+            <button id="deleteAcount" class="button-pink" @click="deleteAcount">Eliminar</button>
+            <button id="modifyAcount" class="button-pink" @click="modifyAcount">Modificar</button>
         </div>
     </div>
 </template>
@@ -76,7 +79,7 @@ export default {
     display: flex;
     flex-direction: column;
 }
-.button-container button{
+.button-container button,.button-container a{
     margin-bottom: 0.25em;
 }
 </style>

@@ -23,6 +23,7 @@ import AdminUsers from './components/AdminUsers.vue';
 import FacilitiesInfo from './components/FacilitiesInfo.vue';
 import ClubsInfo from './components/ClubsInfo.vue';
 import CreateNewUser from './components/CreateNewUser.vue';
+import AdminComments from './components/AdminComments.vue';
 
 
 
@@ -73,6 +74,10 @@ const routes = [
 },{
   path: '/info-clubs',
   component: ClubsInfo
+},{
+  path: '/administrar/comments/:id',
+  component: AdminComments,
+  props: route => ({ id: String(route.params.id) })
 }
 ];
 
