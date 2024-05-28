@@ -1,11 +1,11 @@
 <?php
 
-function updatePeople($conn, $id) {
+function updatePeople($conn) {
     $data = json_decode(file_get_contents('php://input'), true);
 
+    $id=$data['id'];
     $name = $data['name'];
     $surnames = $data['surnames'];
-    $dni = $data['dni'];
     $email = $data['email'];
     $password = $data['password'];
     $birthdate = $data['birthdate'];
@@ -13,7 +13,7 @@ function updatePeople($conn, $id) {
     $player_level = $data['player_level'];
     $team_id = $data['team_id'];
 
-    $q = "UPDATE PEOPLE SET name='$name', surnames='$surnames', dni='$dni', email='$email' , password='$password', birthdate='$birthdate', user_type='$user_type', player_level='$player_level', team_id='$team_id' WHERE id='$id'";
+    $q = "UPDATE PEOPLE SET name='$name', surnames='$surnames', email='$email' , password='$password', birthdate='$birthdate', user_type='$user_type', player_level='$player_level', team_id='$team_id' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {
