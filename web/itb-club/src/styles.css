@@ -1,9 +1,5 @@
 /* GENERAL STYLES */
-section {
-  padding-top: 1em;
-}
-
-form {
+.form , #form{
   max-width: 90%;
   margin: 5em 2em;
   padding: 2em;

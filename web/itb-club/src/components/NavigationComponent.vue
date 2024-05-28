@@ -10,6 +10,8 @@
                 <li><RouterLink @click="handleToggleMenu" to="/reserva">Reserva</RouterLink></li>
                 <li><RouterLink @click="handleToggleMenu" to="/equips">Equips</RouterLink></li>
                 <li><RouterLink @click="handleToggleMenu" to="/usuari">Usuari</RouterLink></li>
+                <li><RouterLink @click="handleToggleMenu" to="/administrar">Administrar</RouterLink></li>
+
             </ul>
         </nav> 
     </div>

@@ -31,7 +31,7 @@
       }}</small>
 
       <label for="category">Categoria</label>
-      <select name="category" id="category" v-model="newUser.category">
+      <select name="category" id="category" v-model="newUser.player_level">
         <option value="cadet">Cadet</option>
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
@@ -68,7 +68,7 @@ export default {
         surnames: "",
         dni: "",
         location: null,
-        category: null,
+        player_level: null,
         email: "",
         password: "",
         user_type:"player",
@@ -99,7 +99,7 @@ export default {
         return;
       }
 
-      if (!Validators.required(this.newUser.category)) {
+      if (!Validators.required(this.newUser.player_level)) {
         this.errors.category = "La categoría es obligatoria.";
         return;
       }
@@ -140,8 +140,6 @@ export default {
       this.$axios.post("auth/register/", this.newUser)
         .then((response) => {
           if (response.data.status != "error") {
-            console.log("Usuario ha sido agregado:", response.data);
-
             this.saveSession(response.data.user);
             this.$router.push({ path: '/usuari' });
           } else {
@@ -162,7 +160,7 @@ export default {
         id: this.newUser.id,
         name: this.newUser.name,
         surnames: this.newUser.surnames,
-        level: this.newUser.user_type,
+        user_type: this.newUser.user_type,
         player_level: this.newUser.player_level,
         mail: this.newUser.email,
         team_id: this.newUser.team_id,

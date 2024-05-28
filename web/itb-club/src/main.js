@@ -16,7 +16,13 @@ import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
 import VisualizeTournamentComponent from './components/VisualizeTournamentComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
-import ReservaCrear from '@/components/ReservaCrear.vue';
+import ReservaCrear from './components/ReservaCrear.vue';
+import AdministrarComponent from './components/AdministrarComponent.vue';
+import ModifyUserComponent from './components/ModifyUserComponent.vue';
+import AdminUsers from './components/AdminUsers.vue';
+
+
+
 
 const routes = [
   { path: '/', component: HomeComponent },
@@ -42,6 +48,18 @@ const routes = [
   {
     path: '/reserva/crear',
     component: ReservaCrear
+},
+{
+  path: '/administrar',
+  component: AdministrarComponent
+},  {
+  path: '/modify/user/:id',
+  component: ModifyUserComponent,
+  props: route => ({ id: String(route.params.id) })
+},
+{
+  path: '/administrar/users',
+  component: AdminUsers
 }
 ];
 
