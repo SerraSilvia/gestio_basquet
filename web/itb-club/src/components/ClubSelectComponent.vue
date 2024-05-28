@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .club-container {
     display: flex;
     justify-content: space-evenly;
@@ -51,7 +51,6 @@ export default {
     background: #00a1e9;
     margin: 1em;
     position: relative;
-
 }
 
 .parallelogram:hover{
