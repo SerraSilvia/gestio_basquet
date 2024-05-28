@@ -14,7 +14,6 @@ function updatePeople($conn) {
     $team_id = $data['team_id'];
 
     $q = "UPDATE PEOPLE SET name='$name', surnames='$surnames', email='$email' , password='$password', birthdate='$birthdate', user_type='$user_type', player_level='$player_level', team_id=$team_id WHERE id=$id";
-    echo $q;
     $result = mysqli_query($conn, $q);
 
     if ($result) {
