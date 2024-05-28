@@ -6,6 +6,7 @@
     <p>ID de instalación: {{ facility_id }}</p>
     <p>ID de club: {{ club_id }}</p>
     <p>Estado de reserva: {{ reservation_status }}</p>
+    <p>Tipo de reserva: {{ reservation_type }}</p>
     <p>ID de usuario logeado: {{ person_id }}</p>
     <button @click="confirmReservation">Confirmar Reserva</button>
   </div>
@@ -24,6 +25,7 @@ export default {
       facility_id: '',
       club_id: '',
       reservation_status: 'confirmed', 
+      reservation_type: '',
       person_id: '' 
     };
   },
@@ -34,8 +36,8 @@ export default {
     this.slot = query.slot || '';
     this.facility_id = query.facility_id || '';
     this.club_id = query.club_id || '';
+    this.reservation_type = query.reservation_type || '';
 
-    
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     this.person_id = userData ? userData.id : '';
   },
