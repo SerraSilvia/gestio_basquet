@@ -9,52 +9,52 @@
       </p>
     </div>
   </div>
-  
-    <div class="home-bar">
-      <nav>
-        <ul class="img-li">
-          <li class="home-li">
-            <RouterLink to="/info-facilities">
-              <div class="parallelogram-img">
-                <img src="../assets/instalacions.jpg" alt="instalacions" />
-              </div>
-              <h3>Instal·lacions</h3>
-            </RouterLink>
-          </li>
-  
-          <li>
-            <RouterLink to="/info-clubs">
-              <div class="parallelogram-img">
-                <img src="../assets/clubs.jpg" alt="clubs" />
-              </div>
-              <h3>Clubs</h3>
-            </RouterLink>
-          </li>
-          <li>
-            <a href="../rutaTornejos">
-              <div class="parallelogram-img">
-                <img src="../assets/tornejos.jpg" alt="tornejos" />
-              </div>
-              <h3>Tornejos</h3>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  
-    <div class="classes">
-      <h4>Classes amb els millors</h4>
-      <div class="coach">
-        <ul>
-          <li>
-            <img src="../assets/images/entrenador1.jpg" alt="entrenador1.jpg"> 
-            <h5>Robert Piera</h5>
-          </li>
-                    
-          <li>
-            <img src="" alt="">
-            <h5></h5>
-          </li>
+
+  <div class="home-bar">
+    <nav>
+      <ul class="img-li">
+        <li class="home-li">
+          <a href="../../facilitiesInfo.html">
+            <div class="parallelogram-img">
+              <img src="../assets/instalacions.jpg" alt="instalacions" />
+            </div>
+            <h3>Instal·lacions</h3>
+          </a>
+        </li>
+
+        <li class="home-li">
+          <a href="../rutaClubs">
+            <div class="parallelogram-img">
+              <img src="../assets/clubs.jpg" alt="clubs" />
+            </div>
+            <h3>Clubs</h3>
+          </a>
+        </li>
+        <li class="home-li">
+          <a href="../rutaTornejos">
+            <div class="parallelogram-img">
+              <img src="../assets/tornejos.jpg" alt="tornejos" />
+            </div>
+            <h3>Tornejos</h3>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="classes">
+    <h4>Classes amb els millors</h4>
+    <div class="coach">
+      <ul>
+        <li>
+          <img src="../assets/images/entrenador1.jpg" alt="entrenador1.jpg" />
+          <h5>Robert Piera</h5>
+        </li>
+
+        <li>
+          <img src="../assets/images/entrenador2.jpg" alt="entrenador2.jpg" />
+          <h5>Francesc Vila</h5>
+        </li>
 
         <li>
           <img src="../assets/images/entrenador3.jpg" alt="entrenador3.jpg" />
@@ -107,8 +107,8 @@
         en línia o posa't en contacte amb nosaltres. No deixis escapar
         l'oportunitat de practicar a les nostres instal·lacions!
       </p>
+      <button>reserva</button>
     </div>
-    <button>reserva</button>
   </div>
 
   <nav class="footer">
@@ -120,14 +120,13 @@
     </ul>
   </nav>
 </template>
-
 <script>
 export default {
   name: "HomeComponent",
 };
 </script>
 
-<style>
+<style scoped>
 h3 {
   font-size: 40px !important;
   padding-top: 10px;
@@ -174,6 +173,10 @@ h4 {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #00a1e9;
   border: 1px solid #00a1e9;
+  transition: transform .25s;
+}
+.home-li:hover {
+  transform: scale(105%);
 }
 
 .img-li {
@@ -193,14 +196,6 @@ img {
   color: black;
   text-align: center;
   font-size: 25px;
-}
-
-.home-li h3:hover {
-  color: white;
-  background-color: #6de6dd;
-  border-radius: 25px;
-  padding: 2px;
-  padding-left: 3px;
 }
 
 .classes {
@@ -262,8 +257,9 @@ img {
 
 .booking-container {
   max-width: 100%;
-  height: 250px;
   padding-top: 20px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .booking {
@@ -272,9 +268,40 @@ img {
   float: right;
   padding-left: 30px;
 }
+.parallelogram {
+    width: 10em;
+    height: 7em;
+    transform: skew(-20deg);
+    background: #00a1e9;
+    margin: 1em;
+    position: relative;
+}
+
+.parallelogram:hover{
+    background: rgb(249,77,123);
+    background: linear-gradient(16deg, rgba(249,77,123,1) 0%, rgba(0,161,233,1) 82%);
+}
 .parallelogram{
   width: 20% !important;
   height: 400px !important;
   
+}
+.button {
+  float: right;
+}
+.footer {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+}
+
+.footer ul > li {
+  padding: 0 10px;
 }
 </style>

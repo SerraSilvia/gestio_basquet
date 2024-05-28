@@ -90,9 +90,6 @@ export default {
 </script>
 
 <style scoped>
-:root {
-  --color-quarter: #4fccc1;
-}
 .who {
   position: relative;
   overflow: hidden;
@@ -108,6 +105,19 @@ export default {
   padding: 5px;
   color: white;
   padding-left: 30px;
+}
+
+.parallelogram {
+    width: 10em;
+    height: 7em;
+    transform: skew(-20deg);
+    background: #00a1e9;
+    margin: 1em;
+    position: relative;
+}
+
+.parallelogram:hover{
+    background: rgb(249,77,123);  
 }
 
 .parallelogram-big {

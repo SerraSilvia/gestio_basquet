@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section>
+    <section id="bookings">
       <h2>Selecciona el club</h2>
       <div>
         <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
@@ -203,6 +203,11 @@ export default {
 </script>
 
 <style scoped>
+#bookings {
+  padding-top: .5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .button-container {
     display: flex;
     justify-content: center;

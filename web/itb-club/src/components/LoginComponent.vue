@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!loged">
+  <section v-if="!loged" id="login">
     <h2>Iniciar Sessió</h2>
     <div class="title-poligon"></div>
     <form class="form" @submit.prevent="validatorForm">
@@ -12,8 +12,11 @@
       <small v-if="errors.password" class="form-error">{{ errors.password }}</small>
 
       <input class="button" type="submit" />
+      <div>
+        No tens compte?
+        <RouterLink to="/register" class="link">Registrar-se</RouterLink>
+      </div>
     </form>
-    <RouterLink to="/register">Registrar-se</RouterLink>
   </section>
   <section v-else="loged">
     <h2>Tancar la sessió</h2>
@@ -107,4 +110,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#login {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+</style>
