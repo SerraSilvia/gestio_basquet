@@ -13,8 +13,8 @@
     <div class="home-bar">
       <nav>
         <ul class="img-li">
-          <li>
-            <a href="../rutaInstalacions">
+          <li class="home-li">
+            <a href="../../facilitiesInfo.html">
               <div class="parallelogram-img">
                 <img src="../assets/instalacions.jpg" alt="instalacions" />
               </div>
@@ -102,7 +102,7 @@
       rgba(244, 90, 69, 0.5)
     );
   }
-  
+
   .header-content {
     width: 45%;
     float: right;
@@ -110,24 +110,52 @@
     padding-right:20px ;
   }
   
+  .home-bar{
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   .nav {
     background-color: rgb(224, 60, 49);
-    padding: 5px;
+    padding:20px;
   }
+.home-li{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
   .img-li {
     font-size: 25px;
     list-style: none;
     display: flex;
     justify-content: space-evenly;
+    gap:70px;
   }
   
   img {
-    width: 70%;
+    width: 100%;
+    height: 300px;
   }
+ 
+  .home-li h3{
+    color: black;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .home-li h3:hover{
+  color: #4fccc1;
+  background-color: #e3f7f5;
+	border-radius: 25px;
+	padding: 2px;
+	padding-left: 3px;
+  }
+
   .parallelogram-img {
     position: relative;
     overflow: hidden;
-    transform: skew(-20deg); /* Ajusta el ángulo según tus necesidades */
+    /*transform: skew(-10deg); Ajusta el ángulo según tus necesidades */
   }
   
   .coach {
