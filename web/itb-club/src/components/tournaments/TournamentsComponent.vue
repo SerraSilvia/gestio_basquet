@@ -3,6 +3,7 @@
         <div class="info">
             <RouterLink :to="`/tornejos/${tournament.id}`">
                 <h3>{{ tournament.name }}</h3>
+
                 <p>{{ selectedTournamentClub.name }}</p>
                 <p>{{ tournament.date_start }} / {{ tournament.date_end }}</p>
             </RouterLink>
