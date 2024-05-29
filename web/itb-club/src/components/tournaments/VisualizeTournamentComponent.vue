@@ -120,15 +120,20 @@ export default {
       }catch(error){
         console.error('Error al obtener los partidos del torneo');
       }
+
       console.log("se crean los juegos");
       if(this.maxRound<4){
         console.log("primera ronda");
-        
-
+        createGameInsert(this.teams[0], this.teams[1], 0);
+        createGameInsert(this.teams[2], this.teams[3], 1);
+        createGameInsert(this.teams[4], this.teams[5], 2);
+        createGameInsert(this.teams[6], this.teams[7], 3);
       }else if(this.maxRound<6){
         console.log("segunda ronda");
+        //seleccionar los ganadores del juego 0, 1, 2, 3
       }else{
         console.log("tercera ronda")
+        //seleccionar los ganadores del juego 4 y 5 y el que gane sera el vencedor
       }
     }
   },
