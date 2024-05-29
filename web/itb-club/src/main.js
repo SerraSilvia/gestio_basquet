@@ -22,12 +22,15 @@ import ReservaCrear from './components/ReservaCrear.vue';
 import AdministrarComponent from './components/AdministrarComponent.vue';
 import ModifyUserComponent from './components/ModifyUserComponent.vue';
 import AdminUsers from './components/AdminUsers.vue';
-import FacilitiesInfo from './components/FacilitiesInfo.vue';
-import ClubsInfo from './components/ClubsInfo.vue';
 import CreateNewUser from './components/CreateNewUser.vue';
 import AdminComments from './components/AdminComments.vue';
+
+import FacilitiesInfo from './components/FacilitiesInfo.vue';
+import ClubsInfo from './components/ClubsInfo.vue';
 import TournamentsInfo from './components/TournamentsInfo.vue';
+
 import CreateTournament from './components/tournaments/CreateTournament.vue';
+import ModifyTournament from './components/tournaments/ModifyTournament.vue';
 
 
 
@@ -87,6 +90,10 @@ const routes = [
 },{
   path: '/tornejos/crear',
   component: CreateTournament
+},{
+  path: '/tornejos/modificar/:id',
+  component: ModifyTournament, 
+  props:route=>({id:String(route.params.id)})
 }
 ];
 

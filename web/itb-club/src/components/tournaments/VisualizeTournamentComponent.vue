@@ -10,7 +10,7 @@
       <p>{{ tournamentSelected.date_end }}</p>
     </div>
     <div class="tournament-status">
-      {{ status }}
+      <p>Status: {{ status }}</p>
     </div>
     <div class="tournament-teams">
 
@@ -33,7 +33,7 @@ export default {
       tournamentSelected: [],
       tournamentClub: [],
       status:'null',
-      teams:[]
+      teams:[], 
     };
   },
   components:{
@@ -65,6 +65,7 @@ export default {
   },
   mounted() {
     this.getTournament();
+
   }
 };
 </script>
