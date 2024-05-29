@@ -7,7 +7,7 @@ import './styles.css';
 
 import HomeComponent from './components/HomeComponent.vue';
 import AboutComponent from './components/AboutComponent.vue';
-import ViewTournaments from './components/ViewTournaments.vue';
+import ViewTournaments from './components/tournaments/ViewTournaments.vue';
 import RankingsComponent from './components/RankingsComponent.vue';
 import ReservesComponent from './components/ReservesComponent.vue';
 import EquipsComponent from './components/EquipsComponent.vue';
@@ -15,18 +15,22 @@ import UsuariComponent from './components/UsuariComponent.vue';
 
 import CrearEquipComponent from './components/CrearEquipComponent.vue';
 import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
-import VisualizeTournamentComponent from './components/VisualizeTournamentComponent.vue';
+import VisualizeTournamentComponent from './components/tournaments/VisualizeTournamentComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import RegisterComponent from './components/RegisterComponent.vue';
 import ReservaCrear from './components/ReservaCrear.vue';
 import AdministrarComponent from './components/AdministrarComponent.vue';
 import ModifyUserComponent from './components/ModifyUserComponent.vue';
 import AdminUsers from './components/AdminUsers.vue';
-import FacilitiesInfo from './components/FacilitiesInfo.vue';
-import ClubsInfo from './components/ClubsInfo.vue';
 import CreateNewUser from './components/CreateNewUser.vue';
 import AdminComments from './components/AdminComments.vue';
+
+import FacilitiesInfo from './components/FacilitiesInfo.vue';
+import ClubsInfo from './components/ClubsInfo.vue';
 import TournamentsInfo from './components/TournamentsInfo.vue';
+
+import CreateTournament from './components/tournaments/CreateTournament.vue';
+import ModifyTournament from './components/tournaments/ModifyTournament.vue';
 
 
 
@@ -83,6 +87,13 @@ const routes = [
   path: '/administrar/comments/:id',
   component: AdminComments,
   props: route => ({ id: String(route.params.id) })
+},{
+  path: '/tornejos/crear',
+  component: CreateTournament
+},{
+  path: '/tornejos/modificar/:id',
+  component: ModifyTournament, 
+  props:route=>({id:String(route.params.id)})
 }
 ];
 

@@ -17,7 +17,7 @@
 
 <script>
 import TournamentsComponent from './TournamentsComponent.vue';
-import ClubSelectComponent from './ClubSelectComponent.vue';
+import ClubSelectComponent from '../ClubSelectComponent.vue';
 
 export default {
   name: 'ViewTournaments',

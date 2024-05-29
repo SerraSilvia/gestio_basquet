@@ -60,7 +60,10 @@
     border-radius: 1em;
     display: flex;
     justify-content: space-between;
+    margin: auto;
     margin-top: 2em;
+
+
   }
   
   .team:hover {
