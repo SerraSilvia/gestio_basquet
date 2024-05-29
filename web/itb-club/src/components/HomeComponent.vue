@@ -14,12 +14,17 @@
     <nav>
       <ul class="img-li">
         <li class="home-li">
-          <a href="../../facilitiesInfo.html">
+        <li>
+          <RouterLink to="/info-facilities">
             <div class="parallelogram-img">
               <img src="../assets/instalacions.jpg" alt="instalacions" />
             </div>
             <h3>Instal·lacions</h3>
-          </a>
+          </RouterLink>
+        </li>
+
+
+
         </li>
 
         <li class="home-li">
@@ -143,11 +148,9 @@ h4 {
 .home-header {
   width: 100%;
   height: 300px;
-  background: linear-gradient(
-    to top,
-    rgba(249, 77, 123, 1),
-    rgba(244, 90, 69, 0.5)
-  );
+  background: linear-gradient(to top,
+      rgba(249, 77, 123, 1),
+      rgba(244, 90, 69, 0.5));
 }
 
 .header-content {
@@ -167,6 +170,7 @@ h4 {
   background-color: rgb(224, 60, 49);
   padding: 20px;
 }
+
 .home-li {
   display: flex;
   justify-content: space-evenly;
@@ -175,6 +179,7 @@ h4 {
   border: 1px solid #00a1e9;
   transition: transform .25s;
 }
+
 .home-li:hover {
   transform: scale(105%);
 }
@@ -204,6 +209,7 @@ img {
   padding: 20px;
   box-sizing: border-box;
 }
+
 .coach {
   background: linear-gradient(to right, #a4ded9, #d4f6f4);
   width: 90%;
@@ -214,6 +220,7 @@ img {
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 .coach ul {
   display: flex;
   justify-content: space-evenly;
@@ -236,12 +243,11 @@ img {
   object-fit: cover;
   border-radius: 50%;
 }
+
 .leaders {
-  background: linear-gradient(
-    to bottom,
-    rgba(249, 77, 123, 1),
-    rgba(244, 90, 69, 0.5)
-  );
+  background: linear-gradient(to bottom,
+      rgba(249, 77, 123, 1),
+      rgba(244, 90, 69, 0.5));
   margin-top: 40px;
   width: 100%;
   height: 300px;
@@ -268,27 +274,31 @@ img {
   float: right;
   padding-left: 30px;
 }
+
 .parallelogram {
-    width: 10em;
-    height: 7em;
-    transform: skew(-20deg);
-    background: #00a1e9;
-    margin: 1em;
-    position: relative;
+  width: 10em;
+  height: 7em;
+  transform: skew(-20deg);
+  background: #00a1e9;
+  margin: 1em;
+  position: relative;
 }
 
-.parallelogram:hover{
-    background: rgb(249,77,123);
-    background: linear-gradient(16deg, rgba(249,77,123,1) 0%, rgba(0,161,233,1) 82%);
+.parallelogram:hover {
+  background: rgb(249, 77, 123);
+  background: linear-gradient(16deg, rgba(249, 77, 123, 1) 0%, rgba(0, 161, 233, 1) 82%);
 }
-.parallelogram{
+
+.parallelogram {
   width: 20% !important;
   height: 400px !important;
-  
+
 }
+
 .button {
   float: right;
 }
+
 .footer {
   position: relative;
   display: flex;
@@ -301,7 +311,7 @@ img {
   display: flex;
 }
 
-.footer ul > li {
+.footer ul>li {
   padding: 0 10px;
 }
 </style>
