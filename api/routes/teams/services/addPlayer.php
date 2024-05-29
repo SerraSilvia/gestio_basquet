@@ -1,6 +1,6 @@
 <?php
 
-function updateTeam($conn, $id) {
+function addPlayer($conn, $id, $user_id, $player) {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $name = $data['name'];
@@ -15,7 +15,7 @@ function updateTeam($conn, $id) {
     $player4 = $data['player4'];
     $tournament_id = $data['tournament_id'];
 
-    $q = "UPDATE TEAMS SET name='$name', location_id='$location_id', category='$category', total_score='$total_score' , img='$img', captain='$captain', player1='$player1', player2='$player2', player3='$player3' , player4='$player4', tournament_id='$tournament_id' WHERE id='$id'";
+    $q = "UPDATE TEAMS SET $player='$user_id' WHERE id='$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) {
