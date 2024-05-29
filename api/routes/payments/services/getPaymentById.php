@@ -1,7 +1,7 @@
 <?php
 
 function getPaymentById($conn, $id) {
-    $q = "SELECT * FROM payments WHERE id = '$id'";
+    $q = "SELECT * FROM PAYMENTS WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     $payments = array();

@@ -1,8 +1,8 @@
 <template>
     <header>
        <IconMenu @click="toggleMenu"/>
-       <h1>ITBClub</h1>
-       <IconLogin @click="clickGoToLogin"/>
+       <h1><RouterLink to="/">ITBClub</RouterLink></h1>
+       <RouterLink to="/login"><IconLogin/></RouterLink>
     </header>
     <NavigationComponent v-show="visibleMenu" class="position-top" @toggle-menu="toggleMenu"></NavigationComponent>
 </template>
@@ -28,29 +28,28 @@ export default {
         toggleMenu() {
             if(this.visibleMenu) this.visibleMenu=false;
             else this.visibleMenu=true;
-        },
-        clickGoToLogin() {
-            console.log("click go to login");
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
 .position-top{
-    position: absolute;
-    top: 0;
+    top: 64px;
+    position: fixed;
 }
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background: rgb(244,93,69);
     background: linear-gradient(90deg, rgba(244,93,69,1) 0%, rgba(249,77,123,1) 100%);
     padding: 1em;
     display: flex;
     justify-content: space-between;
+    z-index: 10;
+    align-items: center;
 }
-h1{
-    color: white;
-    text-transform: uppercase;
-    font-size: 1.5em;
-}
+
 </style>

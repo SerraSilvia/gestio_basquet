@@ -1,7 +1,7 @@
 <?php 
 
 function getGameById($conn, $id) {
-    $q = "SELECT * FROM games WHERE id = '$id'";
+    $q = "SELECT * FROM GAMES WHERE id = '$id'";
     $result = mysqli_query($conn,$q);
 
     $games = array();

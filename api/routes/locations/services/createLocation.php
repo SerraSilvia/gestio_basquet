@@ -9,7 +9,7 @@ function createLocation($conn) {
     $updated_at = $data['updated_at'];
     $deleted_at = $data['deleted_at'];
 
-    $q = "INSERT INTO locations VALUES (DEFAULT, '$name', '$address', '$created_at', '$updated_at', '$deleted_at'";
+    $q = "INSERT INTO LOCATIONS VALUES (DEFAULT, '$name', '$address', '$created_at', '$updated_at', '$deleted_at'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

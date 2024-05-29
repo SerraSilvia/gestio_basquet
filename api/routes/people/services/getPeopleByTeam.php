@@ -1,7 +1,7 @@
 <?php
 
 function getPeopleByTeam($conn, $team_id) {
-    $q = "SELECT * FROM people WHERE team_id='$team_id'";
+    $q = "SELECT * FROM PEOPLE WHERE team_id='$team_id'";
     $result = mysqli_query($conn, $q);
 
     $peoples = array();

@@ -8,7 +8,7 @@ function createFacility($conn) {
     $facility_type = $data['facility_type'];
     $facility_status = $data['facility_status'];
 
-    $q = "INSERT INTO facilities VALUES (DEFAULT, '$location_id', '$name', '$facility_type', '$facility_status'";
+    $q = "INSERT INTO FACILITIES VALUES (DEFAULT, '$location_id', '$name', '$facility_type', '$facility_status'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

@@ -1,7 +1,7 @@
 <?php
 
 function deleteGame($conn, $id) {
-    $q = "DELETE FROM games WHERE id = '$id'";
+    $q = "DELETE FROM GAMES WHERE id = '$id'";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

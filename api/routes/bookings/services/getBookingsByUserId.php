@@ -1,7 +1,7 @@
 <?php
 
 function getBookingsByUserId($conn, $user_id) {
-    $q = "SELECT * FROM bookings WHERE person_id = '$user_id'";
+    $q = "SELECT * FROM BOOKINGS WHERE person_id = '$user_id'";
     $result = mysqli_query($conn, $q);
 
     $bookings = array();

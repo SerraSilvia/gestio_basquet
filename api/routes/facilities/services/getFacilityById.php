@@ -1,7 +1,7 @@
 <?php 
 
-function getFacilitiesById($conn, $id) {
-    $q = "SELECT * FROM facilities WHERE id = '$id'";
+function getFacilityById($conn, $id) {
+    $q = "SELECT * FROM FACILITIES WHERE id = '$id'";
     $result = mysqli_query($conn,$q);
 
     $facilities = array();

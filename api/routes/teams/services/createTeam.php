@@ -6,15 +6,12 @@ function createTeam($conn) {
     $name = $data['name'];
     $location_id = $data['location_id'];
     $category = $data['category'];
-    $total_score = $data['total_score'];
     $img = $data['img'];
     $captain = $data['captain'];
-    $player1 = $data['player1'];
-    $player2 = $data['player2'];
-    $player3 = $data['player3'];
-    $player4 = $data['player4'];
 
-    $q = "INSERT INTO teams VALUES (DEFAULT, '$name', '$location_id', '$category', '$total_score', '$img', '$captain', '$player1', '$player2', '$player3', '$player4'";
+    //INSERT INTO TEAMS (name, location_id, category, total_score, img, captain) VALUES ('name', 1, 'senior', 0, 'prueba.img', '220')
+
+    $q = "INSERT INTO TEAMS (name, location_id, category, total_score, img, captain ) VALUES ('$name', $location_id, '$category', 0 , '$img', $captain)";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

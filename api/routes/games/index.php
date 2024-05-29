@@ -1,5 +1,5 @@
 <?php
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/createGame.php';
 include './services/deleteGame.php';

@@ -1,6 +1,5 @@
 <?php
-
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getBookings.php';
 include './services/getBookingsByFacility.php';
@@ -13,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['facility']) && !iss
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['facility']) && !isset($_REQUEST['user_id'])) {
-    echo getValorationsByCompany($conn, $_REQUEST['facility']);
+    echo getBookingsByFacility($conn, $_REQUEST['facility']);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_REQUEST['facility']) && isset($_REQUEST['user_id'])) {
-    echo getAverageValorationByCompany($conn, $_REQUEST['user_id']);
+else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['facility']) && isset($_REQUEST['user_id'])) {
+    echo getBookingsByUserId($conn, $_REQUEST['user_id']);
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'POST') {

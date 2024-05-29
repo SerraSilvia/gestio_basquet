@@ -1,7 +1,7 @@
 <?php 
 
 function getBookings($conn) {
-    $q = "SELECT * FROM bookings";
+    $q = "SELECT * FROM BOOKINGS";
     $result = mysqli_query($conn,$q);
 
     $bookings = array();

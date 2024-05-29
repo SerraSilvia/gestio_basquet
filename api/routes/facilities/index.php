@@ -1,6 +1,6 @@
 <?php
 
-include '../db/connection.php';
+include '../../db/connection.php';
 
 include './services/getFacilities.php';
 include './services/getFacilityById.php';

@@ -1,7 +1,7 @@
 <?php
 
 function getTeamsByRangeOfPoints($conn, $minPoints, $maxPoints) {
-    $q = "SELECT * FROM teams WHERE total_score BETWEEN '$minPoints' AND '$maxPoints' ORDER BY total_score";
+    $q = "SELECT * FROM TEAMS WHERE total_score BETWEEN '$minPoints' AND '$maxPoints' ORDER BY total_score";
     $result = mysqli_query($conn, $q);
 
     $teams = array();

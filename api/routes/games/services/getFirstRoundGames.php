@@ -1,7 +1,7 @@
 <?php 
 
 function getFirstRoundGames($conn, $tournament_id) {
-    $q = "SELECT * FROM games WHERE tournament_id = '$tournament_id' AND tournament_position BETWEEN 1 AND 4";
+    $q = "SELECT * FROM GAMES WHERE tournament_id = '$tournament_id' AND tournament_position BETWEEN 1 AND 4";
 
     $result = mysqli_query($conn,$q);
 
