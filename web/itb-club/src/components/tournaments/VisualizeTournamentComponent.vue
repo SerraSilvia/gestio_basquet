@@ -4,23 +4,26 @@
       <h2>{{ tournamentSelected.name }}</h2>
       <div class="location">
         <IconLocation></IconLocation>
-        <p>{{ tournamentClub.name }}</p>
+        <p>{{ tournamentClub ? tournamentClub.name : 'Carregant..' }}</p>
       </div>
     </div>
-    <div class="estat">{{ status }}</div> <!-- Cambiar p por div -->
-    <div class="tournament-info">
-      <p>{{ tournamentSelected.date_start }}</p>
-      <p>{{ tournamentSelected.date_end }}</p>
+    <div class="tournament-info"> 
+      <p class="resaltat estat">{{ status }}</p>
+      <p class="resaltat">{{ tournamentSelected.date_start }} / {{ tournamentSelected.date_end }}</p>
     </div>
-    <div class="tournament-teams">
-      <!-- Teams information will be displayed here -->
+    <div v-if="teams.length > 0" class="tournament-teams">
+      <EquipComponent class="team-item" v-for="(team, index) in teams" :key="index" :team="team"></EquipComponent>
     </div>
+    <div v-else>
+      <p class="no-teams-message">No hi ha equips inscrits</p>
+    </div>
+    <button @click="addMyTeam" v-if="user.user_type=='captain' && teams.length<8 && status=='Inscripcions Obertes'">Incriure el meu equip</button>
   </div>
 </template>
 
-
 <script>
 import IconLocation from "../icons/IconLocation.vue";
+import EquipComponent from "../EquipComponent.vue";
 
 export default {
   name: "VisualizeTournamentComponent",
@@ -36,10 +39,12 @@ export default {
       tournamentClub: null,
       status: null,
       teams: [],
+      user:[]
     };
   },
   components: {
-    IconLocation
+    IconLocation,
+    EquipComponent
   },
   methods: {
     async getTournament() {
@@ -89,6 +94,12 @@ export default {
     }
   },
   mounted() {
+        const userData = JSON.parse(sessionStorage.getItem('userData'));
+        if (userData) {
+            this.user = userData;
+        } else {
+            this.$router.push({ path: '/login' });
+        }
     this.getTournament();
   }
 };
@@ -109,22 +120,40 @@ export default {
   color: black;
 }
 
-.estat {
-  background-color: rgba(249, 77, 123, 1);
+.resaltat {
   color: white;
   text-align: center;
   padding: 0.5em;
   margin: 1em 3em;
   text-transform: uppercase;
+}
+
+.estat {
+  background-color: rgba(249, 77, 123, 1);
   border-radius: 0.5em;
 }
-.display-flex{
+
+.display-flex {
   display: flex;
   justify-content: space-around;
 }
-.display-flex div{
+
+.display-flex div {
   padding: 2.25em;
   display: flex;
 }
-</style>
 
+.no-teams-message {
+  color: white;
+  text-align: center;
+  padding: 0.5em;
+  margin: 1em 3em;
+}
+.tournament-teams{
+  background-color: white;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+
+</style>
