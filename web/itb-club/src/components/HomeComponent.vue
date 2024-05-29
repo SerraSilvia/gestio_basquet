@@ -14,7 +14,7 @@
     <nav>
       <ul class="img-li">
         <li class="home-li">
-          <a href="../../facilitiesInfo.html">
+          <a href="../components/FacilitiesInfo.vue">
             <div class="parallelogram-img">
               <img src="../assets/instalacions.jpg" alt="instalacions" />
             </div>
