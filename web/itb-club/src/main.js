@@ -7,7 +7,7 @@ import './styles.css';
 
 import HomeComponent from './components/HomeComponent.vue';
 import AboutComponent from './components/AboutComponent.vue';
-import TornejosComponent from './components/TornejosComponent.vue';
+import ViewTournaments from './components/ViewTournaments.vue';
 import RankingsComponent from './components/RankingsComponent.vue';
 import ReservesComponent from './components/ReservesComponent.vue';
 import EquipsComponent from './components/EquipsComponent.vue';
@@ -33,7 +33,7 @@ import AdminComments from './components/AdminComments.vue';
 const routes = [
   { path: '/', component: HomeComponent },
   { path: '/about', component: AboutComponent },
-  { path: '/tornejos', component: TornejosComponent },
+  { path: '/tornejos', component: ViewTournaments },
   { path: '/rankings', component: RankingsComponent },
   { path: '/reserva', component: ReservesComponent },
   { path: '/equips', component: EquipsComponent },

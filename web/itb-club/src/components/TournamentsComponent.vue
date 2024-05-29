@@ -1,9 +1,9 @@
 <template>
-    <RouterLink :to="`/tornejos/${tournament.id}`">
+   <RouterLink :to="`/tornejos/${tournament.id}`">
         <div class="tournament-item">
             <h3>{{ tournament.name }}</h3>
-            <p>{{ club.name }}</p>
-            <p>{{ tournament.start_date }} / {{ tournament.end_date }}</p>
+            <p>{{ selectedTournamentClub.name }}</p>
+            <p>{{ tournament.date_start }} / {{ tournament.date_end }}</p>
         </div>
     </RouterLink>
 </template>
@@ -19,16 +19,16 @@ export default {
     },
     data() {
         return {
-            club: {}
+            selectedTournamentClub: {}
         };
     },
     methods: {
-        getClub() {
-            console.log(this.tournament.location_id);//TODO: esto siempre da barcelona(?)
+        getClubSelected() {
+            console.log("location del tournament:"+this.tournament.location_id);//TODO: esto siempre da barcelona(?)
             this.$axios.get(`locations/?id=` + this.tournament.location_id)
                 .then(response => {
-                    console.log("club: " + response.data[0]);
-                    this.club = response.data[0];
+                    this.selectedTournamentClub = response.data[0];
+                    console.log("nom del club seleccionat: "+ response.data[0].name)
                 })
                 .catch(error => {
                     console.error('Error al intentar obtener el club', error);
@@ -36,7 +36,7 @@ export default {
         }
     },
     mounted() {
-        this.getClub();
+        this.getClubSelected();
     }
 };
 </script>
@@ -51,5 +51,9 @@ export default {
 
 .tournament-item:hover {
     box-shadow: 0.15em 0.15em #f94d7b;
+}
+
+a:hover{
+    color: #f94d7b;
 }
 </style>
