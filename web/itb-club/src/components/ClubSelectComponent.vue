@@ -59,9 +59,9 @@ export default {
 }
 
 .city-name {
-    margin-top: 0.15em;
+    margin-top: 0.10em;
     position: absolute;
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 1.50em;
 }
 </style>

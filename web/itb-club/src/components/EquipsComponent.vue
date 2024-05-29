@@ -1,12 +1,13 @@
 <template>
-    <section>
+    <section class="club-select">
         <h2>Selecciona el club</h2>
-        <div>
+        <div id="crear-poligon"></div>
+        <div class=" club-poligon">
             <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
         </div>
     </section>
 
-    <section>
+    <section class="equips-a">
         <h2>Equips a {{ clubName }}</h2>
         <div>
             <EquipComponent class="team-item" v-for="(team, index) in teams" :key="index" :team="team" @selected-team="handleSelectedTeam"></EquipComponent>
@@ -83,4 +84,14 @@ section {
 a:hover{
     color: white;
 }
+.club-poligon{
+    margin-top: 150px;
+  }
+h2{
+    margin-top: 50px;
+}
+p{
+    padding-bottom: 60px
+}
+
 </style>
