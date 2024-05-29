@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import IconLocation from "./icons/IconLocation.vue";
+import IconLocation from "../icons/IconLocation.vue";
 export default {
   name: "VisualizeTournamentComponent",
   props: {

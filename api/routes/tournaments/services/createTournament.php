@@ -8,9 +8,9 @@ function createTournament($conn) {
     $date_end = $data['date_end'];
     $created_at = $data['created_at'];
     $updated_at = $data['updated_at'];
-    $deleted_at = $data['deleted_at'];
 
-    $q = "INSERT INTO TOURNAMENTS (location_id, name, date_start, date_end, created_at, updated_at, deleted_at) VALUES ($location_id, '$name', '$date_start', '$date_end', '$created_at', '$updated_at', '$deleted_at')";
+    $q = "INSERT INTO TOURNAMENTS (location_id, name, date_start, date_end, created_at, updated_at) VALUES ($location_id, '$name', '$date_start', '$date_end', '$created_at', '$updated_at')";
+    echo  $q;
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');
