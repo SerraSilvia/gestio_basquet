@@ -59,7 +59,7 @@
       <h2>Selecciona el tipo de reserva</h2>
       <div>
         <label for="reservationType">Tipo de Reserva:</label>
-        <select v-model="reservationType" @change="updateReservationLink">
+        <select v-model="reservationType" @change="updateReservationLink" class="reservation-type-select">
           <option value="class">Class</option>
           <option value="training">Training</option>
         </select>
@@ -71,8 +71,10 @@
     </p>
   </div>
   <div v-else>
-    <p>Por favor, inicia sesión para hacer una reserva.</p>
-    <RouterLink to="/login">Ir a la página de inicio de sesión</RouterLink>
+    <div class="card-info">
+      <p>Por favor, inicia sesión para hacer una reserva.</p>
+      <RouterLink to="/login" class="link">Ir a la página de inicio de sesión</RouterLink>
+    </div>
   </div>
 </template>
 
@@ -225,67 +227,83 @@ export default {
   padding-right: 1.5rem;
 }
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .button {
-    transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 section {
-    padding: 0 7.5%;
+  padding: 0 7.5%;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
 }
 
 th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .is-today {
-    background-color: #ffeb3b;
+  background-color: #ffeb3b;
 }
 
 .is-selected {
-    background-color: #2196f3;
-    color: white;
+  background-color: #2196f3;
+  color: white;
 }
 
 .is-weekend {
-    background-color: #ECE0BF; 
+  background-color: #ECE0BF; 
 }
 
 #weekend {
-    background-color: #C5B484; 
+  background-color: #C5B484; 
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 li {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin: 5px 0;
-    text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  text-align: center;
 }
 
 li.is-selected, .selected-facility {
-    background-color: #2196f3;
-    color: white;
+  background-color: #2196f3;
+  color: white;
+}
+
+.reservation-type-select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.3s ease;
+}
+
+.reservation-type-select:focus {
+  border-color: #2196f3;
+  outline: none;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <h2>Canvia les dades</h2>
+  <div id="crear-poligon"></div>
   <form class="form" @submit.prevent="validatorForm">
     <label for="name">Nom</label>
     <input type="text" id="name" name="name" v-model="modUser.name" />
@@ -14,21 +15,22 @@
     <label for="birthdate">Data de naixement</label>
     <input type="datetime-local" id="birthdate" name="birthdate" v-model="modUser.birthdate" required />
 
-    <label for="location">Club</label>
-    <select name="location" id="location" v-model="modUser.location">
-      <option value="Barcelona">Barcelona</option>
-      <option value="Terrassa">Terrassa</option>
-      <option value="Sabadell">Sabadell</option>
+    <label for="teams">Equip</label>
+    <select name="teams" id="teams" v-model="modUser.team_id">
+      <option v-for="team in teams" :key="team.id" :value="team.id">
+        {{ team.name }}
+      </option>
     </select>
-    <small v-if="errors.location" class="form-error">{{
-      errors.location
+    <small v-if="errors.team_id" class="form-error">{{
+      errors.team_id
     }}</small>
 
     <label for="category">Categoria</label>
-    <select name="category" id="category" v-model="modUser.category">
+    <select name="category" id="category" v-model="modUser.player_level">
       <option value="cadet">Cadet</option>
       <option value="junior">Junior</option>
       <option value="senior">Senior</option>
+      <option value="professional">Professional</option>
     </select>
     <small v-if="errors.category" class="form-error">{{
       errors.category
@@ -37,6 +39,18 @@
     <label for="mail">Email</label>
     <input type="email" id="mail" name="mail" v-model="modUser.email" />
     <small v-if="errors.email" class="form-error">{{ errors.email }}</small>
+
+    <label for="avatar">Avatar</label>
+    <select name="avatar" id="avatar" v-model="modUser.profile_img">
+      <option value="avatar_default.png">Default</option>
+      <option value="avatar1.png">Avatar 1</option>
+      <option value="avatar2.png">Avatar 2</option>
+      <option value="avatar3.png">Avatar 3</option>
+      <option value="avatar4.png">Avatar 4</option>
+      <option value="avatar5.png">Avatar 5</option>
+      <option value="avatar6.png">Avatar 6</option>
+      <option value="avatarAdmin.png">Avatar Admin</option>
+    </select>
 
     <label for="password">Contrasenya</label>
     <input type="password" id="password" name="password" v-model="modUser.password" />
@@ -65,6 +79,7 @@ export default {
   },
   data() {
     return {
+      teams: [],
       user: [],
       errors: {},
       modUser: {
@@ -76,6 +91,7 @@ export default {
         user_type: "player", 
         player_level: "", 
         team_id: null,
+        profile_img: null
       },
     }
   },
@@ -91,8 +107,8 @@ export default {
         return;
       }
 
-      if (!Validators.required(this.modUser.location)) {
-        this.errors.location = "La ubicación es obligatoria.";
+      if (!Validators.required(this.modUser.team_id)) {
+        this.errors.team_id = "La ubicación es obligatoria.";
         return;
       }
 
@@ -119,7 +135,7 @@ export default {
     },
     modifyUser() {
       console.log("Se intenta modificar el usuario");
-      this.$axios.put('people/' + this.modUser)
+      this.$axios.put('people/?id=' + this.modUser.id, this.modUser)
         .then(response => {
           console.log("response: "+response.data);
         })
@@ -131,14 +147,26 @@ export default {
      
       this.$axios.get('people/?id=' + this.id)
         .then(response => {
-          console.log("old data: "+response.data[0]);
-          this.oldUser=response.data[0];
-          this.modUser.id=this.oldUser;
+          console.log("old data: ", response.data[0]);
+          this.oldUser = response.data[0];
+          this.modUser = this.oldUser;
+
+          this.modUser.password = "";
         })
         .catch(error => {
           console.error('Error al intentar obtener el usuario', error);
         });
 
+    },
+    getTeams() {
+      this.$axios.get(`teams/`)
+          .then(response => {
+            this.teams = response.data;
+            console.log(this.teams);
+          })
+          .catch(error => {
+            console.error('Error al intentar obtener los equipos', error);
+          });
     }
   },
   mounted() {
@@ -149,6 +177,7 @@ export default {
         console.log("no cumple las condiciones");
         this.$router.push({ path: '/' });
       }
+      this.getTeams();
       this.getOldData();
     } else {
       this.$router.push({ path: '/' });
