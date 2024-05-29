@@ -66,6 +66,7 @@ export default {
           this.message = 'Reserva confirmada con éxito!';
           this.messageClass = 'success-message';
           console.log('Reserva confirmada:', response.data);
+          this.$router.push('/usuari'); // Redirigir a /usuari después de la reserva exitosa
         })
         .catch(error => {
           this.message = 'Error al confirmar la reserva.';
