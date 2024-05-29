@@ -1,7 +1,8 @@
 <template>
     <section>
       <h2>Selecciona el club</h2>
-      <div>
+      <div class="title-poligon"></div>
+      <div class="club-poligon">
         <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
       </div>
     </section>
@@ -98,5 +99,15 @@
     font-weight: bold;
     color: #f45a45;
   }
+
+  .club-poligon{
+    margin-top: 150px;
+  }
+  h2{
+    font-size: 30px;
+    padding-top: 5px ;
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
   </style>
   

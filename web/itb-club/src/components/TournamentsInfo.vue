@@ -111,7 +111,7 @@ name: 'TournamentsInfo'
   
   .tournaments-ul img {
     width: 100%;
-    height: 400px;
+    height: 600px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
