@@ -7,9 +7,9 @@
   </section>
 
   <section id="teams-section">
-    <h2 v-if="thisClub">Tornejos de {{ thisClub.name }}</h2>
+    <h2 v-if="selectedClub">Tornejos de {{ selectedClub.name }}</h2>
     <h2 v-else>Selecciona un club per veure els tornejos</h2>
-    <TournamentsComponent v-for="(tournament, index) in tournaments" :key="tournament" :tournament="tournament"></TournamentsComponent>
+    <TournamentsComponent v-for="(tournament, index) in tournaments" :key="tournament.id" :tournament="tournament"></TournamentsComponent>
   </section>
 </template>
 
@@ -18,10 +18,10 @@ import TournamentsComponent from './TournamentsComponent.vue';
 import ClubSelectComponent from './ClubSelectComponent.vue';
 
 export default {
-  name: 'ViewTournamentss',
+  name: 'ViewTournaments',
   data() {
     return {
-      thisClub: null,
+      selectedClub: null,
       tournaments: [],
       club_id: null,
     };
@@ -36,7 +36,7 @@ export default {
       this.getTournaments();
       this.$axios.get('locations/?id=' + selectedClub)
         .then(response => {
-          this.thisClub = response.data[0];
+          this.selectedClub = response.data[0];
         })
         .catch(error => {
           console.error('Error al intentar obtener el club', error);

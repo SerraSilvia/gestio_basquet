@@ -1,13 +1,13 @@
 <template>
-  <div v-if="tournament" class="container">
-    <h2>{{ tournament.name }}</h2>
+  <div v-if="tournamentSelected" class="container">
+    <h2>{{ tournamentSelected.name }}</h2>
     <div class="tournament-info">
       <div class="location">
              <IconLocation></IconLocation>
-            <p>{{ club.name }}</p>
+            <p>{{ tournamentClub.name }}</p>
       </div>
-      <p>{{ tournament.date_start }}</p>
-      <p>{{ tournament.date_end }}</p>
+      <p>{{ tournamentSelected.date_start }}</p>
+      <p>{{ tournamentSelected.date_end }}</p>
     </div>
     <div class="tournament-status">
       {{ status }}
@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      tournament: [],
-      club: [],
+      tournamentSelected: [],
+      tournamentClub: [],
       status:'null',
       teams:[]
     };
@@ -52,9 +52,11 @@ export default {
         });
     },
     getClub() {
-      this.$axios.get(`locations/?id=` + this.tournament.location_id)
+      console.log("tournament.loctions_id: "+ this.tournamentSelected.location_id);
+      this.$axios.get(`locations/?id=` + this.tournamentSelected.location_id)
         .then(response => {
-          this.club = response.data[0];
+          console.log("club: "+ response.data[0].name)
+          this.tournamentClub = response.data[0];
         })
         .catch(error => {
           console.error('Error al intentar obtener el club', error);
