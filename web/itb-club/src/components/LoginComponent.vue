@@ -90,6 +90,7 @@ export default {
         mail: this.logedUser.email,
         team_id: this.logedUser.team_id,
         birthday: this.logedUser.birthday,
+        profile_img: this.logedUser.profile_img
       };
       sessionStorage.setItem("userData", JSON.stringify(userData));
       console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));

@@ -1,6 +1,6 @@
 <template>
-    <RouterLink v-if="loged" :to="`/equips/${team.id}`">
-      <section class="team">
+    <RouterLink v-if="loged" :to="`/equips/${team ? team.id: ''}`">
+      <section class="team" v-if="team">
         <div class="img-container">
           <img :src="team.img" alt="">
         </div>

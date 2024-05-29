@@ -1,8 +1,12 @@
 <template>
   <div id="user-manager-page">
-    <div>
-      <img :src="user ? user.img : ''" alt="user_img">
+    <div class="header-user">
+      <div v-if="user" class="avatar-content">
+        <img :src="user.img ? user.img : defaultAvatar" alt="user_img">
+      </div>
+
       <h2>Hola, {{ user ? user.name : 'Usuari' }}</h2>
+      <div id="crear-poligon"></div>
     </div>
     
     <div class="user-manager-container">
@@ -21,10 +25,10 @@
 
       <section v-if="user && user.user_type === 'player'">
         <h3>El teu equip</h3>
-        <p v-if="user.team_id != null">
+        <p v-if="user.team_id && team">
           <EquipComponent class="center-container team-item" :team="team"></EquipComponent>
         </p>
-        <p v-else>Sembla que no tens equip :(</p>
+        <p v-else>Sembla que no tens equip</p>
       </section>
 
       <section v-if="user && user.user_type === 'player' && payments.length > 0">
@@ -51,6 +55,8 @@ import EquipComponent from './EquipComponent.vue';
 import ReservaItemComponent from './ReservaItemComponent.vue';
 import PaymentComponent from './PaymentComponent.vue';
 import CommentComponent from './CommentComponent.vue';
+
+import defaultAvatar from '@/assets/images/avatar_default.png';
 
 export default {
   name: 'UsuariComponent',
@@ -134,6 +140,11 @@ export default {
       }
     }
   },
+  computed: {
+    defaultAvatar() {
+      return defaultAvatar;
+    }
+  },
   mounted() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     if (userData) {
@@ -192,5 +203,11 @@ export default {
 
 #user-info p {
   padding: 0.5em;
+}
+.header-user {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 10px;
 }
 </style>

@@ -12,8 +12,9 @@ function updatePeople($conn) {
     $user_type = $data['user_type'];
     $player_level = $data['player_level'];
     $team_id = $data['team_id'];
+    $profile_img = $data['profile_img'];
 
-    $q = "UPDATE PEOPLE SET name='$name', surnames='$surnames', email='$email' , password='$password', birthdate='$birthdate', user_type='$user_type', player_level='$player_level', team_id=$team_id WHERE id=$id";
+    $q = "UPDATE PEOPLE SET name='$name', surnames='$surnames', email='$email' , password='$password', birthdate='$birthdate', user_type='$user_type', player_level='$player_level', team_id=$team_id, profile_img=$profile_img WHERE id=$id";
     $result = mysqli_query($conn, $q);
 
     if ($result) {

@@ -114,3 +114,15 @@ main {
 .card-info .link {
   font-size: 2rem;
 }
+.avatar-content {
+  height: 150px;
+  width: 150px;
+  border-radius: 50% 50%;
+  position: relative;
+  overflow: hidden
+}
+.avatar-content > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
