@@ -86,7 +86,7 @@
 
   <div class="leaders">
     <div class="leaders-info">
-      <h4>Líders en competir</h4>
+      <h5>Líders en competir</h5>
       <p>
         Al nostre club esportiu, ens enorgullim de ser líders en la competència.
         Organitzem tornejos de primer nivell i oferim programes de formació per
@@ -112,7 +112,7 @@
         en línia o posa't en contacte amb nosaltres. No deixis escapar
         l'oportunitat de practicar a les nostres instal·lacions!
       </p>
-      <button>reserva</button>
+      <button class="booking-button">reserva</button>
     </div>
   </div>
 
@@ -145,6 +145,13 @@ h4 {
   padding-left: 50px;
 }
 
+h5 {
+  font-size: 30px;
+}
+ p {
+  font-size: 22px;
+  margin-top: 40px;
+ }
 .home-header {
   width: 100%;
   height: 300px;
@@ -266,6 +273,7 @@ img {
   padding-top: 20px;
   display: flex;
   justify-content: space-around;
+  margin-top: 25px;
 }
 
 .booking {
@@ -282,6 +290,9 @@ img {
   background: #00a1e9;
   margin: 1em;
   position: relative;
+  width: 20%;
+  height: 350px;
+  margin-top: -20px;
 }
 
 .parallelogram:hover {
@@ -289,14 +300,9 @@ img {
   background: linear-gradient(16deg, rgba(249, 77, 123, 1) 0%, rgba(0, 161, 233, 1) 82%);
 }
 
-.parallelogram {
-  width: 20% !important;
-  height: 400px !important;
-
-}
-
-.button {
+.booking-button {
   float: right;
+  margin-top: 40px;
 }
 
 .footer {
@@ -304,6 +310,8 @@ img {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .footer ul {
