@@ -1,6 +1,7 @@
 :root {
   --primary-color: rgba(249, 77, 123, 1);
   --secondary-color: #00a1e9;
+  --third-color: #1e1b18;
   --color-quarter: #4fccc1;
 }
 /* GENERAL STYLES */
@@ -98,4 +99,18 @@ button:hover,
 }
 main {
   margin-top: 64px;
+}
+.card-info {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--third-color);
+  width: 100%;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card-info .link {
+  font-size: 2rem;
 }

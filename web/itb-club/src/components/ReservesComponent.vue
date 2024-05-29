@@ -71,8 +71,10 @@
     </p>
   </div>
   <div v-else>
-    <p>Por favor, inicia sesión para hacer una reserva.</p>
-    <RouterLink to="/login">Ir a la página de inicio de sesión</RouterLink>
+    <div class="card-info">
+      <p>Por favor, inicia sesión para hacer una reserva.</p>
+      <RouterLink to="/login" class="link">Ir a la página de inicio de sesión</RouterLink>
+    </div>
   </div>
 </template>
 
