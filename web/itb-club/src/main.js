@@ -12,6 +12,7 @@ import RankingsComponent from './components/RankingsComponent.vue';
 import ReservesComponent from './components/ReservesComponent.vue';
 import EquipsComponent from './components/EquipsComponent.vue';
 import UsuariComponent from './components/UsuariComponent.vue';
+
 import CrearEquipComponent from './components/CrearEquipComponent.vue';
 import VisualizeEquipComponent from './components/VisualizeEquipComponent.vue';
 import VisualizeTournamentComponent from './components/VisualizeTournamentComponent.vue';
@@ -25,7 +26,7 @@ import FacilitiesInfo from './components/FacilitiesInfo.vue';
 import ClubsInfo from './components/ClubsInfo.vue';
 import CreateNewUser from './components/CreateNewUser.vue';
 import AdminComments from './components/AdminComments.vue';
-
+import TournamentsInfo from './components/TournamentsInfo.vue';
 
 
 
@@ -75,6 +76,9 @@ const routes = [
 },{
   path: '/info-clubs',
   component: ClubsInfo
+},{
+  path: '/info-tornejos',
+  component: TournamentsInfo
 },{
   path: '/administrar/comments/:id',
   component: AdminComments,
