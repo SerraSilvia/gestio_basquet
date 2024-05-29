@@ -10,6 +10,7 @@ include './services/getTeamsByRangeOfPoints.php';
 include './services/getTeamsByTournamentId.php';
 include './services/createTeam.php';
 include './services/updateTeam.php';
+include './services/addPlayer.php';
 include './services/deleteTeam.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['location_id']) && !isset($_REQUEST['total_score']) && !isset($_REQUEST['minPoints']) && !isset($_REQUEST['maxPoints']) && !isset($_REQUEST['tournament_id'])) {
@@ -40,8 +41,12 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo createTeam($conn);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id'])) {
+else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id'])) && !isset($_REQUEST['user_id']) && !isset($_REQUEST['player']) {
     echo updateTeam($conn, $_REQUEST['id']);    
+}
+
+else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id'])) && isset($_REQUEST['user_id']) && isset($_REQUEST['player']) {
+    echo addPlayer($conn, $_REQUEST['id']);    
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_REQUEST['id'])) {
