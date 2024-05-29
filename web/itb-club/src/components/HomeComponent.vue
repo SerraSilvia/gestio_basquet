@@ -28,12 +28,12 @@
         </li>
 
         <li class="home-li">
-          <a href="../rutaClubs">
+          <RouterLink to="/info-clubs">
             <div class="parallelogram-img">
               <img src="../assets/clubs.jpg" alt="clubs" />
             </div>
             <h3>Clubs</h3>
-          </a>
+          </RouterLink>
         </li>
         <li class="home-li">
           <a href="../rutaTornejos">
