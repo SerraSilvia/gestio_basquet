@@ -7,19 +7,17 @@
         <p>{{ tournamentClub.name }}</p>
       </div>
     </div>
-    <p class="estat">{{ status }}</p>
-
+    <div class="estat">{{ status }}</div> <!-- Cambiar p por div -->
     <div class="tournament-info">
-      
       <p>{{ tournamentSelected.date_start }}</p>
       <p>{{ tournamentSelected.date_end }}</p>
     </div>
-
     <div class="tournament-teams">
       <!-- Teams information will be displayed here -->
     </div>
   </div>
 </template>
+
 
 <script>
 import IconLocation from "../icons/IconLocation.vue";
