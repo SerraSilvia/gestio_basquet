@@ -27,9 +27,9 @@
 
     <label for="category">Categoria</label>
     <select name="category" id="category" v-model="modUser.player_level">
-      <option value="cadet">Cadet</option>
+      <option value="youth">Cadet</option>
       <option value="junior">Junior</option>
-      <option value="senior">Senior</option>
+      <option value="semi-professional">Semi-Professional</option>
       <option value="professional">Professional</option>
     </select>
     <small v-if="errors.category" class="form-error">{{
@@ -112,8 +112,8 @@ export default {
         return;
       }
 
-      if (!Validators.required(this.modUser.category)) {
-        this.errors.category = "La categoría es obligatoria.";
+      if (!Validators.required(this.modUser.player_level)) {
+        this.errors.player_level = "La categoría es obligatoria.";
         return;
       }
 
