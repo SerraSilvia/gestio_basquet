@@ -23,8 +23,6 @@
           </RouterLink>
         </li>
 
-
-
         </li>
 
         <li class="home-li">
@@ -35,13 +33,14 @@
             <h3>Clubs</h3>
           </RouterLink>
         </li>
+
         <li class="home-li">
-          <a href="../rutaTornejos">
+          <RouterLink to="/info-tornejos">
             <div class="parallelogram-img">
               <img src="../assets/tornejos.jpg" alt="tornejos" />
             </div>
             <h3>Tornejos</h3>
-          </a>
+          </RouterLink>
         </li>
       </ul>
     </nav>
