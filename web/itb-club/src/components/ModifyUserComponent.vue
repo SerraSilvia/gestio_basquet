@@ -138,6 +138,8 @@ export default {
       this.$axios.put('people/?id=' + this.modUser.id, this.modUser)
         .then(response => {
           console.log("response: "+response.data);
+          /* Aqui llamarias a una funcion para mostrar un snackbar/toast  con el mensaje de la API */
+          /* https://www.w3schools.com/howto/howto_js_snackbar.asp */
         })
         .catch(error => {
           console.error('Error al intentar obtener las reservas', error);
