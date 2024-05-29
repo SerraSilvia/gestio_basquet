@@ -5,7 +5,9 @@
       <ClubSelectComponent @selected-club="handleSelectedClub"></ClubSelectComponent>
     </div>
   </section>
-
+  <div>
+    <button @click="createTournament" v-if="user.user_type=='admin'">Crear torneig</button>
+  </div>
   <section id="teams-section">
     <h2 v-if="selectedClub">Tornejos de {{ selectedClub.name }}</h2>
     <h2 v-else>Selecciona un club per veure els tornejos</h2>
@@ -24,6 +26,7 @@ export default {
       selectedClub: null,
       tournaments: [],
       club_id: null,
+      user:{}
     };
   },
   components: {
@@ -50,6 +53,18 @@ export default {
         .catch(error => {
           console.error('Error al intentar obtener los torneos', error);
         });
+    }, 
+    createTournament(){
+      this.$router.push({ path: '/tornejos/crear' });
+
+    }
+  }, 
+  mounted(){
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (userData) {
+      this.user = userData;
+    } else {
+      this.$router.push({ path: '/' });
     }
   }
 };
