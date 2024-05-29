@@ -8,9 +8,9 @@ function createGame($conn) {
     $team2_id = $data['team2_id'];
     $score_t1 = $data['score_t1'];
     $score_t2 = $data['score_t2'];
-    $tourtament_position = $data['tourtament_position'];
+    $tourtament_position = $data['tournament_position'];
 
-    $q = "INSERT INTO GAMES VALUES (DEFAULT, '$id_booking', '$tournament_id', '$team1_id', '$team2_id', '$score_t1', '$score_t2', '$tourtament_position')";
+    $q = "INSERT INTO GAMES (id_booking, tournament_id, team1_id, team2_id, score_t1, score_t2, tournament_position) VALUES ($id_booking, $tournament_id, $team1_id, $team2_id, $score_t1, $score_t2, $tourtament_position)";
     $result = mysqli_query($conn, $q);
 
     if ($result) $res = array('status' => 'success');

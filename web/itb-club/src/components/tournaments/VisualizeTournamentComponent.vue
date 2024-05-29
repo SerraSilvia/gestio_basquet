@@ -18,6 +18,11 @@
       <p class="no-teams-message">No hi ha equips inscrits</p>
     </div>
     <button @click="addMyTeam" v-if="user.user_type=='captain' && teams.length<8 && status=='Inscripcions Obertes'">Incriure el meu equip</button>
+      <button @click="createGames" v-if="user_user_type='admin'">Crear partits</button>
+  </div>
+  <div v-if="tournamentSelected && games.length>0">
+    <h2>Partits</h2>
+
   </div>
 </template>
 
@@ -39,7 +44,9 @@ export default {
       tournamentClub: null,
       status: null,
       teams: [],
-      user:[]
+      user:[], 
+      maxRound:0,
+      games:[],
     };
   },
   components: {
@@ -90,6 +97,38 @@ export default {
         this.teams = response.data;
       } catch (error) {
         console.error('Error al intentar obtener los equipos del club', error);
+      }
+    }, 
+    async addMyTeam() {//TODO: esto falta probarlo
+      console.log("añadiendo equipo al torneo");
+      try {
+        const response = await this.$axios.get(`teams/?id=` + this.user.team_id);
+        const updateTeam = response.data[0];
+        updateTeam.tournament_id = this.tournamentSelected.id;
+        await this.$axios.put(`teams/?id=${updateTeam.id}`, updateTeam);
+        await this.getTeams();
+        this.getStatus();
+      } catch (error) {
+        console.error('Error al intentar modificar el equipo', error);
+      }
+    }, 
+    async createGames(){
+      try {
+        const response = await this.$axios.get(`games/?tournament_id=` + this.tournamentSelected.id);
+        this.games=response;
+        this.round=this.games.length;
+      }catch(error){
+        console.error('Error al obtener los partidos del torneo');
+      }
+      console.log("se crean los juegos");
+      if(this.maxRound<4){
+        console.log("primera ronda");
+        
+
+      }else if(this.maxRound<6){
+        console.log("segunda ronda");
+      }else{
+        console.log("tercera ronda")
       }
     }
   },
