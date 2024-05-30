@@ -32,35 +32,48 @@ export default {
       team2: {},
       winner: '',
       user: null,
-      updatedGame:[] 
+      updatedTeam: {} // Cambiado a updatedTeam
     };
   },
   methods: {
     async clickTeam1() {
       this.$emit("selected-winner", [1, this.game.team1_id, this.game.tournament_position]);
       this.displayButtons = false;
-      window.location.reload();
 
-      // Hacer update de la puntuación del juego
+      this.game.score_t1 = 15;
+      this.game.score_t2 = 12;
+      await this.updateGameAndPoints(this.game.team1_id, this.updatedTeam); // Cambiado a updatedTeam
     },
     async clickTeam2() {
       this.$emit("selected-winner", [2, this.game.team2_id, this.game.tournament_position]);
       this.displayButtons = false;
-      window.location.reload();
 
-      // Hacer update de la puntuación del juego
+      this.game.score_t2 = 21;
+      this.game.score_t1 = 18;
+      await this.updateGameAndPoints(this.game.team2_id, this.updatedTeam); // Cambiado a updatedTeam
+    },
+    async updateGameAndPoints(id, team) {
+      try {
+        const newPoints = parseInt(team.total_score , 10)+10;
+        team.total_score = newPoints;
+        console.log("datos actualizados de equipo:", team);
+        await this.$axios.put("teams/?id=" + id, team);
+
+        await this.$axios.put(`game/?id=${this.game.id}`, this.game);
+      } catch (error) {
+        console.error('Error al intentar modificar el partido y los puntos del equipo:', error);
+      }
     },
     async getTeamsInfo() {
       try {
-        // Obtener información del equipo 1
+        // información del equipo 1
         const response1 = await this.$axios.get(`teams/?id=${this.game.team1_id}`);
         this.team1 = response1.data[0];
-        
-        // Obtener información del equipo 2
+
+        //  información del equipo 2
         const response2 = await this.$axios.get(`teams/?id=${this.game.team2_id}`);
         this.team2 = response2.data[0];
 
-        // Verificar si se muestran los botones o se determina al ganador
         if (this.game.score_t1 === 0 && this.game.score_t2 === 0 && this.user && this.user.user_type === "admin") {
           this.displayButtons = true;
         } else {
@@ -71,19 +84,19 @@ export default {
       }
     },
     getWinner() {
-      if (this.game.score_t1 === this.game.score_t2) {
-        // Si el puntaje es el mismo, el ganador será el equipo 1
-        this.winner = this.team1.name;
-      } else {
-        // De lo contrario, determinar el ganador basado en los puntajes
-        this.winner = this.game.score_t1 > this.game.score_t2 ? this.team1.name : this.team2.name;
+      if (this.game.score_t1 !== 0) {
+        if (this.game.score_t1 === this.game.score_t2) {
+          this.winner = this.team1.name;
+        } else {
+          this.winner = this.game.score_t1 > this.game.score_t2 ? this.team1.name : this.team2.name;
+        }
       }
     }
   },
   async mounted() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     this.user = userData;
-    if (userData && userData.user_type == "admin") {
+    if (userData && userData.user_type === "admin") {
       this.displayButtons = true;
     }
     await this.getTeamsInfo();
