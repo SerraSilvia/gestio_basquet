@@ -3,7 +3,7 @@
     <section>
       <h2>Informació d'equip</h2>
       <div class="info-equip">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="" />
+        <img :src="teamImageSrc" alt="team_img" />
         <h3 class="team-name-big">{{ team ? team.name : '' }}</h3>
         <div class="location">
           <IconLocation></IconLocation>
@@ -40,6 +40,10 @@ import IconLocation from "./icons/IconLocation.vue";
 import JugadorComponent from "./JugadorComponent.vue";
 import axios from 'axios';
 
+import defaultImage from '@/assets/images/team1.png'; 
+
+const images = import.meta.glob('@/assets/images/*', { eager: true });
+
 export default {
   name: "VisualizeEquipComponent",
   props: {
@@ -67,6 +71,17 @@ export default {
   computed: {
     canJoinTeam() {
       return this.loged && this.isPlayer && !this.hasTeam && this.playerIDs.length < 5;
+    },
+    teamImageSrc() {
+      if (this.team && this.team.img) {
+        const imagePath = `@/assets/images/${this.team.img}`;
+        const image = Object.keys(images).find(img => img.includes(this.team.img));
+        return image ? images[image].default : defaultImage;
+      }
+      return defaultImage;
+    },
+    defaultImage() {
+      return defaultImage;
     }
   },
   methods: {
