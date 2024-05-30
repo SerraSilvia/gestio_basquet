@@ -16,6 +16,7 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 >![Foto de la home de l'aplicació](web/itb-club/src/assets/images/capt-home.png)
 ### Informació general:
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-about.png)
+
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-about2.png)
 - Instal·lacions:
   
@@ -53,8 +54,6 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Gestionar equips.
 - Veure i modificar el rànquing.
 
-### Equips
-- Els equips estan formats per jugadors i un capità (usuari que ha creat l’equip).
 
 ## Funcionalitats Principals:
 
@@ -72,10 +71,20 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Llistat de jugadors segons puntuació.
 - Rànquing calculat segons resultats en tornejos.
 
->![Fotos d'informació](web/itb-club/src/assets/images/capt-login.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-login.png
+
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-updateProfile.png)
+
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-profileUpdated.png)
->![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsTypes.png)
+
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsInfo.png)
+
+- Apuntar-se a equips:
+
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-teamps.JPG)
+
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-teamps.png)
+
 
 ### Tornejos
 - Alta de tornejos.
@@ -83,11 +92,6 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Classificació dels equips dins del torneig.
 
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsInfo.png)
-
-### Partits
-- Alta de partits.
-- Tipus de partits: amistós i de torneig.
-
 
 ### Consultar el Rànquing
 - Estadístiques de cada equip (punts a favor, punts en contra, victòries/derrotes).
@@ -99,6 +103,9 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Fitxa del jugador amb comentaris.
 - Reservar classe particular.
 - Reservar pista per les classes.
+  
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-training.JPG)
+
 
 ## Estructura de la Base de Dades
 
@@ -114,20 +121,26 @@ La base de dades està estructurada per donar suport a les funcionalitats mencio
 8. **Pagaments**: Pagaments de les reserves.
 9. **Seus**: Localització de les seus de l'ITB club.
 
-## Instal·lació i Configuració
+
+## Instal·lació i Configuració <a name="installation"></a>
 
 1. Cloneu el repositori:
-   ```sh
    git clone <https://github.com/SerraSilvia/gestio_basquet.git>
 
-   A little intro about the installation. 
-```
-$ git clone https://example.com
-$ cd ../path/to/the/file
-$ npm install
-$ npm start
+2. Instal·lar vite en extensió Visual Studio Code.
 
-# Technologies
+3. Instal·lar nodejs: https://nodejs.org/en
+
+4. Instal·lar xampp: https://www.apachefriends.org/es/download.html
+
+5. Dins de la carpeta xampp en htdocs enganxarem el repositori clonat
+
+En la terminal:
+npm install vite --save -dev
+npm run dev
+obrir:  http://localhost:5173/
+
+# Technologies <a name="technologies"></a>
 ***
 A list of technologies used within the project:
 * [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
@@ -138,12 +151,8 @@ A list of technologies used within the project:
 * [Docker](https://docs.docker.com/)
 * [AWS](https://docs.aws.amazon.com/es_es/)
 
-## Collaboration
+## Col·laboradors: <a name="collaboration"></a>
 ***
-
-## Collaboration
-***
-Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
+> Anna Cano 
+> Oscar Serrano
+> Silvia Serra
