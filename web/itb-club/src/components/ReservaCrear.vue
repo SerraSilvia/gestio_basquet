@@ -61,7 +61,7 @@ export default {
         reservation_type: this.reservation_type,
       };
       console.log('Datos enviados a la API:', bookingData);
-      axios.post('bookings/', bookingData)
+      this.$axios.post('bookings/', bookingData)
         .then(response => {
           this.message = 'Reserva confirmada con éxito!';
           this.messageClass = 'success-message';
