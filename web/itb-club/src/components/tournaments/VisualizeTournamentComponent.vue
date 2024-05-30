@@ -141,7 +141,7 @@ export default {
         // this.gameInsert(this.getWinner(2), this.getWinner(3), 5);
       } else {
         console.log("tercera ronda");
-        this.gameInsert(this.getWinner(4), this.getWinner(5), 6);
+        //this.gameInsert(this.getWinner(4), this.getWinner(5), 6);
       }
     },
     async gameInsert(team1, team2, gamePos) {
