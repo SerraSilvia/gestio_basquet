@@ -43,10 +43,10 @@ export default {
     validatorForm() {
 
       if (!Validators.required(this.user.email)) {
-        this.errors.email = "El correo electrónico es obligatorio.";
+        this.errors.email = "El correo electronic es obligatori.";
         return;
       } else if (!Validators.email(this.user.email)) {
-        this.errors.email = "El correo electrónico debe ser válido.";
+        this.errors.email = "El correo electronic ha de ser valid.";
         return;
       }
 
@@ -58,12 +58,11 @@ export default {
       this.doLogin();
     },
     doLogin() {
-      console.log("Iniciando sesion...");
       this.$axios.post('auth/login/', this.user)
         .then(response => {
           console.log(response);
           if (response.data.id != undefined) {
-            console.log("Usuario ha sido logado:", response.data);
+            console.log("Usuari logat:", response.data);
             this.logedUser = response.data;
             this.saveSession();
             this.clearForm();
@@ -93,7 +92,7 @@ export default {
         profile_img: this.logedUser.profile_img
       };
       sessionStorage.setItem("userData", JSON.stringify(userData));
-      console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));
+      console.log("SessionStorage", sessionStorage.getItem("userData"));
       this.$router.push({ path: '/usuari' });
 
     },

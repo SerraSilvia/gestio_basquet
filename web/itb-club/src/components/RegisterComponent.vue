@@ -7,7 +7,7 @@
       <input type="text" id="name" name="name" v-model="newUser.name" />
       <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
 
-      <label for="surnames">Surnames</label>
+      <label for="surnames">Cognoms</label>
       <input type="text" id="surnames" name="surnames" v-model="newUser.surnames" />
       <small v-if="errors.surnames" class="form-error">{{ errors.surnames }}</small>
 
@@ -44,7 +44,7 @@
 
       <input class="button" type="submit" />
       <div>
-        Tens una compta? <RouterLink to="/login" class="link">Logar-se</RouterLink>
+        Tens un compte? <RouterLink to="/login" class="link">Logar-se</RouterLink>
       </div>
     </form>
   </section>

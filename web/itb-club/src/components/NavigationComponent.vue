@@ -10,7 +10,7 @@
                     <li><RouterLink @click="handleToggleMenu" to="/reserva">Reserva</RouterLink></li>
                     <li><RouterLink @click="handleToggleMenu" to="/equips">Equips</RouterLink></li>
                     <li><RouterLink @click="handleToggleMenu" to="/usuari">Usuari</RouterLink></li>
-                <li><RouterLink @click="handleToggleMenu" to="/administrar">Administrar</RouterLink></li>
+                <li v-if="user.user_type=='admin'"><RouterLink @click="handleToggleMenu" to="/administrar">Administrar</RouterLink></li>
 
                 </ul>
             </nav> 
@@ -26,12 +26,24 @@ export default {
     components: {
         IconMenu
     },
+    data(){
+        return {
+            user:[]
+        }
+    },
     methods:{
         handleToggleMenu(){
             this.$emit('toggle-menu');
 
         }
+    }, 
+    mounted() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (userData) {
+        this.user = userData;
     }
+}
+
 };
 </script>
 
