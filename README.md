@@ -1,9 +1,9 @@
 # Club Esportiu ITB Club - README
 
-## Table of Contents
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
+## Taula de continguts:
+1. [Informació General](#general-info)
+2. [Tecnologies](#technologies)
+3. [Instal·lació](#installation)
 4. [Autors](#collaboration)
 ## Descripció del Projecte <a name="general-info"></a>
 
@@ -13,9 +13,9 @@ equips, tornejos i classes.
 A més, permet al personal del club i als administradors gestionar reserves, tornejos, rànquings i molt més.
 
 ### Screenshot
->![Foto de propaganda](./images/compramos-tu-autocaravana.jpg)
+>![Foto de la home de l'aplicació](web/itb-club/src/assets/images/capt-home.png)
 
-## Funcionalitats Principals
+## Funcionalitats d'usuari
 
 ### Usuari No Registrat
 - Consultar informació general del club.
@@ -97,6 +97,7 @@ La base de dades està estructurada per donar suport a les funcionalitats mencio
 9. **Seus**: Localització de les seus de l'ITB club.
 
 ## Instal·lació i Configuració
+***
 
 1. Cloneu el repositori:
    ```sh
