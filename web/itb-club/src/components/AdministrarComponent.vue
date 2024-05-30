@@ -6,7 +6,6 @@
         <ul>
             <li class="button-pink"><RouterLink @click="handleToggleMenu" to="/administrar/users">Mirar Usuaris</RouterLink></li>
         </ul>
-        <h3>Reserves:</h3>
     </section>
 </template>
   
