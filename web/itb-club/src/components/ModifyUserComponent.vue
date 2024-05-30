@@ -16,6 +16,7 @@
 
       <label for="teams">Equip</label>
       <select name="teams" id="teams" v-model="modUser.team_id" :disabled="isCaptain">
+        <option value="">No tener equipo</option> <!-- Opción para no tener equipo -->
         <option v-for="team in teams" :key="team.id" :value="team.id">
           {{ team.name }}
         </option>
@@ -97,10 +98,6 @@ export default {
         this.errors.surnames = "Los apellidos son obligatorios.";
       }
 
-      if (!Validators.required(this.modUser.team_id)) {
-        this.errors.team_id = "La ubicación es obligatoria.";
-      }
-
       if (!Validators.required(this.modUser.player_level)) {
         this.errors.player_level = "La categoría es obligatoria.";
       }
@@ -121,7 +118,13 @@ export default {
     },
     async modifyUser() {
       console.log("Se intenta modificar el usuario");
+
+      if (this.modUser.team_id === "") {
+        this.modUser.team_id = null;
+      }
+
       try {
+        console.log("Datos enviados:", this.modUser);
         const response = await this.$axios.put('people/?id=' + this.modUser.id, this.modUser);
         console.log("response: " + response.data);
         if (this.modUser.team_id) {
@@ -130,6 +133,9 @@ export default {
         this.$router.push({ path: '/usuari' });
       } catch (error) {
         console.error('Error al intentar modificar el usuario', error);
+        if (error.response) {
+          console.error("Datos de error del servidor:", error.response.data);
+        }
       }
     },
     async addPlayerToTeam(teamId, userId) {
