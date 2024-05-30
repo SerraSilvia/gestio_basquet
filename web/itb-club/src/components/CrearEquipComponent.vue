@@ -12,14 +12,12 @@
       <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
 
       <label for="location">Club</label>
-      <select name="location" id="location" v-model="newTeam.location">
-        <option value="Barcelona">Barcelona</option>
-        <option value="Terrassa">Terrassa</option>
-        <option value="Sabadell">Sabadell</option>
+      <select name="location" id="location" v-model="newTeam.location_id">
+        <option value="1">Barcelona</option>
+        <option value="2">Terrassa</option>
+        <option value="3">Sabadell</option>
       </select>
-      <small v-if="errors.location" class="form-error">{{
-        errors.location
-      }}</small>
+      <small v-if="errors.location" class="form-error">{{ errors.location }}</small>
 
       <label for="category">Categoria</label>
       <select name="category" id="category" v-model="newTeam.category">
@@ -27,17 +25,18 @@
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
       </select>
-      <small v-if="errors.category" class="form-error">{{
-        errors.category
-      }}</small>
+      <small v-if="errors.category" class="form-error">{{ errors.category }}</small>
 
       <input class="button" type="submit" />
     </form>
+    <p v-if="message" :class="messageClass">{{ message }}</p>
   </section>
 </template>
 
 <script>
+import axios from 'axios';
 import { Validators } from '@/utils/validators';
+
 export default {
   name: "CrearEquipComponent",
   data() {
@@ -50,6 +49,8 @@ export default {
         img: "image.png",
         captain: 0,
       },
+      message: null,
+      messageClass: null
     };
   },
   mounted() {
@@ -75,13 +76,7 @@ export default {
       this.addTeam();
     },
     resetForm() {
-      this.errors = {
-        name: null,
-        location_id: null,
-        category: null,
-        img: null,
-        captain: JSON.parse(sessionStorage.getItem("userData")).id,
-      };
+      this.errors = {};
     },
     setCaptainId() {
       const user = JSON.parse(sessionStorage.getItem("userData"));
@@ -91,18 +86,39 @@ export default {
         console.error('No user ID found in session storage');
       }
     },
-    addTeam() {
-      console.log("Creando un nuevo equipo...");
-      this.$axios.post('teams/', this.newTeam)
-        .then(response => {
-          console.log('Equipo ha sido agregado:', response.data);
-        })
-        .catch((error) => {
-          console.error("Error al agregar el equipo:", error);
-        });
+    async addTeam() {
+      try {
+        const response = await axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/', this.newTeam);
+        const createdTeamId = response.data.id;
+        console.log('Equipo ha sido agregado:', response.data);
+        this.updateUserTypeAndTeamId(createdTeamId);
+      } catch (error) {
+        console.error("Error al agregar el equipo:", error.response ? error.response.data : error.message);
+        this.message = 'Error al agregar el equipo: ' + (error.response ? error.response.data.message : error.message);
+        this.messageClass = 'error-message';
+      }
     },
-
-  },
+    async updateUserTypeAndTeamId(teamId) {
+      const user = JSON.parse(sessionStorage.getItem("userData"));
+      if (user) {
+        try {
+          const updatedUser = { user_type: 'captain', team_id: teamId };
+          const response = await axios.put(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?id=${user.id}`, updatedUser);
+          console.log('Usuario actualizado:', response.data);
+          user.user_type = 'captain';
+          user.team_id = teamId;
+          sessionStorage.setItem('userData', JSON.stringify(user));
+          this.$router.push('/equips');
+        } catch (error) {
+          console.error('Error al actualizar el usuario:', error.response ? error.response.data : error.message);
+          this.message = 'Error al actualizar el usuario: ' + (error.response ? error.response.data.message : error.message);
+          this.messageClass = 'error-message';
+        }
+      } else {
+        console.error('No user ID found in session storage');
+      }
+    }
+  }
 };
 </script>
 
@@ -177,5 +193,17 @@ label {
   top: 5em;
   left: 7em;
   z-index: -1;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
 }
 </style>

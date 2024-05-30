@@ -18,8 +18,9 @@
         v-for="(player, index) in playerIDs" 
         :key="index" 
         :player="player" 
-        :is-admin="isAdmin" 
-        @playerRemoved="getTeamData">
+        :team-id="team.id" 
+        :vacancy="getVacancy(index)" 
+        @playerAdded="getTeamData">
       </JugadorComponent>
     </section>
 
@@ -29,6 +30,7 @@
         <p v-if="team && team.total_score">{{ team.total_score }}</p>
       </div>
     </section>
+    <button v-if="canJoinTeam" class="button" @click="addMeToTeam">Afegir-se</button>
     <p v-if="message" :class="messageClass">{{ message }}</p>
   </div>
 </template>
@@ -56,48 +58,82 @@ export default {
       clubName: '',
       playerIDs: [],
       loged: false,
-      isAdmin: false,
+      isPlayer: false,
+      hasTeam: false,
       message: null,
       messageClass: null
     };
   },
+  computed: {
+    canJoinTeam() {
+      return this.loged && this.isPlayer && !this.hasTeam && this.playerIDs.length < 5;
+    }
+  },
   methods: {
-    async getTeamData() {
-      try {
-        const response = await axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/?id=${this.id}`);
-        this.team = response.data[0];
-        this.handleSelectedClub();
-        this.getPlayersId();
-      } catch (error) {
-        console.error('Error al obtener datos del equipo:', error);
-      }
+    getVacancy(index) {
+      return `player${index + 1}`;
     },
-    async handleSelectedClub() {
+    getTeamData() {
+      axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/?id=${this.id}`)
+        .then(response => {
+          this.team = response.data[0];
+          this.handleSelectedClub();
+          this.getPlayersId();
+        })
+        .catch(error => {
+          console.error('Error al obtener datos del equipo:', error);
+        });
+    },
+    handleSelectedClub() {
       if (!this.team) return;
-      try {
-        const response = await axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/locations/?id=${this.team.location_id}`);
-        if (response.data[0]) {
-          this.clubName = response.data[0].name;
-        } else {
-          console.error('No se encontró el nombre del club');
-        }
-      } catch (error) {
-        console.error('Error al obtener el nombre del club:', error);
-      }
+      axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/locations/?id=${this.team.location_id}`)
+        .then(response => {
+          if (response.data[0]) {
+            this.clubName = response.data[0].name;
+          } else {
+            console.error('No se encontró el nombre del club');
+          }
+        });
     },
     getPlayersId() {
       this.playerIDs = [this.team.captain, this.team.player1, this.team.player2, this.team.player3, this.team.player4].filter(Boolean);
+    },
+    addMeToTeam() {
+      const userData = JSON.parse(sessionStorage.getItem('userData'));
+      if (userData && userData.user_type === 'player' && userData.team_id === null) {
+        const vacancyIndex = this.playerIDs.length;
+        const vacancy = this.getVacancy(vacancyIndex);
+        axios.put(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/?id=${this.team.id}&user_id=${userData.id}&player=${vacancy}`)
+          .then(response => {
+            if (response.data.status === 'success') {
+              userData.team_id = this.team.id;
+              sessionStorage.setItem('userData', JSON.stringify(userData));
+              this.hasTeam = true;
+              this.message = 'Te has unido al equipo con éxito.';
+              this.messageClass = 'success-message';
+              this.$router.push('/usuari');
+            } else {
+              this.message = 'Error al intentar unirse al equipo.';
+              this.messageClass = 'error-message';
+            }
+          })
+          .catch(error => {
+            this.message = 'Error al intentar unirse al equipo.';
+            this.messageClass = 'error-message';
+            console.error('Error al intentar unirse al equipo:', error);
+          });
+      } else {
+        this.message = 'No puedes unirte al equipo. Verifica tu estado de usuario.';
+        this.messageClass = 'error-message';
+      }
     },
     checkUserStatus() {
       const userData = JSON.parse(sessionStorage.getItem('userData'));
       if (userData) {
         this.loged = true;
-        this.isAdmin = userData.user_type === 'admin';
+        this.isPlayer = userData.user_type === 'player';
+        this.hasTeam = userData.team_id !== null;
       }
-    },
-    setMessage(text, success) {
-      this.message = { text, success };
-      this.messageClass = success ? 'success-message' : 'error-message';
     }
   },
   mounted() {
@@ -158,6 +194,21 @@ div .location {
   font-size: 6em;
 }
 
+.button {
+  display: block;
+  margin: 1em auto;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #1976d2;
+}
+
 .success-message {
   color: green;
   font-weight: bold;
@@ -172,4 +223,3 @@ div .location {
   margin-top: 20px;
 }
 </style>
-
