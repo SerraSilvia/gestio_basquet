@@ -35,7 +35,7 @@ export default {
   methods: {
     async clickTeam1() {
       this.$emit("selected-winner", [1, this.game.team1_id, this.game.tournament_position]);
-
+      this.displayButtons = false;
       this.updatedGame.score_t1 = "15";
       this.updatedGame.score_t2 = "12";
       await this.updateGame();
