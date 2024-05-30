@@ -81,9 +81,9 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 
 - Apuntar-se a equips:
 
->![Fotos d'informació](web/itb-club/src/assets/images/capt-teamps.JPG)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-teams.jpg)
 
->![Fotos d'informació](web/itb-club/src/assets/images/capt-teamps.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-teams.png)
 
 
 ### Tornejos
@@ -104,7 +104,7 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Reservar classe particular.
 - Reservar pista per les classes.
   
->![Fotos d'informació](web/itb-club/src/assets/images/capt-training.JPG)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-training.jpg)
 
 
 ## Estructura de la Base de Dades
