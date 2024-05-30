@@ -12,6 +12,7 @@ include './services/createTeam.php';
 include './services/updateTeam.php';
 include './services/addPlayer.php';
 include './services/deleteTeam.php';
+include './services/deleteTeamPlayer.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['location_id']) && !isset($_REQUEST['total_score']) && !isset($_REQUEST['minPoints']) && !isset($_REQUEST['maxPoints']) && !isset($_REQUEST['tournament_id'])) {
     echo getTeams($conn); 
@@ -52,8 +53,6 @@ else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['id']) && isset(
 else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['team_id']) && isset($_REQUEST['user_id']) && isset($_REQUEST['action']) && $_REQUEST['action'] == 'deletePlayer') {
     echo deleteTeamPlayer($conn, $_REQUEST['team_id'], $_REQUEST['user_id']);
 }
-
-
 
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_REQUEST['id'])) {
     echo deleteTeam($conn, $_REQUEST['id']);

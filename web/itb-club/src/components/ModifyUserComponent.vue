@@ -120,12 +120,26 @@ export default {
       console.log("Se intenta modificar el usuario");
 
       if (this.modUser.team_id === "") {
-        this.modUser.team_id = null;
+        // El jugador ha seleccionado "No tener equipo"
+        try {
+          // Llamada a la API para eliminar al jugador del equipo
+          const deleteTeamPlayerResponse = await this.$axios.put('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/?action=deletePlayer', {
+            team_id: this.user.team_id,
+            user_id: this.modUser.id
+          });
+          console.log("Jugador eliminado del equipo: " + deleteTeamPlayerResponse.data);
+        } catch (error) {
+          console.error('Error al intentar eliminar al jugador del equipo', error);
+          if (error.response) {
+            console.error("Datos de error del servidor:", error.response.data);
+          }
+          return;
+        }
       }
 
       try {
         console.log("Datos enviados:", this.modUser);
-        const response = await this.$axios.put('people/?id=' + this.modUser.id, this.modUser);
+        const response = await this.$axios.put('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?id=' + this.modUser.id, this.modUser);
         console.log("response: " + response.data);
         if (this.modUser.team_id) {
           await this.addPlayerToTeam(this.modUser.team_id, this.modUser.id);
@@ -140,7 +154,7 @@ export default {
     },
     async addPlayerToTeam(teamId, userId) {
       try {
-        const response = await this.$axios.put('teams/', null, {
+        const response = await this.$axios.put('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/', null, {
           params: {
             id: teamId,
             user_id: userId
@@ -152,7 +166,7 @@ export default {
       }
     },
     getOldData() {
-      this.$axios.get('people/?id=' + this.id)
+      this.$axios.get('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?id=' + this.id)
         .then(response => {
           console.log("old data: ", response.data[0]);
           this.modUser = response.data[0];
@@ -166,7 +180,7 @@ export default {
         });
     },
     getTeams() {
-      this.$axios.get('teams/')
+      this.$axios.get('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/')
         .then(response => {
           this.teams = response.data;
         })
@@ -175,7 +189,7 @@ export default {
         });
     },
     checkIfCaptain() {
-      this.$axios.get(`teams/?id=${this.modUser.team_id}`)
+      this.$axios.get(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/?id=${this.modUser.team_id}`)
         .then(response => {
           const team = response.data[0];
           if (team.captain === this.modUser.id) {
