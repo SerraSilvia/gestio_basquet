@@ -1,12 +1,11 @@
 <?php
 
 function deleteTeamPlayer($conn, $team_id, $user_id) {
-    
     $query = "SELECT player1, player2, player3, player4 FROM TEAMS WHERE id='$team_id'";
     $result = mysqli_query($conn, $query);
     
     if (!$result) {
-        return json_encode(array('status' => 'error', 'message' => 'Error al obtener el equipo'));
+        return json_encode(array('status' => 'error', 'message' => 'Error al obtener el equipo: ' . mysqli_error($conn)));
     }
 
     $team = mysqli_fetch_assoc($result);
@@ -27,17 +26,10 @@ function deleteTeamPlayer($conn, $team_id, $user_id) {
     $updateTeamQuery = "UPDATE TEAMS SET $playerField='0' WHERE id='$team_id'";
     $updateTeamResult = mysqli_query($conn, $updateTeamQuery);
 
-    if (!$updateTeamResult) {
-        return json_encode(array('status' => 'error', 'message' => 'Error al actualizar el equipo'));
-    }
-
-    $updatePlayerQuery = "UPDATE PEOPLE SET team_id=NULL WHERE id='$user_id'";
-    $updatePlayerResult = mysqli_query($conn, $updatePlayerQuery);
-
-    if ($updatePlayerResult) {
+    if ($updateTeamResult) {
         return json_encode(array('status' => 'success'));
     } else {
-        return json_encode(array('status' => 'error', 'message' => 'Error al actualizar el jugador'));
+        return json_encode(array('status' => 'error', 'message' => 'Error al actualizar el equipo: ' . mysqli_error($conn)));
     }
 }
 
