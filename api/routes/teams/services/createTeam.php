@@ -14,7 +14,7 @@ function createTeam($conn) {
     $q = "INSERT INTO TEAMS (name, location_id, category, total_score, img, captain ) VALUES ('$name', $location_id, '$category', 0 , '$img', $captain)";
     $result = mysqli_query($conn, $q);
 
-    if ($result) $res = array('status' => 'success');
+    if ($result) $res = array('status' => 'success', 'id' => $createdTeamId);
     else $res = array('status' => 'error');
 
     header("Content-Type: application/json");

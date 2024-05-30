@@ -21,7 +21,7 @@
 
       <label for="category">Categoria</label>
       <select name="category" id="category" v-model="newTeam.category">
-        <option value="cadet">Cadet</option>
+        <option value="professional">Professional</option>
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
       </select>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { Validators } from '@/utils/validators';
 
 export default {
@@ -93,24 +92,29 @@ export default {
         console.error('No user ID found in session storage');
       }
     },
-    async addTeam() {
-      try {
-        const response = await axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/', this.newTeam);
-        const createdTeamId = response.data.id;
-        console.log('Equipo ha sido agregado:', response.data);
-        await this.setCaptain(createdTeamId); 
-        this.$router.push('/equips');
-      } catch (error) {
-        console.error("Error al agregar el equipo:", error.response ? error.response.data : error.message);
-        this.message = 'Error al agregar el equipo: ' + (error.response ? error.response.data.message : error.message);
-        this.messageClass = 'error-message';
-      }
+    addTeam() {
+      this.user = JSON.parse(sessionStorage.getItem('userData'));
+      this.newTeam.captain=Number(this.newTeam.captain)
+      console.log(JSON.stringify(this.newTeam));
+
+      this.$axios.post('teams/', JSON.stringify(this.newTeam))
+        .then(response => {
+          console.log('Equipo ha sido agregado:', response.data);
+          const createdTeamId = response.data.id;
+          this.setCaptain(createdTeamId); 
+          this.$router.push('/equips');
+        })
+        .catch(error => {
+          console.error("Error al agregar el equipo:", error.response ? error.response.data : error.message);
+          this.message = 'Error al agregar el equipo: ' + (error.response ? error.response.data.message : error.message);
+          this.messageClass = 'error-message';
+        });
     },
     async setCaptain(teamId) {
       const user = JSON.parse(sessionStorage.getItem('userData'));
       if (user) {
         try {
-          const response = await axios.put('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?action=newCaptain', {
+          const response = await this.$axios.put('people/?action=newCaptain', {
             id: user.id,
             team_id: teamId
           });
@@ -119,9 +123,7 @@ export default {
           user.team_id = teamId;
           sessionStorage.setItem('userData', JSON.stringify(user));
         } catch (error) {
-          console.error('Error al actualizar el usuario a capitán:', error.response ? error.response.data : error.message);
-          this.message = 'Error al actualizar el usuario a capitán: ' + (error.response ? error.response.data.message : error.message);
-          this.messageClass = 'error-message';
+          console.log("error al actualizar el capitan");
         }
       } else {
         console.error('No user ID found in session storage');
@@ -192,11 +194,9 @@ label {
   width: 40em;
   height: 9em;
   transform: skew(20deg);
-  background: linear-gradient(
-    to right,
-    rgb(54, 208, 255),
-    rgba(255, 159, 147, 0)
-  );
+  background: linear-gradient(to right,
+      rgb(54, 208, 255),
+      rgba(255, 159, 147, 0));
   margin: 1em;
   position: absolute;
   top: 5em;
