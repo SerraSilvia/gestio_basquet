@@ -32,7 +32,7 @@ export default {
       team2: {},
       winner: '',
       user: null,
-      updatedTeam: {}
+      updatedGame: {}
     };
   },
   methods: {
@@ -40,27 +40,22 @@ export default {
       this.$emit("selected-winner", [1, this.game.team1_id, this.game.tournament_position]);
       this.displayButtons = false;
 
-      this.game.score_t1 = 15;
-      this.game.score_t2 = 12;
-      await this.updateGameAndPoints(this.game.team1_id, this.updatedTeam); // Cambiado a updatedTeam
+      this.updatedGame.score_t1 = "15";
+      this.updatedGame.score_t2 = "12";
+      await this.updateGame();
     },
     async clickTeam2() {
       this.$emit("selected-winner", [2, this.game.team2_id, this.game.tournament_position]);
       this.displayButtons = false;
 
-      this.game.score_t2 = 21;
-      this.game.score_t1 = 18;
-      await this.updateGameAndPoints(this.game.team2_id, this.updatedTeam); // Cambiado a updatedTeam
+      this.updatedGame.score_t2 = "21";
+      this.updatedGame.score_t1 = "18";
+      await this.updateGame();
     },
-    async updateGameAndPoints(id, team) {
+    async updateGame() {
       try {
-        const newPoints = parseInt(team.total_score , 10)+10;
-        team.total_score = newPoints;
-
-        console.log("datos actualizados de equipo:", newPoints);
-        /*await this.$axios.put("teams/?id=" + id, team);
-        
-        await this.$axios.put(`game/?id=${this.game.id}`, this.game);*/
+        console.log("datos actualizados de equipo:", this.updatedGame);
+        await this.$axios.put(`games/?id=${this.game.id}`, this.updatedGame);
       } catch (error) {
         console.error('Error al intentar modificar el partido y los puntos del equipo:', error);
       }
@@ -99,6 +94,7 @@ export default {
     this.user = userData;
     if (userData && userData.user_type === "admin") {
       this.displayButtons = true;
+      this.updatedGame=this.game;
     }
     await this.getTeamsInfo();
   }
