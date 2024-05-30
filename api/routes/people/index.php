@@ -9,6 +9,7 @@ include './services/updatePeople.php';
 include './services/getPeopleById.php';
 include './services/getPeopleByUserType.php';
 include './services/getPeopleByTeam.php';
+include './services/newCaptain.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_REQUEST['id']) && !isset($_REQUEST['user_type']) && !isset($_REQUEST['team_id']) && !isset($_REQUEST['email'])) {
     echo getPeople($conn);
@@ -34,8 +35,13 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo createPeople($conn);
 }
 
-else if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && !isset($_REQUEST['action'])) {
     echo updatePeople($conn);    
+}
+
+else if ($_SERVER['REQUEST_METHOD'] == 'PUT' && isset($_REQUEST['action']) && $_REQUEST['action'] == 'newCaptain') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    echo newCaptain($conn, $data['id'], $data['team_id']);
 }
 
 else if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_REQUEST['id'])) {
