@@ -17,7 +17,9 @@
     <div v-else>
       <p class="no-teams-message">No hi ha equips inscrits</p>
     </div>
-    <button @click="addMyTeam" v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu equip</button>
+    <button @click="addMyTeam"
+      v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu
+      equip</button>
     <button @click="createGames" v-if="user.user_type == 'admin' && teams.length == 8">Crear propers partits</button>
   </div>
   <div v-if="tournamentSelected && games.length > 0">
@@ -182,8 +184,30 @@ export default {
       return game.score_t1 >= game.score_t2 ? game.team1 : game.team2;
     },
     handleWinner(data) {
-      console.log("Ganador: " + data[0] + " partido: " + data[1]);
+      console.log("Ganador num: " + data[0] + "Id ganador "+data[1]+" partido: " + data[2]);
+
+      // Obtener los detalles del equipo ganador
+      this.$axios.get(`teams/?id=` + data[1])
+        .then(response => {
+          const updateTeam = response.data[0];
+          const newPoints = updateTeam.total_score + 10;
+
+          updateTeam.total_score = newPoints;
+          console.log("datos actualizados de equipo:"+ updateTeam)
+          return this.$axios.put("teams/?id=" + data[1], updateTeam);
+        })
+        .then(updateResponse => {
+          if (updateResponse.data.status !== "error") {
+            console.log("Puntuación del equipo actualizada");
+          } else {
+            console.error("Error al actualizar la puntuación del equipo: ", updateResponse.data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error al procesar la actualización de la puntuación del equipo: ", error);
+        });
     }
+
   },
   mounted() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
