@@ -9,9 +9,7 @@
 
       <label for="surnames">Surnames</label>
       <input type="text" id="surnames" name="surnames" v-model="newUser.surnames" />
-      <small v-if="errors.surnames" class="form-error">{{
-        errors.surnames
-      }}</small>
+      <small v-if="errors.surnames" class="form-error">{{ errors.surnames }}</small>
 
       <label for="dni">DNI</label>
       <input type="text" id="dni" name="dni" v-model="newUser.dni" />
@@ -26,9 +24,7 @@
         <option value="Terrassa">Terrassa</option>
         <option value="Sabadell">Sabadell</option>
       </select>
-      <small v-if="errors.location" class="form-error">{{
-        errors.location
-      }}</small>
+      <small v-if="errors.location" class="form-error">{{ errors.location }}</small>
 
       <label for="category">Categoria</label>
       <select name="category" id="category" v-model="newUser.player_level">
@@ -36,9 +32,7 @@
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
       </select>
-      <small v-if="errors.category" class="form-error">{{
-        errors.category
-      }}</small>
+      <small v-if="errors.category" class="form-error">{{ errors.category }}</small>
 
       <label for="mail">Email</label>
       <input type="email" id="mail" name="mail" v-model="newUser.email" />
@@ -46,9 +40,7 @@
 
       <label for="password">Contrasenya</label>
       <input type="password" id="password" name="password" v-model="newUser.password" />
-      <small v-if="errors.password" class="form-error">{{
-        errors.password
-      }}</small>
+      <small v-if="errors.password" class="form-error">{{ errors.password }}</small>
 
       <input class="button" type="submit" />
       <div>
@@ -57,6 +49,7 @@
     </form>
   </section>
 </template>
+
 <script>
 import { Validators } from "@/utils/validators.js";
 
@@ -73,7 +66,7 @@ export default {
         player_level: null,
         email: "",
         password: "",
-        user_type:"player",
+        user_type: "player",
       },
     };
   },
@@ -141,43 +134,23 @@ export default {
 
       this.$axios.post("auth/register/", this.newUser)
         .then((response) => {
-          if (response.data.status != "error") {
-            this.saveSession(response.data.user);
-            this.$router.push({ path: '/usuari' });
+          if (response.data.status !== "error") {
+            console.log("Usuario creado exitosamente:", response.data.user);
+            this.$router.push({ path: '/login' });
           } else {
             console.error("Error en la creación del usuario:", response.data.message);
           }
-
-          this.saveSession();
         })
-
         .catch((error) => {
           console.error("Error al agregar el usuario:", error);
         });
       this.resetForm();
-
-    },
-    saveSession() {
-      const userData = {
-        id: this.newUser.id,
-        name: this.newUser.name,
-        surnames: this.newUser.surnames,
-        user_type: this.newUser.user_type,
-        player_level: this.newUser.player_level,
-        mail: this.newUser.email,
-        team_id: this.newUser.team_id,
-        birthday: this.newUser.birthday,
-      };
-      sessionStorage.setItem("userData", JSON.stringify(userData));
-      console.log("Contenido de sessionStorage después de guardar:", sessionStorage.getItem("userData"));
-      this.$router.push({ path: '/usuari' });
-
     }
   },
 };
 </script>
 
-<style scope>
+<style scoped>
 .form-error {
   color: red;
 }
