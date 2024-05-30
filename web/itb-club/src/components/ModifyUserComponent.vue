@@ -119,16 +119,31 @@ export default {
         this.modifyUser();
       }
     },
-    modifyUser() {
+    async modifyUser() {
       console.log("Se intenta modificar el usuario");
-      this.$axios.put('people/?id=' + this.modUser.id, this.modUser)
-        .then(response => {
-          console.log("response: " + response.data);
-          this.$router.push({ path: '/usuari' });
-        })
-        .catch(error => {
-          console.error('Error al intentar modificar el usuario', error);
+      try {
+        const response = await this.$axios.put('people/?id=' + this.modUser.id, this.modUser);
+        console.log("response: " + response.data);
+        if (this.modUser.team_id) {
+          await this.addPlayerToTeam(this.modUser.team_id, this.modUser.id);
+        }
+        this.$router.push({ path: '/usuari' });
+      } catch (error) {
+        console.error('Error al intentar modificar el usuario', error);
+      }
+    },
+    async addPlayerToTeam(teamId, userId) {
+      try {
+        const response = await this.$axios.put('teams/', null, {
+          params: {
+            id: teamId,
+            user_id: userId
+          }
         });
+        console.log("Usuario añadido al equipo: " + response.data);
+      } catch (error) {
+        console.error('Error al intentar añadir el usuario al equipo', error);
+      }
     },
     getOldData() {
       this.$axios.get('people/?id=' + this.id)
@@ -184,5 +199,5 @@ export default {
 </script>
 
 <style scoped>
-/* Agrega tus estilos aquí */
+
 </style>
