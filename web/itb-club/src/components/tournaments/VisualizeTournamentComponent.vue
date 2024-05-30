@@ -94,7 +94,7 @@ export default {
 
       if (dateStart <= currentDate && dateEnd >= currentDate && this.games.length<6) {
         this.status = "En curs";
-      } else if (dateStart > currentDate && this.teams.length < 8 && this.games.length==0) {
+      } else if (dateStart < currentDate && this.teams.length < 8 && this.games.length==0) {
         this.status = "Inscripcions Obertes";
       } else if (dateStart > currentDate && this.teams.length === 8 && this.games.length==0) {
         this.status = "Inscripcions Tancades";
