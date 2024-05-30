@@ -1,6 +1,7 @@
 <template>
     <div id="user-id-container">
         <h2>Usuaris registrats</h2>
+            <div class="title-poligon"></div>
         <div class="center-container">
             <RouterLink class="button" to="/administrar/users/add">Crear Usuari</RouterLink></div>
         <input type="text" v-model="searchQuery" placeholder="Buscar jugador per email">
@@ -79,6 +80,7 @@ input[type="text"] {
     display: flex;
     justify-content:flex-end; 
     margin-bottom: 1em;/* Centra el botón horizontalmente */
+    margin-top:100px;
 }
 
 
