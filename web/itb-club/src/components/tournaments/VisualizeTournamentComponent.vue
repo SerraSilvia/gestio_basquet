@@ -17,10 +17,8 @@
     <div v-else>
       <p class="no-teams-message">No hi ha equips inscrits</p>
     </div>
-    <button @click="addMyTeam"
-      v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu
-      equip</button>
-    <button @click="createGames" v-if="user.user_type == 'admin'">Crear partits</button>
+    <button @click="addMyTeam" v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu equip</button>
+    <button @click="createGames" v-if="user.user_type == 'admin' && teams.length == 8">Crear propers partits</button>
   </div>
   <div v-if="tournamentSelected && games.length > 0">
     <h2>Partits</h2>
@@ -130,24 +128,22 @@ export default {
       console.log("se crean los juegos");
       if (this.maxRound < 4) {
         console.log("primera ronda");
-        this.createGameInsert(this.teams[0], this.teams[1], 0);
-        this.createGameInsert(this.teams[2], this.teams[3], 1);
-        this.createGameInsert(this.teams[4], this.teams[5], 2);
-        this.createGameInsert(this.teams[6], this.teams[7], 3);
+        this.gameInsert(this.teams[0], this.teams[1], 0);
+        this.gameInsert(this.teams[2], this.teams[3], 1);
+        this.gameInsert(this.teams[4], this.teams[5], 2);
+        this.gameInsert(this.teams[6], this.teams[7], 3);
+        //add game to page
+       // window.location.reload();
       } else if (this.maxRound < 6) {
         console.log("segunda ronda");
-       //execute function again
-
-        this.createGameInsert(getWinner(0), this.getWinner(1), 4);
-        this.createGameInsert(getWinner(0), this.getWinner(1), 5);
+        this.gameInsert(this.getWinner(0), this.getWinner(1), 4);
+        this.gameInsert(this.getWinner(2), this.getWinner(3), 5);
       } else {
         console.log("tercera ronda");
-        // seleccionar los ganadores del juego 4 y 5 y el que gane sera el vencedor
-        this.createGameInsert(getWinner(4), this.getWinner(5), 6);
-
+        this.gameInsert(this.getWinner(4), this.getWinner(5), 6);
       }
     },
-    async createGameInsert(team1, team2, gamePos) {
+    async gameInsert(team1, team2, gamePos) {
       console.log("se crean los inserts");
       const newGame = {
         id_booking: 54,
@@ -181,8 +177,10 @@ export default {
         console.error("Error al obtener partidos:", error);
       }
     },
-    getWinner(game) {
-      console.log("se consigue el ganador del partido", game);
+    getWinner(gamePos) {
+      const game = this.games.find(g => g.tournament_position === gamePos);
+      if (!game) return null;
+      return game.score_t1 >= game.score_t2 ? game.team1 : game.team2;
     }
   },
   mounted() {
@@ -234,7 +232,15 @@ export default {
   display: flex;
 }
 
+.tournament-teams {
+  background-color: white;
+  padding: 1em;
+  border-radius: 1em;
+}
+
 .no-teams-message {
   color: white;
   text-align: center;
-  padding:
+  padding: 1em;
+}
+</style>

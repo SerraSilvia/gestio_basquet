@@ -61,7 +61,7 @@ export default {
         reservation_type: this.reservation_type,
       };
       console.log('Datos enviados a la API:', bookingData);
-      axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/bookings/', bookingData)
+      axios.post('bookings/', bookingData)
         .then(response => {
           this.message = 'Reserva confirmada con éxito!';
           this.messageClass = 'success-message';

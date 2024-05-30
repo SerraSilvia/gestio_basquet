@@ -1,5 +1,5 @@
 <template>
-<p>Esto es un juego</p>
+<p>Esto es un juego {{ game.id }}</p>
 </template>
   <script>
   
