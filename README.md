@@ -1,9 +1,9 @@
 # Club Esportiu ITB Club - README
 
-## Table of Contents
-1. [General Info](#general-info)
-2. [Technologies](#technologies)
-3. [Installation](#installation)
+## Taula de continguts:
+1. [Informació General](#general-info)
+2. [Tecnologies](#technologies)
+3. [Instal·lació](#installation)
 4. [Autors](#collaboration)
 ## Descripció del Projecte <a name="general-info"></a>
 
@@ -12,10 +12,22 @@ L'aplicació permet als usuaris consultar la informació general del club i tene
 equips, tornejos i classes. 
 A més, permet al personal del club i als administradors gestionar reserves, tornejos, rànquings i molt més.
 
-### Screenshot
->![Foto de propaganda](./images/compramos-tu-autocaravana.jpg)
+### Home
+>![Foto de la home de l'aplicació](web/itb-club/src/assets/images/capt-home.png)
+### Informació general:
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-about.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-about2.png)
+- Instal·lacions:
+  
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-facilities.png)
+- Clubs:
+  
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-clubs.png)
+- Tornejos del club:
+  
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsTypes.png)
 
-## Funcionalitats Principals
+## Funcionalitats d'Usuari:
 
 ### Usuari No Registrat
 - Consultar informació general del club.
@@ -44,38 +56,44 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 ### Equips
 - Els equips estan formats per jugadors i un capità (usuari que ha creat l’equip).
 
-## Funcionalitats:
-
-### Multi-Seus
-- Filtrar per seus diferents que té el club.
+## Funcionalitats Principals:
 
 ### Reserva de pistes
 - Lloger de pistes per entrenaments, partits, tornejos...
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-bookings.png)
 
 ### Comentaris
-- Treballador de staff pot afegir comentaris sobre una classe.
-- Usuari registrat pot afegir comentaris sobre una classe, un partit o un torneig del seu equip.
+- L'entrenador pot afegir comentaris sobre una classe.
+- L'usuari pot consultar els seus comentaris.
 
-### Gestió de Jugadors
+### Jugadors
+- Logar-se.
 - Alta, baixa i modificació de la informació dels jugadors.
 - Llistat de jugadors segons puntuació.
 - Rànquing calculat segons resultats en tornejos.
+
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-login.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-updateProfile.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-profileUpdated.png)
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsTypes.png)
 
 ### Tornejos
 - Alta de tornejos.
 - Assignar jugadors/equips al torneig.
 - Classificació dels equips dins del torneig.
 
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsInfo.png)
+
 ### Partits
-- Alta de partits (manual o automàtica dins d’un torneig).
+- Alta de partits.
 - Tipus de partits: amistós i de torneig.
-- Apuntar estadístiques.
-- Fer càlcul del rànquing.
-- Comentaris dels jugadors.
+
 
 ### Consultar el Rànquing
 - Estadístiques de cada equip (punts a favor, punts en contra, victòries/derrotes).
 - Puntuació reflectida al rànquing general.
+
+>![Fotos d'informació](web/itb-club/src/assets/images/capt-rankings.png)
 
 ### Classes Particulars
 - Fitxa del jugador amb comentaris.
@@ -119,6 +137,9 @@ A list of technologies used within the project:
 * [GitHub](https://docs.github.com/es)
 * [Docker](https://docs.docker.com/)
 * [AWS](https://docs.aws.amazon.com/es_es/)
+
+## Collaboration
+***
 
 ## Collaboration
 ***
