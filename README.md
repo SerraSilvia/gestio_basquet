@@ -1,16 +1,17 @@
-# Club Esportiu ITB Club - README
+# ITBCLUB - README
 
 ## Taula de continguts:
 1. [Informació General](#general-info)
 2. [Tecnologies](#technologies)
 3. [Instal·lació](#installation)
 4. [Autors](#collaboration)
+5. [Estructura del projecte](#structure)
 ## Descripció del Projecte <a name="general-info"></a>
 
-Aquest projecte és una aplicació web per a la gestió d'un club esportiu. 
+Aquest projecte és una aplicació web per a la gestió d'un club esportiu de bàsquet. 
 L'aplicació permet als usuaris consultar la informació general del club i tenen accés a funcionalitats adicionals com lloguers de pista i gestionar
-equips, tornejos i classes. 
-A més, permet al personal del club i als administradors gestionar reserves, tornejos, rànquings i molt més.
+equips, tornejos i les dades d'usuari. 
+A més, permet al personal del club i als administradors gestionar, tornejos,  usuaris i molt més.
 
 ### Home
 >![Foto de la home de l'aplicació](web/itb-club/src/assets/images/capt-home.png)
@@ -41,9 +42,10 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 - Veure informació detallada del seu equip.
 - Reservar una pista per fer una classe.
 - Consultar comentaris
+- Modificar les deves dades
 
 ### Capità d'Equip
-- Apuntar-se a tornejos.
+- Apuntar l'equip a tornejos.
 - Fer reserves de classes.
 - Veure informació detallada del seu equip.
 - Reservar una pista per fer una classe.
@@ -51,8 +53,8 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 ### Administrador
 - Accedir a tota la informació de la web.
 - Crear i gestionar tornejos.
-- Gestionar equips.
-- Veure i modificar el rànquing.
+- Gestionar usuaris.
+- Veure el rànquing.
 
 
 ## Funcionalitats Principals:
@@ -88,7 +90,7 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 
 ### Tornejos
 - Alta de tornejos.
-- Assignar jugadors/equips al torneig.
+- Creació dels partits.
 - Classificació dels equips dins del torneig.
 
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-tournamentsInfo.png)
@@ -99,9 +101,8 @@ A més, permet al personal del club i als administradors gestionar reserves, tor
 
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-rankings.png)
 
-### Classes Particulars
+### Classes Particulars (desenvolupament)
 - Fitxa del jugador amb comentaris.
-- Reservar classe particular.
 - Reservar pista per les classes.
   
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-training.jpg)
@@ -150,6 +151,19 @@ A list of technologies used within the project:
 * [GitHub](https://docs.github.com/es)
 * [Docker](https://docs.docker.com/)
 * [AWS](https://docs.aws.amazon.com/es_es/)
+
+## Estructura del projecte <a name="structure"></a>
+
+### Frontend:
+  Es composa per un projecte de Vue.js que ha de ser executat localment, tal i com s'indica en el punt anterior. 
+
+### Backend
+  Es tracta d'una api rest desplegada a AWS. La connexió a aquesta es fa mitjançant la llibreria axios a el projecte vue.js. 
+  -> https://docs.aws.amazon.com/es_es/](http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/
+    
+### Base de Dades
+  Es centralitza en un lloc hosting de phpMyAdmin: 
+  -> http://www.phpmyadmin.co
 
 ## Col·laboradors: <a name="collaboration"></a>
 ***
