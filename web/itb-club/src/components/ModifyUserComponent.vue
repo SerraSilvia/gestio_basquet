@@ -88,11 +88,11 @@ export default {
   },
   methods: {
     validatorForm() {
-      this.errors = {}; // Reset errors
+      this.errors = {};
       if (!Validators.required(this.modUser.name)) {
         this.errors.name = "El nombre es obligatorio.";
       }
-
+      
       if (!Validators.required(this.modUser.surnames)) {
         this.errors.surnames = "Los apellidos son obligatorios.";
       }
@@ -150,7 +150,7 @@ export default {
         .then(response => {
           console.log("old data: ", response.data[0]);
           this.modUser = response.data[0];
-          this.modUser.password = ""; // Clear password for security reasons
+          this.modUser.password = "";
           if (this.modUser.team_id) {
             this.checkIfCaptain();
           }

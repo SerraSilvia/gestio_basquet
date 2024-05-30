@@ -27,6 +27,13 @@
       </select>
       <small v-if="errors.category" class="form-error">{{ errors.category }}</small>
 
+      <label for="team_image">Imatge de l'equip</label>
+      <select name="team_image" id="team_image" v-model="newTeam.img">
+        <option v-for="n in 10" :key="'team' + n" :value="'team' + n + '.png'">
+          Team {{ n }}
+        </option>
+      </select>
+
       <input class="button" type="submit" />
     </form>
     <p v-if="message" :class="messageClass">{{ message }}</p>
@@ -46,7 +53,7 @@ export default {
         name: "",
         location_id: 1,
         category: "",
-        img: "image.png",
+        img: "team1.png",
         captain: 0,
       },
       message: null,
