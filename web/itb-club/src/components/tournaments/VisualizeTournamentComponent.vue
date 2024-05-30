@@ -20,15 +20,15 @@
     <button @click="addMyTeam" v-if="user.user_type != 'admin' && teams.length < 8 && status == 'Inscripcions Obertes'">
       Incriure el meu equip
     </button>
-    <button @click="createGames" v-if="user.user_type == 'admin' && teams.length == 8 && status!='Finalitzat'">
+    <button @click="createGames" v-if="user.user_type == 'admin' && teams.length == 8 && status!='Finalitzat' && games.length<6">
       Crear propers partits
     </button>
     <p v-else >{{ winner }}</p>
   </div>
-  <div v-if="tournamentSelected && games.length > 0">
+  <div v-if="tournamentSelected && games.length > 0" class="game-container">
     <h2>Partits</h2>
     <div class="game-container">
-      <GameItem v-for="(game, index) in games" :key="game.id" :game="game" @selected-winner="handleWinner" :class="{'special-team': index === 6}" />
+      <GameItem v-for="(game, index) in games" :key="game.id" :game="game" @selected-winner="handleWinner" :class="{'game': index===3,'final-game': index === 6, 'semifinal-game': index >3 }" />
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
       user: {}, // Cambiado a objeto
       maxRound: 0,
       games: [],
-      winner:[],
+      winner:"",
     };
   },
   components: {
@@ -92,13 +92,16 @@ export default {
       const dateStart = new Date(this.tournamentSelected.date_start);
       const dateEnd = new Date(this.tournamentSelected.date_end);
 
-      if (dateStart <= currentDate && dateEnd >= currentDate) {
+      if (dateStart <= currentDate && dateEnd >= currentDate && this.games.length<6) {
         this.status = "En curs";
-      } else if (dateStart > currentDate && this.teams.length < 8) {
+      } else if (dateStart > currentDate && this.teams.length < 8 && this.games.length==0) {
         this.status = "Inscripcions Obertes";
-      } else if (dateStart > currentDate && this.teams.length === 8) {
+      } else if (dateStart > currentDate && this.teams.length === 8 && this.games.length==0) {
         this.status = "Inscripcions Tancades";
-      } else {
+      } else if(this.games.length==6){
+        this.status = "Finalitzat";
+        this.winner="Equip guanyador"
+      }else{
         this.status = "Finalitzat";
       }
     },
@@ -298,8 +301,22 @@ export default {
   padding: 1em;
 }
 
-.special-team{
+.game{
+  border-color: rgb(255, 91, 83);
+  border-width: 0.5em;
+}
+
+.semifinal-game{
+  border-color: rgb(255, 229, 83);
+  border-width: 0.5em;
+}
+
+.final-game{
   border-color: rgb(106, 255, 83);
   border-width: 0.5em;
+}
+
+.game-container h2{
+  margin:5% 0% 5% 10%;
 }
 </style>
