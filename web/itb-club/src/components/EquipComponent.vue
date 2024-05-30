@@ -2,7 +2,7 @@
   <RouterLink v-if="loged" :to="`/equips/${team.id}`">
     <section class="team">
       <div class="img-container">
-        <img :src="team.img" alt="">
+        <img :src="teamImageSrc" alt="">
       </div>
       <div class="team-info">
         <h3>{{ team.name }}</h3>
@@ -16,7 +16,7 @@
 
   <section v-else class="team">
     <div class="img-container">
-      <img :src="team.img" alt="">
+      <img :src="teamImageSrc" alt="">
     </div>
     <div class="team-info">
       <h3>{{ team.name }}</h3>
@@ -31,6 +31,10 @@
 <script>
 import { RouterLink } from 'vue-router';
 
+import defaultImage from '@/assets/images/team1.png'; // Verifica que la ruta sea correcta
+
+const images = import.meta.glob('@/assets/images/*', { eager: true });
+
 export default {
   name: 'EquipComponent',
   props: {
@@ -43,6 +47,19 @@ export default {
     return {
       loged: true
     };
+  },
+  computed: {
+    teamImageSrc() {
+      if (this.team && this.team.img) {
+        const imagePath = `@/assets/images/${this.team.img}`;
+        const image = Object.keys(images).find(img => img.includes(this.team.img));
+        return image ? images[image].default : defaultImage;
+      }
+      return defaultImage;
+    },
+    defaultImage() {
+      return defaultImage;
+    }
   },
   mounted() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
@@ -62,8 +79,6 @@ export default {
   justify-content: space-between;
   margin: auto;
   margin-top: 2em;
-
-
 }
 
 .team:hover {
