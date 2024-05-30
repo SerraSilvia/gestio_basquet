@@ -59,42 +59,44 @@ const routes = [
   {
     path: '/reserva/crear',
     component: ReservaCrear
-},
-{
-  path: '/administrar',
-  component: AdministrarComponent
-},  {
-  path: '/modify/user/:id',
-  component: ModifyUserComponent,
-  props: route => ({ id: String(route.params.id) })
-},
-{
-  path: '/administrar/users',
-  component: AdminUsers
-},{
-  path: '/administrar/users/add',
-  component: CreateNewUser
-},{
-  path: '/info-facilities',
-  component: FacilitiesInfo
-},{
-  path: '/info-clubs',
-  component: ClubsInfo
-},{
-  path: '/info-tornejos',
-  component: TournamentsInfo
-},{
-  path: '/administrar/comments/:id',
-  component: AdminComments,
-  props: route => ({ id: String(route.params.id) })
-},{
-  path: '/tornejos/crear',
-  component: CreateTournament
-},{
-  path: '/tornejos/modificar/:id',
-  component: ModifyTournament, 
-  props:route=>({id:String(route.params.id)})
-}
+  },
+  {
+    path: '/modify/user/:id',
+    component: ModifyUserComponent,
+    props: route => ({ id: String(route.params.id) })
+  },
+  {
+    path: '/administrar/users',
+    component: AdminUsers
+  }, {
+    path: '/administrar/users/add',
+    component: CreateNewUser
+  },
+  {
+    path: '/administrar',
+    component: AdministrarComponent
+  }, 
+  {
+    path: '/info-facilities',
+    component: FacilitiesInfo
+  }, {
+    path: '/info-clubs',
+    component: ClubsInfo
+  }, {
+    path: '/info-tornejos',
+    component: TournamentsInfo
+  }, {
+    path: '/administrar/comments/:id',
+    component: AdminComments,
+    props: route => ({ id: String(route.params.id) })
+  }, {
+    path: '/tornejos/crear',
+    component: CreateTournament
+  }, {
+    path: '/tornejos/modificar/:id',
+    component: ModifyTournament,
+    props: route => ({ id: String(route.params.id) })
+  }
 ];
 
 const router = createRouter({

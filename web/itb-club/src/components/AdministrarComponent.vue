@@ -21,6 +21,11 @@ export default {
             newUserMail:"",
         }
     },
+    methods:{
+        handleToggleMenu(){
+            console.log("handleToggleMenu hola");
+        }
+    }, 
     mounted(){
         const userData = JSON.parse(sessionStorage.getItem('userData'));
         if(userData) {
