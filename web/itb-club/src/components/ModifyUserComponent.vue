@@ -21,7 +21,6 @@
           {{ team.name }}
         </option>
       </select>
-      <small v-if="errors.team_id" class="form-error">{{ errors.team_id }}</small>
 
       <label for="category">Categoria</label>
       <select name="category" id="category" v-model="modUser.player_level">
@@ -117,8 +116,8 @@ export default {
       }
     },
     async modifyUser() {
-      console.log("Se intenta modificar el usuario");
-
+      console.log("Se intenta modificar el usuario", this.user, this.modUser);
+  
       if (this.modUser.team_id === "") {
         // El jugador ha seleccionado "No tener equipo"
         try {
@@ -171,6 +170,11 @@ export default {
           console.log("old data: ", response.data[0]);
           this.modUser = response.data[0];
           this.modUser.password = "";
+
+          if (this.user.id !== this.modUser.id) {
+            this.user = JSON.parse(JSON.stringify(this.modUser));
+          }
+
           if (this.modUser.team_id) {
             this.checkIfCaptain();
           }
