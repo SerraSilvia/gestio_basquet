@@ -7,7 +7,7 @@
         <p>{{ tournamentClub ? tournamentClub.name : 'Carregant..' }}</p>
       </div>
     </div>
-    <div class="tournament-info"> 
+    <div class="tournament-info">
       <p class="resaltat estat">{{ status }}</p>
       <p class="resaltat">{{ tournamentSelected.date_start }} / {{ tournamentSelected.date_end }}</p>
     </div>
@@ -17,18 +17,23 @@
     <div v-else>
       <p class="no-teams-message">No hi ha equips inscrits</p>
     </div>
-    <button @click="addMyTeam" v-if="user.user_type=='captain' && teams.length<8 && status=='Inscripcions Obertes'">Incriure el meu equip</button>
-      <button @click="createGames" v-if="user_user_type='admin'">Crear partits</button>
+    <button @click="addMyTeam"
+      v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu
+      equip</button>
+    <button @click="createGames" v-if="user.user_type == 'admin'">Crear partits</button>
   </div>
-  <div v-if="tournamentSelected && games.length>0">
+  <div v-if="tournamentSelected && games.length > 0">
     <h2>Partits</h2>
-
+    <div class="game-container">
+      <GameItem v-for="(game, index) in games" :key="game.id" :game="game"></GameItem>
+    </div>
   </div>
 </template>
 
 <script>
 import IconLocation from "../icons/IconLocation.vue";
 import EquipComponent from "../EquipComponent.vue";
+import GameItem from "../GameItem.vue";
 
 export default {
   name: "VisualizeTournamentComponent",
@@ -44,14 +49,15 @@ export default {
       tournamentClub: null,
       status: null,
       teams: [],
-      user:[], 
-      maxRound:0,
-      games:[],
+      user: [],
+      maxRound: 0,
+      games: [],
     };
   },
   components: {
     IconLocation,
-    EquipComponent
+    EquipComponent,
+    GameItem
   },
   methods: {
     async getTournament() {
@@ -98,8 +104,8 @@ export default {
       } catch (error) {
         console.error('Error al intentar obtener los equipos del club', error);
       }
-    }, 
-    async addMyTeam() {//TODO: esto falta probarlo
+    },
+    async addMyTeam() {
       console.log("añadiendo equipo al torneo");
       try {
         const response = await this.$axios.get(`teams/?id=` + this.user.team_id);
@@ -111,44 +117,85 @@ export default {
       } catch (error) {
         console.error('Error al intentar modificar el equipo', error);
       }
-    }, 
-    async createGames(){
+    },
+    async createGames() {
       try {
         const response = await this.$axios.get(`games/?tournament_id=` + this.tournamentSelected.id);
-        this.games=response;
-        this.round=this.games.length;
-      }catch(error){
-        console.error('Error al obtener los partidos del torneo');
+        this.games = response.data;
+        this.maxRound = this.games.length;
+      } catch (error) {
+        console.error('Error al obtener los partidos del torneo', error);
       }
 
       console.log("se crean los juegos");
-      if(this.maxRound<4){
+      if (this.maxRound < 4) {
         console.log("primera ronda");
-        createGameInsert(this.teams[0], this.teams[1], 0);
-        createGameInsert(this.teams[2], this.teams[3], 1);
-        createGameInsert(this.teams[4], this.teams[5], 2);
-        createGameInsert(this.teams[6], this.teams[7], 3);
-      }else if(this.maxRound<6){
+        this.createGameInsert(this.teams[0], this.teams[1], 0);
+        this.createGameInsert(this.teams[2], this.teams[3], 1);
+        this.createGameInsert(this.teams[4], this.teams[5], 2);
+        this.createGameInsert(this.teams[6], this.teams[7], 3);
+      } else if (this.maxRound < 6) {
         console.log("segunda ronda");
-        //seleccionar los ganadores del juego 0, 1, 2, 3
-      }else{
-        console.log("tercera ronda")
-        //seleccionar los ganadores del juego 4 y 5 y el que gane sera el vencedor
+       //execute function again
+
+        this.createGameInsert(getWinner(0), this.getWinner(1), 4);
+        this.createGameInsert(getWinner(0), this.getWinner(1), 5);
+      } else {
+        console.log("tercera ronda");
+        // seleccionar los ganadores del juego 4 y 5 y el que gane sera el vencedor
+        this.createGameInsert(getWinner(4), this.getWinner(5), 6);
+
       }
+    },
+    async createGameInsert(team1, team2, gamePos) {
+      console.log("se crean los inserts");
+      const newGame = {
+        id_booking: 54,
+        tournament_id: this.tournamentSelected.id,
+        team1_id: team1.id,
+        team2_id: team2.id,
+        score_t1: 0,
+        score_t2: 0,
+        tournament_position: gamePos
+      };
+      try {
+        const response = await this.$axios.post("games/", newGame);
+        if (response.data.status != "error") {
+          console.log("Partido creado con exito");
+        } else {
+          console.error("Error en la creación del partido:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error al agregar el partido:", error);
+      }
+    },
+    async getGames() {
+      try {
+        const response = await this.$axios.get("games/?tournament_id=" + this.tournamentSelected.id);
+        if (response.data.status != "error") {
+          this.games = response.data;
+        } else {
+          console.error("Error al obtener partidos ", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error al obtener partidos:", error);
+      }
+    },
+    getWinner(game) {
+      console.log("se consigue el ganador del partido", game);
     }
   },
   mounted() {
-        const userData = JSON.parse(sessionStorage.getItem('userData'));
-        if (userData) {
-            this.user = userData;
-        } else {
-            this.$router.push({ path: '/login' });
-        }
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (userData) {
+      this.user = userData;
+    } else {
+      this.$router.push({ path: '/login' });
+    }
     this.getTournament();
   }
 };
 </script>
-
 
 <style scoped>
 .container {
@@ -190,14 +237,4 @@ export default {
 .no-teams-message {
   color: white;
   text-align: center;
-  padding: 0.5em;
-  margin: 1em 3em;
-}
-.tournament-teams{
-  background-color: white;
-  padding: 1em;
-  border-radius: 1em;
-}
-
-
-</style>
+  padding:
