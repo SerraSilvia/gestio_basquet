@@ -83,8 +83,6 @@ A més, permet al personal del club i als administradors gestionar, tornejos,  u
 
 - Apuntar-se a equips:
 
->![Fotos d'informació](web/itb-club/src/assets/images/capt-teams.jpg)
-
 >![Fotos d'informació](web/itb-club/src/assets/images/capt-teams.png)
 
 
@@ -105,8 +103,6 @@ A més, permet al personal del club i als administradors gestionar, tornejos,  u
 - Fitxa del jugador amb comentaris.
 - Reservar pista per les classes.
   
->![Fotos d'informació](web/itb-club/src/assets/images/capt-training.jpg)
-
 
 ## Estructura de la Base de Dades
 
