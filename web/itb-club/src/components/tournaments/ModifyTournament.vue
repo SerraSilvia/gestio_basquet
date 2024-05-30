@@ -69,9 +69,10 @@
       modifyTournament() {
         console.log("Se intenta modificar el torneo");
         this.modTournament.updated_at = new Date().toISOString();
-        this.$axios.put('tournaments/' + this.id, this.modTournament)
+        this.$axios.put('tournaments/?id=' + this.id, this.modTournament)
           .then(response => {
             console.log("response: " + response.data);
+            this.$router.push({ path: `/tornejos/${this.id}` });
           })
           .catch(error => {
             console.error('Error al intentar modificar el torneo', error);

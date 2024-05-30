@@ -54,7 +54,7 @@ export default {
         },
         modifyTournament() {
             console.log("se modifica un tournament");
-            this.$router.push({ path: '/tornejos/modificar/${this.user.id}'});
+            this.$router.push({ path: `/tornejos/modificar/${this.tournament.id}` });
 
         }
     },
