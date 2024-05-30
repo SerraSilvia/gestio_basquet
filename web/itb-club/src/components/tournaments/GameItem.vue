@@ -32,7 +32,7 @@ export default {
       team2: {},
       winner: '',
       user: null,
-      updatedTeam: {} // Cambiado a updatedTeam
+      updatedTeam: {}
     };
   },
   methods: {
@@ -56,10 +56,11 @@ export default {
       try {
         const newPoints = parseInt(team.total_score , 10)+10;
         team.total_score = newPoints;
-        console.log("datos actualizados de equipo:", team);
-        await this.$axios.put("teams/?id=" + id, team);
 
-        await this.$axios.put(`game/?id=${this.game.id}`, this.game);
+        console.log("datos actualizados de equipo:", newPoints);
+        /*await this.$axios.put("teams/?id=" + id, team);
+        
+        await this.$axios.put(`game/?id=${this.game.id}`, this.game);*/
       } catch (error) {
         console.error('Error al intentar modificar el partido y los puntos del equipo:', error);
       }

@@ -18,7 +18,7 @@
       <p class="no-teams-message">No hi ha equips inscrits</p>
     </div>
     <button @click="addMyTeam"
-      v-if="user.user_type == 'captain' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu
+      v-if="user.user_type != 'admin' && teams.length < 8 && status == 'Inscripcions Obertes'">Incriure el meu
       equip</button>
     <button @click="createGames" v-if="user.user_type == 'admin' && teams.length == 8">Crear propers partits</button>
   </div>
@@ -33,7 +33,7 @@
 <script>
 import IconLocation from "../icons/IconLocation.vue";
 import EquipComponent from "../EquipComponent.vue";
-import GameItem from "../GameItem.vue";
+import GameItem from "./GameItem.vue";
 
 export default {
   name: "VisualizeTournamentComponent",
@@ -89,13 +89,13 @@ export default {
       const dateEnd = new Date(this.tournamentSelected.date_end);
 
       if (dateStart <= currentDate && dateEnd >= currentDate) {
-        this.status = "Actiu";
+        this.status = "En curs";
       } else if (dateStart > currentDate && this.teams.length < 8) {
         this.status = "Inscripcions Obertes";
       } else if (dateStart > currentDate && this.teams.length === 8) {
         this.status = "Inscripcions Tancades";
       } else {
-        this.status = "Tancat";
+        this.status = "Finalitzat";
       }
     },
     async getTeams() {
@@ -190,10 +190,9 @@ export default {
       this.$axios.get(`teams/?id=` + data[1])
         .then(response => {
           const updateTeam = response.data[0];
-          const newPoints = updateTeam.total_score + 10;
-
+          const newPoints = (Number(updateTeam.total_score))+10;
           updateTeam.total_score = newPoints;
-          console.log("datos actualizados de equipo:"+ updateTeam)
+          this.getTeams();
           return this.$axios.put("teams/?id=" + data[1], updateTeam);
         })
         .then(updateResponse => {
