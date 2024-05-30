@@ -31,7 +31,7 @@
 <script>
 import { RouterLink } from 'vue-router';
 
-import defaultImage from '@/assets/images/team1.png'; // Verifica que la ruta sea correcta
+import defaultImage from '@/assets/images/team1.png'; 
 
 const images = import.meta.glob('@/assets/images/*', { eager: true });
 

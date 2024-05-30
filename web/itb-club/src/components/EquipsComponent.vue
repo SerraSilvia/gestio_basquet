@@ -86,7 +86,7 @@ a:hover{
 }
 .club-poligon{
     margin-top: 150px;
-  }
+}
 h2{
     margin-top: 50px;
 }
