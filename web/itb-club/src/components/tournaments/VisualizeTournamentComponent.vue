@@ -244,7 +244,7 @@ export default {
     if (userData) {
       this.user = userData;
     } else {
-      this.$router.push({ path: '/login' });
+      this.$router.push({ path: '/tornejos' });
     }
     this.getTournament();
   },

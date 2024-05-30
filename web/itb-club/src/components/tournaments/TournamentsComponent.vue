@@ -63,8 +63,6 @@ export default {
         const userData = JSON.parse(sessionStorage.getItem('userData'));
         if (userData) {
             this.user = userData;
-        } else {
-            this.$router.push({ path: '/login' });
         }
     }
 };

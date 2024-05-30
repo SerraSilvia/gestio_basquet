@@ -57,7 +57,8 @@ export default {
         captain: 0,
       },
       message: null,
-      messageClass: null
+      messageClass: null, 
+      user:[]
     };
   },
   mounted() {
@@ -124,6 +125,14 @@ export default {
       } else {
         console.error('No user ID found in session storage');
       }
+    }
+  }, 
+  mounted() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (userData) {
+        this.user = userData;
+    }else{
+      this.$router.push({ path: '/login' });
     }
   }
 };
