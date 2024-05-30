@@ -96,6 +96,9 @@ input[type="text"] {
   font-weight: bold;
   color: #f45a45;
 }
+button{
+  margin: 0% 40%;
+}
 
 #tournaments-container, #teams-section {
   padding: 5% 10%;

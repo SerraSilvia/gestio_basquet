@@ -79,7 +79,7 @@ input[type="text"] {
 .center-container {
     display: flex;
     justify-content:flex-end; 
-    margin-bottom: 1em;/* Centra el botón horizontalmente */
+    margin-bottom: 1em;
     margin-top:100px;
 }
 

@@ -26,7 +26,6 @@ export default {
         if(userData) {
             this.user = userData;
             if(this.user.user_type=="admin"){
-                console.log("hola admin")
             }else this.$router.push({ path: '/' });
 
 
