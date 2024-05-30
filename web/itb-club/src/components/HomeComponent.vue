@@ -111,7 +111,7 @@
         en línia o posa't en contacte amb nosaltres. No deixis escapar
         l'oportunitat de practicar a les nostres instal·lacions!
       </p>
-      <button class="booking-button">reserva</button>
+      <button @click="goToBookings" class="booking-button">reserva</button>
     </div>
   </div>
 
@@ -127,6 +127,11 @@
 <script>
 export default {
   name: "HomeComponent",
+  methods:{
+    goToBookings(){
+      this.$router.push({ path: '/reserva' });
+    }
+  }
 };
 </script>
 
