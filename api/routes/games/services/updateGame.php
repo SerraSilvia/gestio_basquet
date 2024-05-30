@@ -9,9 +9,9 @@ function updateGame($conn, $id) {
     $team2_id = $data['team2_id'];
     $score_t1 = $data['score_t1'];
     $score_t2 = $data['score_t2'];
-    $tourtament_position = $data['tourtament_position'];
+    $tournament_position = $data['tournament_position'];
 
-    $q = "UPDATE GAMES SET id_booking='$id_booking', tournament_id='$tournament_id', team1_id='$team1_id', team2_id='$team2_id', score_t1='$score_t1', score_t2='$score_t2', tourtament_position='$tourtament_position' WHERE id='$id'";
+    $q = "UPDATE GAMES SET id_booking='$id_booking', tournament_id='$tournament_id', team1_id='$team1_id', team2_id='$team2_id', score_t1='$score_t1', score_t2='$score_t2', tournament_position='$tournament_position' WHERE id=$id";
     echo $q;
     $result = mysqli_query($conn, $q);
 
