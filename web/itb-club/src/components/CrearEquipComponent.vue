@@ -57,8 +57,7 @@ export default {
         captain: 0,
       },
       message: null,
-      messageClass: null, 
-      user:[]
+      messageClass: null
     };
   },
   mounted() {
@@ -99,40 +98,34 @@ export default {
         const response = await axios.post('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/teams/', this.newTeam);
         const createdTeamId = response.data.id;
         console.log('Equipo ha sido agregado:', response.data);
-        this.updateUserTypeAndTeamId(createdTeamId);
+        await this.setCaptain(createdTeamId); 
+        this.$router.push('/equips');
       } catch (error) {
         console.error("Error al agregar el equipo:", error.response ? error.response.data : error.message);
         this.message = 'Error al agregar el equipo: ' + (error.response ? error.response.data.message : error.message);
         this.messageClass = 'error-message';
       }
     },
-    async updateUserTypeAndTeamId(teamId) {
-      const user = JSON.parse(sessionStorage.getItem("userData"));
+    async setCaptain(teamId) {
+      const user = JSON.parse(sessionStorage.getItem('userData'));
       if (user) {
         try {
-          const updatedUser = { user_type: 'captain', team_id: teamId };
-          const response = await axios.put(`http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?id=${user.id}`, updatedUser);
-          console.log('Usuario actualizado:', response.data);
+          const response = await axios.put('http://apiitbclub-env.eba-jkyv4asm.us-east-1.elasticbeanstalk.com/people/?action=newCaptain', {
+            id: user.id,
+            team_id: teamId
+          });
+          console.log('Usuario actualizado a capitán:', response.data);
           user.user_type = 'captain';
           user.team_id = teamId;
           sessionStorage.setItem('userData', JSON.stringify(user));
-          this.$router.push('/equips');
         } catch (error) {
-          console.error('Error al actualizar el usuario:', error.response ? error.response.data : error.message);
-          this.message = 'Error al actualizar el usuario: ' + (error.response ? error.response.data.message : error.message);
+          console.error('Error al actualizar el usuario a capitán:', error.response ? error.response.data : error.message);
+          this.message = 'Error al actualizar el usuario a capitán: ' + (error.response ? error.response.data.message : error.message);
           this.messageClass = 'error-message';
         }
       } else {
         console.error('No user ID found in session storage');
       }
-    }
-  }, 
-  mounted() {
-    const userData = JSON.parse(sessionStorage.getItem('userData'));
-    if (userData) {
-        this.user = userData;
-    }else{
-      this.$router.push({ path: '/login' });
     }
   }
 };

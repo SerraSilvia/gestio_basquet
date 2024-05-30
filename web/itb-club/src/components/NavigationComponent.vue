@@ -10,8 +10,7 @@
                     <li><RouterLink @click="handleToggleMenu" to="/reserva">Reserva</RouterLink></li>
                     <li><RouterLink @click="handleToggleMenu" to="/equips">Equips</RouterLink></li>
                     <li><RouterLink @click="handleToggleMenu" to="/usuari">Usuari</RouterLink></li>
-                    <li v-bind="user" v-if="user.user_type=='admin'"><RouterLink @click="handleToggleMenu" to="/administrar">Administrar</RouterLink></li>
-
+                    <li v-if="user && user.user_type=='admin'" ><RouterLink @click="handleToggleMenu" to="/administrar">Administrar</RouterLink></li>
                 </ul>
             </nav> 
         </div>
@@ -30,15 +29,12 @@ export default {
         return {
             user:[],
             menuKey: 0 //esto es para forzar la actualizacion del componente en cada click
-
         }
     },
     methods:{
         handleToggleMenu(){
-            
             this.menuKey++; 
             this.$emit('toggle-menu');
-
         }
     }, 
     mounted() {
