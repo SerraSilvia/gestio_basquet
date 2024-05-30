@@ -23,7 +23,7 @@
   <div v-if="tournamentSelected && games.length > 0">
     <h2>Partits</h2>
     <div class="game-container">
-      <GameItem v-for="(game, index) in games" :key="game.id" :game="game"></GameItem>
+      <GameItem v-for="(game, index) in games" :key="game.id" :game="game" @selected-winner="handleWinner"></GameItem>
     </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
       tournamentClub: null,
       status: null,
       teams: [],
-      user: [],
+      user: {}, // Cambiado a objeto
       maxRound: 0,
       games: [],
     };
@@ -65,6 +65,7 @@ export default {
         await this.getClub();
         await this.getTeams();
         this.getStatus();
+        this.getGames();
       } catch (error) {
         console.error('Error al intentar obtener el torneo', error);
       }
@@ -132,12 +133,10 @@ export default {
         this.gameInsert(this.teams[2], this.teams[3], 1);
         this.gameInsert(this.teams[4], this.teams[5], 2);
         this.gameInsert(this.teams[6], this.teams[7], 3);
-        //add game to page
-       // window.location.reload();
       } else if (this.maxRound < 6) {
         console.log("segunda ronda");
-        this.gameInsert(this.getWinner(0), this.getWinner(1), 4);
-        this.gameInsert(this.getWinner(2), this.getWinner(3), 5);
+        // this.gameInsert(this.getWinner(0), this.getWinner(1), 4);
+        // this.gameInsert(this.getWinner(2), this.getWinner(3), 5);
       } else {
         console.log("tercera ronda");
         this.gameInsert(this.getWinner(4), this.getWinner(5), 6);
@@ -156,7 +155,7 @@ export default {
       };
       try {
         const response = await this.$axios.post("games/", newGame);
-        if (response.data.status != "error") {
+        if (response.data.status !== "error") {
           console.log("Partido creado con exito");
         } else {
           console.error("Error en la creación del partido:", response.data.message);
@@ -168,7 +167,7 @@ export default {
     async getGames() {
       try {
         const response = await this.$axios.get("games/?tournament_id=" + this.tournamentSelected.id);
-        if (response.data.status != "error") {
+        if (response.data.status !== "error") {
           this.games = response.data;
         } else {
           console.error("Error al obtener partidos ", response.data.message);
@@ -181,6 +180,9 @@ export default {
       const game = this.games.find(g => g.tournament_position === gamePos);
       if (!game) return null;
       return game.score_t1 >= game.score_t2 ? game.team1 : game.team2;
+    },
+    handleWinner(data) {
+      console.log("Ganador: " + data[0] + " partido: " + data[1]);
     }
   },
   mounted() {
@@ -194,6 +196,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 .container {
